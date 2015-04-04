@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 # MetInfo Enterprise Content Management System 
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
 header("Content-type: text/html;charset=utf-8");

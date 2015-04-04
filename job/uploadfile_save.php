@@ -1,9 +1,9 @@
-﻿<?php
+<?php
 # MetInfo Enterprise Content Management System 
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
 require_once '../include/common.inc.php';
 $met_file_maxsize=$met_file_maxsize*1024*1024;
-
+	
 function upload($form, $met_file_format) {
     global $lang_js22,$lang_js23,$lang_fileOK,$lang_fileError1,$lang_fileError2,$lang_fileError3,$lang_fileError4;
     if (is_array($form)) {
@@ -11,7 +11,6 @@ function upload($form, $met_file_format) {
     } else {
       $filear = $_FILES[$form];
     }
-    var_dump($filear);exit;
     if (!is_writable('../upload/file/')) {
 	 okinfo('javascript:history.go(-1);',$lang_js22);  
     }
@@ -35,7 +34,7 @@ function upload($form, $met_file_format) {
     }
     return "../upload/file/".$name;
   }
-
+ 
 foreach($cv_para as $key=>$val)
 {
 	$downloadurl=$val['para'];

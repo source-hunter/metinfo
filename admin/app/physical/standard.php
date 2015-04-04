@@ -9,7 +9,7 @@ have=1
 filesize=1319
 [download/download.php]
 have=1
-filesize=908
+filesize=895
 [download/index.php]
 have=1
 filesize=381
@@ -18,13 +18,13 @@ have=1
 filesize=768
 [feedback/index.php]
 have=1
-filesize=12362
+filesize=12363
 [feedback/uploadfile_save.php]
 have=1
 filesize=1725
 [img/img.php]
 have=1
-filesize=736
+filesize=723
 [img/index.php]
 have=1
 filesize=381
@@ -111,7 +111,7 @@ have=1
 filesize=8847
 [include/thumb.php]
 have=1
-filesize=630
+filesize=481
 [index.php]
 have=1
 filesize=1408
@@ -240,7 +240,7 @@ have=1
 filesize=381
 [news/news.php]
 have=1
-filesize=720
+filesize=707
 [news/shownews.php]
 have=1
 filesize=739
@@ -249,7 +249,7 @@ have=1
 filesize=381
 [product/product.php]
 have=1
-filesize=792
+filesize=779
 [product/showproduct.php]
 have=1
 filesize=754
@@ -1497,7 +1497,7 @@ have=1
 filesize=3702
 [admin/include/common.inc.php]
 have=1
-filesize=7154
+filesize=6930
 [admin/include/config.php]
 have=1
 filesize=913
@@ -1863,7 +1863,7 @@ have=1
 filesize=1495
 [admin/templates/met/column/column.html]
 have=1
-filesize=17392
+filesize=17391
 [admin/templates/met/column/column_editor.html]
 have=1
 filesize=9420

@@ -47,9 +47,7 @@ $metinfoadminok=1;
 $settings_arr=array();
 require_once ROOTPATH.'config/config.inc.php';
 met_cooike_start();
-$query="select * from {$tablepre}lang where mark='{$_GET[langset]}' and lang='metinfo'";
-$isadminlang=$db->get_one($query);
-if(!$isadminlang&&$_GET[langset]!='')die('not have this language');
+if(!is_array($met_langadmin[$_GET[langset]])&&$_GET[langset]!='')die('not have this language');
 if($_GET[langset]!=''){
 	$_GET[langset]=daddslashes($_GET[langset],0,1);
 	change_met_cookie('languser',$_GET[langset]);
@@ -156,19 +154,13 @@ if($_M['plugin']['doadmin']){
 				$_M['url']['own'] = $_M['url']['site'].'app/app/'.$val.'/';
 				if(file_exists($applistfile)&&!is_dir($applistfile)&&((file_get_contents($applistfile))!='metinfo')){
 					require_once $applistfile;
-					$name=str_replace('.class.php', '', 'plugin_'.$val);
-					if (class_exists($name)) {
-						$newclass=new $name;
-						if(method_exists($newclass, 'doadmin')){
-							call_user_func(array($newclass,  'doadmin'));
-						}
-					}
+					$newclass=str_replace('.class.php', '', 'plugin_'.$val);
+					$newclass=new $newclass;
+					call_user_func(array($newclass,  'doadmin'));
 				}
 		}
 		$_M['url']['own'] = '';
 		DB::close();
-		$db = new dbmysql();
-		$db->dbconn($con_db_host,$con_db_id,$con_db_pass,$con_db_name);
 	}
 }
 //结束

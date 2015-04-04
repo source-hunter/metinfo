@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once substr(dirname(__FILE__), 0, -6).'common.inc.php';
 if(!is_numeric($id)){okinfo('../404.html');exit();}
 if($dbname!=$met_download&&$dbname!=$met_img&&$dbname!=$met_news&&$dbname!=$met_product){okinfo('../404.html');exit();}
