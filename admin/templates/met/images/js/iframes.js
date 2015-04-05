@@ -81,18 +81,10 @@ function metHeight(group) {
 }
 function ifreme_methei(mh) {
 	mh=mh?mh:0;
-	$('#metleft', parent.document).attr('style','');
-	$('#metleft .floatl_box', parent.document).attr('style','');
 	var m = $("body").height();
-	var k = parseInt($("#metcmsbox", parent.document).attr('jiluht'));
-	var l = $('#metleft', parent.document).height()+35;
+	var l = $('.metcms_cont_left', parent.document).height()-65;
 	l = m < l ? l : m;
-	if (m < k && l < k) l = k;
-	l=l+10;
-	l=l<mh?mh:l;
-	$('#metleft', parent.document).height(l);
-	$('#metleft .floatl_box', parent.document).height(l);
-	$('#metright', parent.document).height(l);
+	l = l < mh ? mh : l;
 	$(window.parent.document).find("#main").height(l);
 }
 function met_ckeditor(depthm, name, type) {

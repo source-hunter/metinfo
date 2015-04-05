@@ -244,6 +244,14 @@ echo <<<EOT
 -->
 	<div class="v52fmbx_dlbox tradpoplist">
 	<dl>
+		<dt>{$lang_permission_upgrade}{$lang_marks}</dt>
+		<dd>
+			<label title="{$lang_update_permissions}"><input name="admin_pop1801" type="checkbox" class="checkbox" value="1801" {$admin_popx[1801]} />{$lang_upfiletips42}</label>
+		</dd>
+	</dl>
+	</div>
+	<div class="v52fmbx_dlbox tradpoplist">
+	<dl>
 		<dt>{$lang_adminPower}{$lang_marks}</dt>
 		<dd>
 			<label><input name="admin_issue" type="checkbox" class="checkbox" value="yes" {$admin_issue_ok} />{$lang_adminTip2}</label>
@@ -295,6 +303,7 @@ echo <<<EOT
 		  <label><input name="admin_pop" type="checkbox" value="yes" class="checkbox" />{$lang_adminSelectAll}</label>
 <!--
 EOT;
+print_r($sidebarcolumn);
 foreach($metinfocolumn as $key=>$val){
 echo <<<EOT
 -->
@@ -304,6 +313,7 @@ echo <<<EOT
 <!--
 EOT;
 foreach($sidebarcolumn as $key=>$val2){
+if($val2['id'] == 33||$val2['id'] == 68)continue;
 if($val2[bigclass]==$val[id] && $val2[field]){
 echo <<<EOT
 -->
@@ -352,6 +362,7 @@ echo <<<EOT
 <!--
 EOT;
 }
+/*
 foreach($app as $key=>$val5){
 //if($val5[no]==10||$val5[no]==9)continue;
 	$query="select * from $met_admin_column where url like '%app/$val5[file]/%'";
@@ -364,10 +375,12 @@ echo <<<EOT
 EOT;
 	}
 }
+*/
 //接口函数
 $query="select * from $met_applist order by id DESC";
 $applist = $db->get_all($query);
 foreach($applist as $key=>$val6){
+$val6[appname] = get_word($val6[appname]);
 echo <<<EOT
 -->
 	<label><input name="admin_popa{$val6[no]}" type="checkbox" class="checkbox" value="a{$val6[no]}" {$admin_popx[$val6[no]]} />{$val6[appname]}</label>

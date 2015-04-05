@@ -125,6 +125,25 @@ $query = "INSERT INTO $met_download SET
 	$gent='../../sitemap/index.php?lang='.$lang.'&htmsitemap='.$met_member_force;
 	metsave($turl,'',$depth,$htmjs,$gent);
 }
+if($description){
+	$description_type=$db->get_one("select * from $met_download where id='$id'");
+	$description1=strip_tags($description_type[content]);
+	$description1=str_replace("&nbsp;",'',$description1); 
+	$description1=str_replace(" ","",$description1);
+	$description1=str_replace("\n", '', $description1); 
+	$description1=str_replace("\r", '', $description1); 
+	$description1=str_replace("\t", '', $description1);
+	$description1=mb_substr($description1,0,200,'utf-8');
+	if($description1==$description){
+		$description=strip_tags($content);
+		$description=str_replace("&nbsp;",'',$description); 
+		$description=str_replace(" ","",$description);
+		$description=str_replace("\n", '', $description); 
+		$description=str_replace("\r", '', $description); 
+		$description=str_replace("\t", '', $description);
+		$description=mb_substr($description,0,200,'utf-8');
+	}
+}
 if($action=="editor"){
 $query = "update $met_download SET 
                       title              = '$title',

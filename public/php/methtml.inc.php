@@ -87,15 +87,15 @@ $methtml_now.="d[today.getDay()+1],\n";
 $methtml_now.="''); \n";
 $methtml_now.="</script>\n";
 
-if($index_hadd_ok){
-//set home page
-$methtml_sethome="<a href='#' onclick='SetHome(this,window.location,\"$lang_MessageInfo5\");' style='cursor:pointer;' title='".$lang_sethomepage."'  >".$lang_sethomepage."</a>";
-//bookmark
-$methtml_addfavorite="<a href='#' onclick='addFavorite(\"$lang_MessageInfo5\");' style='cursor:pointer;' title='".$lang_bookmark."'  >".$lang_bookmark."</a>";
-$methtml_hadd=$methtml_sethome.'<span>|</span>'.$methtml_addfavorite;
+if($index_hadd_ok&&$metinfover != 'v1'){
+	//set home page
+	$methtml_sethome="<a href='#' onclick='SetHome(this,window.location,\"$lang_MessageInfo5\");' style='cursor:pointer;' title='".$lang_sethomepage."'  >".$lang_sethomepage."</a>";
+	//bookmark
+	$methtml_addfavorite="<a href='#' onclick='addFavorite(\"$lang_MessageInfo5\");' style='cursor:pointer;' title='".$lang_bookmark."'  >".$lang_bookmark."</a>";
+	$methtml_hadd=$methtml_sethome.'<span>|</span>'.$methtml_addfavorite;
 }
 
-//language switch
+//language switchs
 function methtml_lang($label,$type=1){
 global $lang,$lang_chchinese,$met_ch_mark,$met_ch_lang,$met_langok,$met_url,$index_url,$met_index_url,$met_lang_mark,$met_waplink,$lang_wap,$met_wap_tpb,$met_wap_url,$met_wap,$met_index_type,$navurl,$app_file,$met_adminfile,$_M;
 $metinfo='';
@@ -423,13 +423,150 @@ global $navlist_y1,$class1,$class2,$class3,$classnow,$nav_list2,$nav_list3,$clas
 }
 //Flashimg
 function methtml_flashimg($type,$width,$height,$imgurl,$imglink,$imgtitle){
-global $met_flasharray,$classnow,$met_url,$met_flash_img,$met_flash_imglink,$met_flash_imgtitle,$met_flashimg;
+global $met_flasharray,$classnow,$met_url,$met_flash_img,$met_flash_imglink,$met_flash_imgtitle,$met_flashimg,$metinfover;
 if($width=='')$width=$met_flasharray[$classnow][x];
 if($height=='')$height=$met_flasharray[$classnow][y];
 if($imgurl=='')$imgurl=$met_flash_img;
 if($imglink=='')$imglink=$met_flash_imglink;
 if($imgtitle=='')$imgtitle=$met_flash_imgtitle;
 $imglink=str_replace('&','%26',$imglink);
+if($metinfover=='v1'){
+switch($type){
+case 1:
+	$methtml_flash.="
+	<div class='slider-wrapper metinfo-banner1' style='height:{$met_flasharray[$classnow][y]}px; width:{$met_flasharray[$classnow][x]}px;'>
+	    <div id='slider' class='nivoSlider'>";
+	foreach($met_flashimg as $key=>$val){
+		$val[img_link]=str_replace('%26','&',$val[img_link]);
+		if($val[img_link])$methtml_flash.="
+		<a href='".$val[img_link]."' target='_blank' title='{$val[img_title]}'>";
+		$methtml_flash.="<img src='".$val[img_path]."' alt='".$val[img_title]."' width='{$met_flasharray[$classnow][x]}' height='{$met_flasharray[$classnow][y]}' />"; 
+		if($val[img_link])$methtml_flash.="</a>";
+
+	}
+	$methtml_flash.="
+	    </div>
+	</div>
+	";
+break;
+
+case 2:
+   $methtml_flash.="		<div class='banner2' style='height:{$height}px; width:{$width}px; margin:0 auto;' data-banner2='".$width."*".$height."*".$imgurl."*".$imglink."'></div>
+	";
+break;
+
+case 3:
+	$methtml_flash.="	<div class='slider-wrapper metinfo-banner3' style='height:{$met_flasharray[$classnow][y]}px; width:{$met_flasharray[$classnow][x]}px;'>
+	<div id=\"slider\" class=\"nivoSlider\">\n";
+	foreach($met_flashimg as $key=>$val){
+		$val[img_link]=str_replace('%26','&',$val[img_link]);
+		if($val[img_link])$methtml_flash.="	    <a href='".$val[img_link]."' target='_blank' title='{$val[img_title]}'>";
+		$methtml_flash.="<img src=\"{$val[img_path]}\" alt=\"{$val[img_title]}\" width=\"{$met_flasharray[$classnow][x]}\" height=\"{$met_flasharray[$classnow][y]}\" "; 
+		if($val[img_title])$methtml_flash.=" title=\"#img_title_{$val[id]}\"";
+		$methtml_flash.="/>";
+		if($val[img_link])$methtml_flash.="</a>";
+		$methtml_flash.="\n";
+	}
+	$methtml_flash.="	</div>
+	";
+	foreach($met_flashimg as $key=>$val){
+		if($val[img_title])$methtml_flash.="<div id=\"img_title_{$val[id]}\" class=\"nivo-html-caption\">{$val[img_title]}</div>";
+	}
+	$methtml_flash.="</div>
+	";
+
+break;
+
+case 4:
+	$methtml_flash.="	<div id='metinfo_banner4' style='height:{$met_flasharray[$classnow][y]}px;'>
+	";
+	$methtml_flash.="    <ul>
+	";
+	foreach($met_flashimg as $key=>$val){
+		$methtml_flash.="    	<li>";
+		$val[img_link]=str_replace('%26','&',$val[img_link]);
+		if($val[img_link])$methtml_flash.="<a href='".$val[img_link]."' style='background-image:url({$val[img_path]}); height:".$met_flasharray[$classnow][y]."px;' target='_blank' title='{$val[img_title]}'>";
+		if($val[img_link])$methtml_flash.="</a>";
+		$methtml_flash.="</li>
+	";
+	}
+	$methtml_flash.="    </ul>
+	";
+	$methtml_flash.="</div>
+	";
+	
+break;
+
+case 5:
+	$methtml_flash.="
+		<div class='slider-wrapper metinfo-banner5' style='height:{$met_flasharray[$classnow][y]}px;'>
+			<div id='slider' class='nivoSlider'>
+	";
+	foreach($met_flashimg as $key=>$val){
+		$val[img_link]=str_replace('%26','&',$val[img_link]);
+		if($val[img_link])$methtml_flash.="
+				<a href='".$val[img_link]."' style='background-image:url(".$val[img_path].");' class='b5' target='_blank' title='{$val[img_title]}'>";
+		if($val[img_link])$methtml_flash.="
+				</a>
+		";
+
+	}
+	$methtml_flash.="
+			</div>
+		</div>
+	";
+break;
+
+case 6:
+	$img_x=$met_flasharray[$classnow][x];
+	$methtml_flash.="
+		<div id='viewport-shadow' class='trans metinfo-banner7' style='height:{$met_flasharray[$classnow][y]}px;'>";
+	$methtml_flash.="
+		    <a href='#' id='prev' class='trans'></a>
+		    <a href='#' id='next' class='trans'></a>";
+	$methtml_flash.="
+		    <div id='viewport'>
+		      <div id='box'>";
+	foreach($met_flashimg as $key=>$val){
+		$methtml_flash.="
+			<figure class='slide'>";
+		$val[img_link]=str_replace('%26','&',$val[img_link]);
+		if($val[img_link])$methtml_flash.="
+			    <a href='".$val[img_link]."' target='_blank' title='{$val[img_title]}'>";
+		$methtml_flash.="
+			        <img src='".$val[img_path]."' alt='".$val[img_title]."' width='{$img_x}' height='{$met_flasharray[$classnow][y]}' />"; 
+		if($val[img_link])$methtml_flash.="
+			    </a>";
+		$methtml_flash.="
+			</figure>";
+	}
+	$methtml_flash.="
+		      </div>
+		</div>
+	";
+	$methtml_flash.="<div class='slider-controls'>
+	";
+	$methtml_flash.="<ul id='controls'>";
+	$i=0;
+	foreach($met_flashimg as $key=>$val){
+		$d1=$i==0?'current':'';
+		$methtml_flash.="
+		<li>
+			<a class='goto-slide {$d1}' href='#' data-slideindex='{$i}'></a>
+		</li>";
+		$i++;
+	}
+	$methtml_flash.="
+	</ul>
+	";
+	$methtml_flash.="</div>
+	";
+	$methtml_flash.="</div>
+	";
+break;
+}
+}else{
+
 switch($type){
 case 1:
 	$methtml_flash.="<link rel=\"stylesheet\" href=\"{$met_url}banner/nivo-slider/nivo-slider.css\" type=\"text/css\" media=\"screen\" />
@@ -601,6 +738,7 @@ case 6:
 break;
 }
 
+}
 return $methtml_flash;
 }
 
@@ -723,7 +861,7 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 	global $index_news_no,$index_product_no,$index_download_no,$index_img_no,$index_job_no,$mobilesql;
 	global $index,$navurl,$weburly,$lang,$pagename,$langmark,$met_htmpagename,$met_chtmtype,$met_htmtype,$met_pseudo,$met_webhtm;
 	global $dataoptimize,$pagemark,$img_url,$met_hot,$m_now_date,$met_newsdays,$metmemberforce,$met_alt,$metblank,$met_agents_img;
-	global $product_paralist,$download_paralist,$img_paralist;
+	global $product_paralist,$download_paralist,$img_paralist,$m_now_time;
 	if($mark&&strstr($mark,"-")){
 		$hngy5=explode('-',$mark);
 		if($hngy5[1]=='cm'){
@@ -738,10 +876,10 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 	$listmx=$listmx==''?-1:$listmx;
 	if($met_member_use==2)$access_sql= " and access<=$metinfo_member_type";
 	$numname = ' id,title,description,class1,class2,class3,updatetime,addtime,filename,access,top_ok,hits,issue,com_ok,no_order,';
-	$listitem['news']=array(0=>$numname.'img_ok,imgurls,content,imgurl',1=>$met_news,2=>'shownews');
-	$listitem['product']=array(0=>$numname.'new_ok,imgurls,content,imgurl,displayimg',1=>$met_product,2=>'showproduct');
+	$listitem['news']=array(0=>$numname.'img_ok,imgurls,content,imgurl,links',1=>$met_news,2=>'shownews');
+	$listitem['product']=array(0=>$numname.'new_ok,imgurls,content,imgurl,displayimg,links',1=>$met_product,2=>'showproduct');
 	$listitem['download']=array(0=>$numname.'downloadurl,filesize,content,downloadaccess',1=>$met_download,2=>'showdownload');
-	$listitem['img']=array(0=>$numname.'new_ok,imgurls,content,imgurl,displayimg',1=>$met_img,2=>'showimg');
+	$listitem['img']=array(0=>$numname.'new_ok,imgurls,content,imgurl,displayimg,links',1=>$met_img,2=>'showimg');
 	$listitem['job']=array(0=>'*',1=>$met_job,2=>'showjob');
 	$sqlorder=$order=='hits'?' order by top_ok desc,com_ok desc,no_order desc,hits desc,id desc':' order by top_ok desc,com_ok desc,no_order desc,updatetime desc,id desc';
 	switch($type){
@@ -856,7 +994,7 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 				$rand_query = "order by top_ok desc,no_order desc,addtime desc limit $rand, $listmx";
 			}
 		}
-		$query = "SELECT $select FROM $table where lang='$lang' {$mobilesql} and ((TO_DAYS(NOW())-TO_DAYS(`addtime`)< useful_life) OR useful_life=0) $displaytype_sql $access_sql $rand_query";
+		$query = "SELECT $select FROM $table where lang='$lang' {$mobilesql} and ((TO_DAYS(NOW())-TO_DAYS(`addtime`)< useful_life) OR useful_life=0) and addtime<='{$m_now_date}' $displaytype_sql $access_sql $rand_query";
 	}
 	else{
 		if($rand==0){
@@ -868,7 +1006,7 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 				$rand_query = $sqlorder." limit $rand, $listmx";
 			}
 		}
-		$query = "SELECT $select FROM $table where lang='$lang' {$mobilesql} $sqlclounm $access_sql $sqltype and (recycle='0' or recycle='-1') $displaytype_sql $rand_query";
+		$query = "SELECT $select FROM $table where lang='$lang' {$mobilesql} $sqlclounm $access_sql $sqltype and (recycle='0' or recycle='-1') and addtime<='{$m_now_date}' $displaytype_sql $rand_query";
 	}
 	$result = $db->query($query);
 	while($list= $db->fetch_array($result)){
@@ -968,7 +1106,11 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 		$panyid = $list['filename']!=''?$list['filename']:$list['id'];
 		$met_ahtmtype = $list['filename']<>""?$met_chtmtype:$met_htmtype;
 		$phpname=$met_pseudo?$filename."/".$panyid.'-'.$lang.'.html':$filename."/".$listitem[$module][2].".php?".$langmark."&id=".$list['id'];	
-		$list['url']=$met_pseudo?$phpname:($met_webhtm?$htmname.$met_ahtmtype:$phpname);
+		if($list['links']){
+			$list['url']=$list['links'];
+		}else{
+			$list['url']=$met_pseudo?$phpname:($met_webhtm?$htmname.$met_ahtmtype:$phpname);
+		}
 		$list['updatetime'] = date($met_listtime,strtotime($list['updatetime']));
 		$list['img_x']=met_imgxy(1,$module);
 		$list['img_y']=met_imgxy(2,$module);
@@ -1109,15 +1251,22 @@ function methtml_online(){
 }
 
 function methtml_hits($module,$mobile){
-global $news,$product,$img,$download,$job,$lang_Hits,$lang_Printing,$lang_Printing,$lang_UpdateTime,$lang_Close,$met_tools_ok,$met_tools_code;
+global $news,$product,$img,$download,$job,$lang_Hits,$lang_Printing,$lang_Printing,$lang_UpdateTime,$lang_Close,$met_tools_ok,$met_tools_code,$metinfover;
 global $met_pageclick,$met_pagetime,$met_pageprint,$met_pageclose;
 	$listnow=$$module;
 	if($module=='job')$listnow[updatetime]=$listnow[addtime];
-	if($met_tools_ok)$metinfo.="<div class='metjiathis'>{$met_tools_code}</div>";
-	if($module!='job' && $met_pageclick)$metinfo.=$lang_Hits."：<span><script language='javascript' src='../include/hits.php?type=".$module."&id=".$listnow[id]."'></script></span>";
-	if($met_pagetime)$metinfo.='&nbsp;&nbsp;'.$lang_UpdateTime.'：'.$listnow['updatetime'];
-	if($met_pageprint)$metinfo.='&nbsp;&nbsp;【<a href="javascript:window.print()">'.$lang_Printing.'</a>】';
-	if($met_pageclose)$metinfo.='&nbsp;&nbsp;【<a href="javascript:self.close()">'.$lang_Close.'</a>】';
+	$metinfo.="<div class='metjiathis'>{$met_tools_code}</div>";
+	if($metinfover == 'v1'){
+		if($module!='job' && $met_pageclick)$metinfo.=$lang_Hits."：<span class='metClicks' data-metClicks=".$module."|".$listnow[id]."></span>";
+		if($met_pagetime)$metinfo.='　'.$lang_UpdateTime.'：'.$listnow['updatetime'];
+		if($met_pageprint)$metinfo.='　【<a href="#" class="metPrinting">'.$lang_Printing.'</a>】';
+		if($met_pageclose)$metinfo.='　【<a href="#" class="metClose">'.$lang_Close.'</a>】';
+	}else{
+		if($module!='job')$metinfo.=$lang_Hits."：<span><script language='javascript' src='../include/hits.php?type=".$module."&id=".$listnow[id]."'></script></span>";
+		$metinfo.='&nbsp;&nbsp;'.$lang_UpdateTime.'：'.$listnow['updatetime'];
+		$metinfo.='&nbsp;&nbsp;【<a href="javascript:window.print()">'.$lang_Printing.'</a>】';
+		$metinfo.='&nbsp;&nbsp;【<a href="javascript:self.close()">'.$lang_Close.'</a>】';
+	}
 	if($mobile){
 		$metinfo="{$lang_Hits}：<script language='javascript' src='../include/hits.php?type={$module}&id={$listnow[id]}'></script>";
 	}
@@ -1270,6 +1419,7 @@ function memberlist(){
 }
 require_once ROOTPATH.'public/php/searchhtml.inc.php';//应用修改带代码
 require_once ROOTPATH.'public/php/metlabel.inc.php';//应用修改带代码
+require_once ROOTPATH.'public/php/metlabels.inc.php';
 # This program is an open source system, commercial use, please consciously to purchase commercial license.
 # Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
 ?>

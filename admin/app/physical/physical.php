@@ -122,6 +122,7 @@ if($action=="do"){
 	if($physicaldo[11]==1){
 		require_once $depth.'../../include/export.func.php';
 		$met_file='/dl/standard.php';
+		/*
 		$query="select * from $met_app where download=1";
 		$app=$db->get_all($query);
 		$applist='';
@@ -129,6 +130,7 @@ if($action=="do"){
 			$applist.="{$val[no]},{$val[ver]}|";
 		}
 		$applist=trim($applist,'|');
+		*/
 		$post=array('ver'=>$metcms_v,'app'=>$applist);
 		$result=curl_post($post,60);
 		if(link_error($result)==1){
@@ -136,6 +138,7 @@ if($action=="do"){
 			file_put_contents('dlappfile.php',$results[1]);
 			file_put_contents('standard.php',$results[0].$results[1]);
 		}
+		
 		if(file_exists('standard.php')){filescan('../../..','standard.php');}
 		else{$physical_file="0";}
 	}

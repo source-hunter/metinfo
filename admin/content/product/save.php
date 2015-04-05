@@ -66,6 +66,7 @@ if($imgnum>0){
 } 
 $displayimg = $displayimglist;
 $classother=$classothers?'|'.implode('|',$classothers).'|':'';
+if($metinfover)$metadmin[productother] = $met_productTabok-1;
 if($action=="add"){
 	if(!$description){
 		$description=strip_tags($content);
@@ -75,6 +76,10 @@ if($action=="add"){
 		$description=str_replace("\r",'',$description); 
 		$description=str_replace("\t",'',$description);
 		$description=mb_substr($description,0,200,'utf-8');
+	}
+	if($links){
+		$links=str_replace("http://",'',$links); 
+		$links="http://".$links;
 	}
 	$access=$access<>""?$access:0;
 	$query = "INSERT INTO $met_product SET
@@ -102,7 +107,8 @@ if($action=="add"){
 						  no_order       	 = '$no_order',
 						  lang          	 = '$lang',
 						  displaytype        = '$displaytype',
-						  tag                = '$tag',";
+						  tag                = '$tag',
+						  links              = '$links',";
 	if($metadmin[productother])$query .="
 						  contentinfo         = '$contentinfo',
 						  contentinfo1        = '$contentinfo1',
@@ -152,9 +158,32 @@ if($action=="add"){
 	$gent='../../sitemap/index.php?lang='.$lang.'&htmsitemap='.$met_member_force;
 	metsave($turl,'',$depth,$htmjs,$gent);
 }
+if($description){
+	$description_type=$db->get_one("select * from $met_product where id='$id'");
+	$description1=strip_tags($description_type[content]);
+	$description1=str_replace("&nbsp;",'',$description1); 
+	$description1=str_replace(" ","",$description1);
+	$description1=str_replace("\n", '', $description1); 
+	$description1=str_replace("\r", '', $description1); 
+	$description1=str_replace("\t", '', $description1);
+	$description1=mb_substr($description1,0,200,'utf-8');
+	if($description1==$description){
+		$description=strip_tags($content);
+		$description=str_replace("&nbsp;",'',$description); 
+		$description=str_replace(" ","",$description);
+		$description=str_replace("\n", '', $description); 
+		$description=str_replace("\r", '', $description); 
+		$description=str_replace("\t", '', $description);
+		$description=mb_substr($description,0,200,'utf-8');
+	}
+}
 if($action=="editor"){
 	if($class_other != 1){
 		$classother = '';
+	}
+	if($links){
+		$links=str_replace("http://",'',$links); 
+		$links="http://".$links;
 	}
 	$query = "update $met_product SET 
 						  title              = '$title',
@@ -170,7 +199,8 @@ if($action=="editor"){
 						  imgurl             = '$imgurl',
 						  imgurls            = '$imgurls',
 						  displayimg         = '$displayimg',
-						  displaytype        = '$displaytype',";
+						  displaytype        = '$displaytype',
+						  links              = '$links',";
 	if($metadmin[productnew])$query .= "					  
 						  new_ok             = '$new_ok',";
 	if($metadmin[productcom])$query .= "	

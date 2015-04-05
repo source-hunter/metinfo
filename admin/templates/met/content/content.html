@@ -7,7 +7,7 @@ echo <<<EOT
 <title>{$lang_setbasicWebInfoSet}</title>
 <style>
 img{ behavior: url({$img_url}/iepngfix.htc); }
-.Layer {float: left;position: absolute;left: 81px;top: 72px;font-weight: normal;color:#666;}
+.Layer {float: left;position: absolute;left: 81px;top: 13px;font-weight: normal;color:#666;}
 </style>
 
 </head>
@@ -22,53 +22,47 @@ if($class2)$title.="<a href='?anyid={$anyid}&lang={$lang}&module=1&class2={$clas
 if($met_content_type==2){
 	$awegcs[1]="class='column_hidden'";
 	$awegcs[2]="class='modular_display'";
-	$spacing[1]="";
-	$spacing[2]="<div class='v52fmbx_tbmax v52fmbx_tbmaxmt' >
-	<div class='v52fmbx_tbbox'>";
 }else{
 	$awegcs[1]="class='column_display'";
 	$awegcs[2]="class='modular_hidden'";
-	$spacing[1]="<div class='v52fmbx_tbmax v52fmbx_tbmaxmt' >
-	<div class='v52fmbx_tbbox'>";
-	$spacing[2]="";
 }
 $other_op.="<a href=\"content.php?anyid={$anyid}&lang={$lang}&met_content_type=2\" title=\"{$lang_columnarrangement2}{$lang_columnarrangement3}\" {$awegcs[2]}>{$lang_columnarrangement3}</a><a href=\"content.php?anyid={$anyid}&lang={$lang}&met_content_type=1\" title=\"{$lang_columnarrangement2}{$lang_columnarrangement4}\" {$awegcs[1]}>{$lang_columnarrangement4}</a></span>";
 require_once template('metlangs');
 echo <<<EOT
--->
-{$spacing[2]}
+-->	
+	<div align="right" class="v52fmbx_dings">
+	<a href="recycle/index.php?anyid=33&amp;lang=cn" title="{$_M['word']['upfiletips25']}" style="color: #23b7e5;text-decoration: none;"><i class="fa fa-recycle"></i>{$_M['word']['upfiletips25']}</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href="../app/batch/contentup.php?anyid=32" style="color: #23b7e5;text-decoration: none;">{$_M['word']['bulkopr']}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	</div>
+	<h3 class="v52fmbx_ding search" id="topsearch" >
 <!--
 EOT;
-if($met_content_type==2){
+//$met_content_type==1
+if(1){
 echo <<<EOT
---> 
-	<h3 style="margin-top: 30px;"></h3>
-<!--
-EOT;
-}
-echo <<<EOT
---> 
-<!--
-EOT;
-if($met_content_type==1){
-echo <<<EOT
---> 
+-->	
 
-			<h3 class="v52fmbx_ding search" id="topsearch" >
 	<form  method='POST' name='myform' onSubmit='return Checkmember();' action='content.php?anyid={$anyid}&search={$program}&action=search&lang={$lang}' target='_self'>
 	<div >
 	{$x}
 	</div>
-	<div align="right">
+
+	<div>
 	<label class="Layer">{$lang_column_searchname}</label>
 	<input id='program' name='program' type='text' size='24'  class='input_text stxt'/>
 	</div>
 	</form>
-	</h3>
-	{$spacing[1]}
 <!--
 EOT;
 }
+echo <<<EOT
+-->		
+	{$other_op}
+	</h3>
+	
+<!--
+EOT;
+
 echo <<<EOT
 --> 
 <div class="metv5box">

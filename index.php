@@ -1,6 +1,7 @@
 <?php
 # MetInfo Enterprise Content Management System 
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+
 if(!file_exists('./config/install.lock')){
 	if(file_exists('./install/index.php')){
 		header("location:./install/index.php");exit;
@@ -33,6 +34,11 @@ $show['description']=$met_description;
 $show['keywords']=$met_keywords;
 require_once 'public/php/methtml.inc.php';
 if($met_indexskin=="" or (!file_exists("templates/".$met_skin_user."/".$met_indexskin.".".$dataoptimize_html)))$met_indexskin='index';
+if($map&&$met_mobileok&&is_numeric($uid)) {
+	if($wap_skin_user == 'metx5_mobile') {
+		$met_indexskin = 'map';
+	}
+}
 include template($met_indexskin);
 footer();
 # This program is an open source system, commercial use, please consciously to purchase commercial license.

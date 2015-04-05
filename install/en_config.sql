@@ -11,7 +11,7 @@ INSERT INTO met_config VALUES('213','metconfig_wap_ok','0','','0','0','en');
 INSERT INTO met_config VALUES('214','metconfig_wap_tpa','1','','0','0','en');
 INSERT INTO met_config VALUES('215','metconfig_wap_tpb','0','','0','0','en');
 INSERT INTO met_config VALUES('216','metconfig_wap_url','','','0','0','en');
-INSERT INTO met_config VALUES('217','metconfig_wap_logo','','','0','0','en');
+INSERT INTO met_config VALUES('217','metconfig_wap_logo','../upload/201207/1342516579.png','','0','0','en');
 INSERT INTO met_config VALUES('218','metconfig_wap_img','../upload/201207/1342516476.jpg','','0','0','en');
 INSERT INTO met_config VALUES('219','wap_news_list','5','','0','0','en');
 INSERT INTO met_config VALUES('220','wap_product_list','5','','0','0','en');
@@ -24,11 +24,11 @@ INSERT INTO met_config VALUES('226','wap_img_imgx','240','','0','0','en');
 INSERT INTO met_config VALUES('227','wap_img_imgy','200','','0','0','en');
 INSERT INTO met_config VALUES('228','wap_title','Mobile Website','','0','0','en');
 INSERT INTO met_config VALUES('229','wap_description','','','0','0','en');
-INSERT INTO met_config VALUES('230','wap_footertext','Service Hotline :','','0','0','en');
+INSERT INTO met_config VALUES('230','wap_footertext','','','0','0','en');
 INSERT INTO met_config VALUES('231','metconfig_weburl','http://192.168.1.181/metv52/','','0','0','en');
 INSERT INTO met_config VALUES('232','metconfig_webname','Website Name','','0','0','en');
-INSERT INTO met_config VALUES('233','metconfig_logo','../upload/201207/1342516579.png','','0','0','en');
-INSERT INTO met_config VALUES('234','metconfig_skin_user','metv5s','','0','0','en');
+INSERT INTO met_config VALUES('233','metconfig_logo','../upload/201207/1342516529.png','','0','0','en');
+INSERT INTO met_config VALUES('234','metconfig_skin_user','metx5','','0','0','en');
 INSERT INTO met_config VALUES('235','metconfig_big_wate','0','','0','0','en');
 INSERT INTO met_config VALUES('236','metconfig_thumb_wate','0','','0','0','en');
 INSERT INTO met_config VALUES('237','metconfig_wate_class','1','','0','0','en');
@@ -53,9 +53,9 @@ INSERT INTO met_config VALUES('255','metconfig_imgs_x','210','','0','0','en');
 INSERT INTO met_config VALUES('256','metconfig_imgs_y','210','','0','0','en');
 INSERT INTO met_config VALUES('257','metconfig_keywords','Website Keywords','','0','0','en');
 INSERT INTO met_config VALUES('258','metconfig_description','MetInfo enterprise content manager system','','0','0','en');
-INSERT INTO met_config VALUES('259','metconfig_title_type','3','','0','0','en');
+INSERT INTO met_config VALUES('259','metconfig_title_type','2','','0','0','en');
 INSERT INTO met_config VALUES('260','metconfig_tools_ok','0','','0','0','en');
-INSERT INTO met_config VALUES('261','metconfig_tools_code','<div class=\"jiathis_style\"><span class=\"jiathis_txt\">分享到：</span><a class=\"jiathis_button_icons_1\"></a><a class=\"jiathis_button_icons_2\"></a><a class=\"jiathis_button_icons_3\"></a><a class=\"jiathis_button_icons_4\"></a><a href=\"http://www.jiathis.com/share\" class=\"jiathis jiathis_txt jtico jtico_jiathis\" target=\"_blank\"></a></div><script type=\"text/javascript\" src=\"http://v3.jiathis.com/code/jia.js?uid=1346378669840136\" charset=\"utf-8\"></script>','','0','0','en');
+INSERT INTO met_config VALUES('261','metconfig_tools_code','<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>','','0','0','en');
 INSERT INTO met_config VALUES('262','metconfig_alt','MetInfo enterprise content manager system | MetInfo CMS','','0','0','en');
 INSERT INTO met_config VALUES('263','metconfig_atitle','MetInfo CMS','','0','0','en');
 INSERT INTO met_config VALUES('264','metconfig_linkname','MetInfo CMS','','0','0','en');
@@ -105,7 +105,7 @@ INSERT INTO met_config VALUES('307','metconfig_product_detail','1','','0','0','e
 INSERT INTO met_config VALUES('308','metconfig_img_detail','1','','0','0','en');
 INSERT INTO met_config VALUES('309','metconfig_productdetail_x','400','','0','0','en');
 INSERT INTO met_config VALUES('310','metconfig_productdetail_y','300','','0','0','en');
-INSERT INTO met_config VALUES('311','metconfig_imgdetail_x','500','','0','0','en');
+INSERT INTO met_config VALUES('311','metconfig_imgdetail_x','900','','0','0','en');
 INSERT INTO met_config VALUES('312','metconfig_imgdetail_y','500','','0','0','en');
 INSERT INTO met_config VALUES('313','metconfig_onlineright_top','118','','0','0','en');
 INSERT INTO met_config VALUES('314','metconfig_onlineright_right','0','','0','0','en');
@@ -149,7 +149,7 @@ INSERT INTO met_config VALUES('532','index_hadd_ok','1','','0','0','en');
 INSERT INTO met_config VALUES('536','metconfig_hometitle','','','0','0','en');
 INSERT INTO met_config VALUES('538','metconfig_img_rename','0','','0','0','en');
 INSERT INTO met_config VALUES('560','metconfig_index_content','<p><span style=\"color: rgb(102, 102, 102); -webkit-text-size-adjust: none; \">MetInfo Co., Ltd. (</span><a href=\"http://www.metinfo.cn/\" style=\"color: rgb(28, 87, 196); -webkit-text-size-adjust: none; \" target=\"_blank\">MetInfo.cn</a><span style=\"color: rgb(102, 102, 102); -webkit-text-size-adjust: none; \">) focused on the field of network information and network marketing, integrated team of professional marketing ideas and networking technologies to provide customers with high quality online marketing services.</span></p>','','0','0','en');
-INSERT INTO met_config VALUES('582','wap_skin_user','wap001','','0','0','en');
+INSERT INTO met_config VALUES('582','wap_skin_user','metx5_mobile','','0','0','en');
 INSERT INTO met_config VALUES('583','wap_search_list','5','','0','0','en');
 INSERT INTO met_config VALUES('584','wap_message_list','5','','0','0','en');
 INSERT INTO met_config VALUES('585','wap_index_content','<img alt=\"\" src=\"web_metinfo_urlupload/images/20131228_183101.jpg\" style=\"width: 150px; height: 100px; float: left; margin-left: 8px; margin-right: 8px;\" />MetInfo believe all our customers, suppliers, shareholders, employees and other cooperative relations and their own units and individuals are their partners, and only through efforts to create value for partners in order to realize their own value and access to development and success.','','0','0','en');
@@ -166,6 +166,21 @@ INSERT INTO met_config VALUES('595','metconfig_maptitle','Demonstration Company 
 INSERT INTO met_config VALUES('596','metconfig_mapcontents','Address: Yuelu District, some 518 South Second Ring Road Metro 3-17 Sunshine 100 International Building 803 # <br/> Tel :0000-88888888 0000-8888888','','0','0','en');
 INSERT INTO met_config VALUES('598','wap_dimensional_size','200','0','0','0','en');
 INSERT INTO met_config VALUES('600','metconfig_dimensional_logo','','','0','0','en');
+INSERT INTO met_config VALUES('870','metconfig_menu_ok','1','','0','0','en');
+INSERT INTO met_config VALUES('871','metconfig_menu_oks','1','','0','0','en');
+INSERT INTO met_config VALUES('872','metconfig_menu_rgb','#e9280c','','0','0','en');
+INSERT INTO met_config VALUES('873','metconfig_menu_bg','','','0','0','en');
+INSERT INTO met_config VALUES('874','metconfig_menu_textbg','#ffffff','','0','0','en');
+INSERT INTO met_config VALUES('882','metconfig_wapshowtype','0','','0','0','en');
+INSERT INTO met_config VALUES('885','metconfig_bannerpagetype','0','','0','0','en');
+INSERT INTO met_config VALUES('886','metconfig_theme_preview','','','0','0','en');
+INSERT INTO met_config VALUES('895', 'metconfig_productTabname', 'Detailed information', '', '0', '0', 'en');
+INSERT INTO met_config VALUES('896', 'metconfig_productTabname_1', 'Tab two', '', '0', '0', 'en');
+INSERT INTO met_config VALUES('897', 'metconfig_productTabname_2', 'Tab three', '', '0', '0', 'en');
+INSERT INTO met_config VALUES('898', 'metconfig_productTabname_3', 'Tab four', '', '0', '0', 'en');
+INSERT INTO met_config VALUES('899', 'metconfig_productTabname_4', 'Tab five', '', '0', '0', 'en');
+INSERT INTO met_config VALUES('900', 'metconfig_productTabok', '1', '', '0', '0', 'en');
+INSERT INTO met_config VALUES('916', 'metconfig_htmlurl', '0', '', '0', '0', 'en');
 INSERT INTO met_language VALUES('4016','system','system parameter','0','1','0','0','en');
 INSERT INTO met_language VALUES('4017','sunday','Sunday','0','1','1','0','en');
 INSERT INTO met_language VALUES('4018','monday','Monday','0','2','1','0','en');
@@ -495,48 +510,20 @@ INSERT INTO met_language VALUES('4366','tagweb','TAG','0','66','1','0','en');
 INSERT INTO met_config VALUES('4368','wap_footertext_tel','0000-88888','0','0','0','en');
 INSERT INTO met_admin_array VALUES('4','Member','','0','','0','0','1','1','en','');
 INSERT INTO met_admin_array VALUES('5','Agents','','0','','0','0','2','1','en','');
-
-INSERT INTO met_language VALUES('30390','message_name','The name field name','1','240','4','0','en');
-INSERT INTO met_language VALUES('30393','message_name1','To obtain the user name, field type must be a “short”','1','241','4','0','en');
-INSERT INTO met_language VALUES('30396','message_content','The message content field name','1','242','4','0','en');
-INSERT INTO met_language VALUES('30399','message_content1','For the message content for users, field type must be a “text”','1','243','4','0','en');
-INSERT INTO met_language VALUES('30414','message_AcceptMail','Voice mail received mailbox','1','244','4','0','en');
 INSERT INTO met_config VALUES('638','metconfig_message_fd_class','120','','49','0','en');
 INSERT INTO met_config VALUES('640','metconfig_message_fd_email','122','','49','0','en');
 INSERT INTO met_config VALUES('642','metconfig_message_fd_sms','121','','49','0','en');
 INSERT INTO met_config VALUES('644','metconfig_message_fd_content','124','','49','0','en');
-INSERT INTO met_language VALUES('30402','popular_explain','When "replaced" is null, the "original text" replaces the value is null','1','25','5','0','en');
-INSERT INTO met_language VALUES('30417','column_search','Program search','1','245','4','0','en');
-INSERT INTO met_language VALUES('30420','column_searchname','Please enter the name column','1','246','4','0','en');
-INSERT INTO met_language VALUES('30423','search_inthe','Are the search','1','247','4','0','en');
-INSERT INTO met_language VALUES('30426','search_Noresults','Sorry, you want to search column not found','1','248','4','0','en');
-INSERT INTO met_language VALUES('30405','membertips','Membership settings','1','244','4','0','en');
-INSERT INTO met_language VALUES('30408','memberstyle','Group members set','1','245','4','0','en');
-INSERT INTO met_language VALUES('30411','memberflashset','Membership function','1','246','4','0','en');
-INSERT INTO met_language VALUES('30432','cvall','ALL','0','39','4','0','en');
-
-INSERT INTO met_language VALUES('30761','jsx36','Note: zip format is not allowed to upload, please go to the site safety add upload zip format','1','444','8','0','en');
-INSERT INTO met_language VALUES('30764','jsx37','Note: SQL formats are not allowed to upload, please go to the site safety add SQL upload format','1','445','8','0','en');
-INSERT INTO met_language VALUES('30767','jsx38','You do not have full control permissions, please contact your administrator','1','446','8','0','en');
-INSERT INTO met_language VALUES('30770','appmodule','Application module','1','1','3','0','en');
-INSERT INTO met_language VALUES('30773','formerror1','Please fill in this field.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30776','formerror2','Please choose one of these options.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30779','formerror3','Please enter the correct phone number.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30782','formerror4','Please enter the correct Email address.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30785','formerror5','Two input password, please enter again.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30788','formerror6','Please enter at least & metinfo & characters.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30791','formerror7','Enter no more than & metinfo & characters.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30794','formerror8','Enter the number of characters must be between & metinfo &.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30797','smstips96','other','1','0','8','0','en');
-INSERT INTO met_language VALUES('30800','smstips97','User notification','1','0','8','0','en');
-
-INSERT INTO met_language VALUES('30803','js72','Whether to import the administrator and member information, determine the current administrator and membership information will be imported data replacement, cancel the administrator and member or current.','1','0','8','0','en');
-INSERT INTO met_language VALUES('30806','upfileFail20','Delete the thumbnail cache','1','0','8','0','en');
 
 
-
-
-
-
-
-
+INSERT INTO met_language VALUES('35826','read','Read','0','0','1','0','en');
+INSERT INTO met_language VALUES('35827','switching_category','Switching category','0','0','1','0','en');
+INSERT INTO met_language VALUES('35727','formerror1','Please fill in this field.','0','0','1','0','en');
+INSERT INTO met_language VALUES('35728','formerror2','Please choose one of these options.','0','0','1','0','en');
+INSERT INTO met_language VALUES('35729','formerror3','Please enter the correct phone number.','0','0','1','0','en');
+INSERT INTO met_language VALUES('35730','formerror4','Please enter the correct Email address.','0','0','1','0','en');
+INSERT INTO met_language VALUES('35731','formerror5','Two input password, please enter again.','0','0','1','0','en');
+INSERT INTO met_language VALUES('35732','formerror6','Please enter at least &metinfo& characters.','0','0','1','0','en');
+INSERT INTO met_language VALUES('35733','formerror7','Enter no more than &metinfo& characters.','0','0','1','0','en');
+INSERT INTO met_language VALUES('35734','formerror8','Enter the number of characters must be between &metinfo&.','0','0','1','0','en');
+INSERT INTO met_language VALUES('35725','js46','can not repeat','0','0','1','0','en');

@@ -110,7 +110,7 @@ EOT;
 echo <<<EOT
 -->		
 		</select>
-		<a href="{$met_weburl}{$met_adminfile}" onclick="return tocloumn();" target="_blank">{$lang_indexcolumn}</a>
+		<a href="{$met_weburl}{$met_adminfile}/column/index.php?anyid=25&lang=$lang" target="_blank">{$lang_indexcolumn}</a>
 			</dd>
 		</dl>
 		</div>
@@ -170,10 +170,11 @@ echo <<<EOT
 -->
 <!--
 EOT;
+$metadmin['newsimage'] = 1;
 if($metadmin['newsimage']){
 echo <<<EOT
 -->
-				<label><input name="img_ok" type="checkbox" value="1" class="checkbox" {$img_ok} />{$lang_article2}</label>
+				<label><input name="img_ok" type="checkbox" class="checkbox" value="1" {$img_ok}/>{$lang_article2}</label>
 <!--
 EOT;
 }
@@ -213,6 +214,15 @@ EOT;
 }
 echo <<<EOT
 -->	
+	<div class="v52fmbx_dlbox">
+	<dl>
+		<dt>{$lang_external_links}{$lang_marks}</dt>
+		<dd>
+			<input name="links" type="text" class="text" value="$news_list[links]" />
+			<span class="tips">{$lang_specified_link}</span>
+		</dd>
+	</dl>
+	</div>
 	<h3 class="v52fmbx_hr metsliding" sliding="0">{$lang_contentdetail}</h3>
 	<div class="metsliding_box metsliding_box_0">
 		<div class="v52fmbx_dlbox_content">
@@ -279,6 +289,27 @@ echo <<<EOT
 	</div>
 	<h3 class="v52fmbx_hr metsliding" sliding="2">{$lang_unitytxt_28}</h3>
 	<div class="metsliding_box metsliding_box_2">
+		<div class="v52fmbx_dlbox">
+		<dl>
+			<dt>{$lang_timedrelease}{$lang_marks}</dt>
+			<dd>
+				
+				<span class="tips">把发布时间设置为未来时间，即可在指定时间发布。
+<!--
+EOT;
+if($met_htmlurl == 0 && ($met_webhtm == 2 || $met_webhtm == 1)){
+echo <<<EOT
+-->	
+				您开启了静态页面功能，必须开启“静态页面伪静态化”才可以使用定时发布功能。<a href="../../seo/sethtm.php?anyid=37&lang={$lang}&nojump=1" target="_blank">{$lang_clickset}</a>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+				</span>
+			</dd>
+		</dl>
+		</div>
 		<div class="v52fmbx_dlbox">
 		<dl>
 			<dt>{$lang_addtime}{$lang_marks}</dt>

@@ -51,6 +51,7 @@ if($action=="login"){
 		if($_GET[langset]!=''){
 			$_GET[langset]=daddslashes($_GET[langset],0,1);
 			change_met_cookie('languser',$_GET[langset]);
+			met_setcookie("langset", $_GET[langset], 0, '/', false);
 			save_met_cookie();
 		}
 		save_met_cookie();
@@ -65,6 +66,7 @@ if($action=="login"){
 	if($admincp_list[langok]<>'metinfo' and (!strstr($admincp_list[langok],"-".$met_index_type."-")))$lang=$adminlang[1];
 	$filejs = ROOTPATH_ADMIN.'include/metvar.js';
 	$strlen = file_put_contents($filejs, $js);
+	$metinfo_mobile=false;
 	if($metinfo_mobile){
 		Header("Location: ../index.php");
 	}else{

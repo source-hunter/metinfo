@@ -4,6 +4,7 @@
 $depth='../';
 require_once $depth.'../login/login_check.php';
 require_once 'global.func.php';
+eliminate();
 $listclass='';
 $listclass[2]='class="now"';
 $rurls='../system/database/recovery.php?anyid='.$anyid.'&lang='.$lang;
@@ -88,6 +89,7 @@ if($action=='delete'){
 				die();
 			}
 		}
+		
 		$gent='../../include/404.php?lang='.$lang.'&metinfonow='.$met_member_force;
 		metsave($rurls,$lang_setdbDBRestoreOK,$depth,'','',2,$gent);
 	}

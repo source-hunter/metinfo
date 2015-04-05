@@ -101,7 +101,10 @@ sendsms($met_nurse_link_tel,$message,4);
         $fdjs=$fdjs."alert('{$lang_LinkInfo3}');";
         $fdjs=$fdjs."document.myform.weburl.focus();";
         $fdjs=$fdjs."return false;}";
-        $fdjs=$fdjs."}</script>";
+        $fdjs=$fdjs."}";
+		$fdjs=$fdjs."function verification(){ ";
+		$fdjs=$fdjs."document.getElementById('new_code').click();}\n";	
+		$fdjs=$fdjs."</script>";
 require_once '../public/php/methtml.inc.php';
 		if($ankok==1)$cvidnow=10010;
         $methtml_addlink.=$fdjs;
@@ -167,8 +170,8 @@ $methtml_addlink.="<td bgcolor='#FFFFFF' style='color:#990000' class='addlink_in
 $methtml_addlink.="</tr>\n";
 if($met_memberlogin_code==1){  
 	 $methtml_addlink.="<tr class='addlink_tr'><td class='addlink_td1' align='right' bgcolor='#FFFFFF'>".$lang_memberImgCode."</td>\n";
-     $methtml_addlink.="<td width='70%' bgcolor='#FFFFFF' class='addlink_input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' />";
-     $methtml_addlink.="<img align='absbottom' src='../member/ajax.php?action=code'  onclick=this.src='../member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
+     $methtml_addlink.="<td width='70%' bgcolor='#FFFFFF' class='addlink_input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' onclick=verification() >";
+     $methtml_addlink.="<img align='absbottom' id='new_code' src='../member/ajax.php?action=code'  onclick=this.src='../member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
      $methtml_addlink.="</td>\n";
 	 $methtml_addlink.="<td bgcolor='#FFFFFF' style='color:#990000' class='addlink_info'>*</td>\n";
      $methtml_addlink.="</tr>\n";

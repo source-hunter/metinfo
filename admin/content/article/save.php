@@ -85,6 +85,10 @@ if(!$description){
 	$description=str_replace("\t", '', $description);
 	$description=mb_substr($description,0,200,'utf-8');
 }
+if($links){
+	$links=str_replace("http://",'',$links); 
+	$links="http://".$links;
+}
 $query = "INSERT INTO $met_news SET
                       title              = '$title',
                       ctitle             = '$ctitle',
@@ -109,6 +113,7 @@ $query = "INSERT INTO $met_news SET
 					  lang          	 = '$lang',
 					  top_ok             = '$top_ok',
 					  displaytype        = '$displaytype',
+					  links              = '$links',
 					  tag                = '$tag'";
          $db->query($query);
 $later_news=$db->get_one("select * from $met_news where updatetime='$updatetime' and lang='$lang'");
@@ -140,6 +145,10 @@ if($description){
 	}
 }
 if($action=="editor"){
+if($links){
+	$links=str_replace("http://",'',$links); 
+	$links="http://".$links;
+}
 $query = "update $met_news SET 
                       title              = '$title',
                       ctitle             = '$ctitle',
@@ -150,11 +159,12 @@ $query = "update $met_news SET
                       class1             = '$class1',
 					  class2             = '$class2',
 					  class3             = '$class3',
-					  displaytype        = '$displaytype',";
-if($metadmin[newsimage])$query .= "					  
+					  displaytype        = '$displaytype',
 					  img_ok             = '$img_ok',
 					  imgurl             = '$imgurl',
 					  imgurls            = '$imgurls',";
+					  
+					  
 if($metadmin[newscom])$query .= "	
 				      com_ok             = '$com_ok',";
 					  $query .= "
@@ -170,6 +180,7 @@ if($metadmin[pagename])  $query .= "
 					  $query .= "
 					  top_ok             = '$top_ok',
 					  no_order       	 = '$no_order',
+					  links              = '$links',
 					  lang               = '$lang'
 					  where id='$id'";
 $db->query($query);

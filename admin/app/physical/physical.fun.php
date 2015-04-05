@@ -169,7 +169,7 @@ function dangerfun($jkdir,$danger,$suffix,$trust){
 	deltree(ROOTPATH.'/cache');
 	deltree(ROOTPATH."/$adminfile/update");
 	$column=$db->get_all("select * from $met_column where classtype=1 or releclass!=0");
-	$columnfile=array('about',$adminfile,'cache','config','download','feedback','img','include','job','lang','link','member','message','news','product','public','search','sitemap','templates','upload','wap','install','update','webscan360');
+	$columnfile=array('about',$adminfile,'cache','config','download','feedback','img','include','job','lang','link','member','message','news','product','public','search','sitemap','templates','upload','wap','install','update','webscan360','app');
 	foreach($column as $key=>$val){
 		array_push($columnfile,$val['foldername']);
 	}

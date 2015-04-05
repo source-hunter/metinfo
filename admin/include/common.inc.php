@@ -47,7 +47,9 @@ $metinfoadminok=1;
 $settings_arr=array();
 require_once ROOTPATH.'config/config.inc.php';
 met_cooike_start();
-if(!is_array($met_langadmin[$_GET[langset]])&&$_GET[langset]!='')die('not have this language');
+$query="select * from {$tablepre}lang where mark='{$_GET[langset]}' and lang='metinfo'";
+$isadminlang=$db->get_one($query);
+if(!$isadminlang&&$_GET[langset]!='')die('not have this language');
 if($_GET[langset]!=''){
 	$_GET[langset]=daddslashes($_GET[langset],0,1);
 	change_met_cookie('languser',$_GET[langset]);
@@ -72,7 +74,7 @@ $met_cookie_filter=$met_cookie;
 foreach(array('_COOKIE', '_POST', '_GET') as $_request) {
 	foreach($$_request as $_key => $_value) {
 		$_key{0} != '_' && $$_key = daddslashes($_value,0,0,1);
-		$_M[form][$_key]=daddslashes($_value,0,0,1);
+		$_M['form'][$_key]=daddslashes($_value,0,0,1);
 	}
 }
 $met_cookie=array();
@@ -87,7 +89,7 @@ $mettables=explode('|',$mettable[value]);
 foreach($mettables as $key=>$val){
 	$tablename='met_'.$val;	
 	$$tablename=$tablepre.$val;
-	$_M['table'][$tablename] = $tablepre.$val;
+	$_M['table'][$val] = $tablepre.$val;
 }
 (!MAGIC_QUOTES_GPC) && $_FILES = daddslashes($_FILES);
 $REQUEST_URI  = $_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
@@ -154,25 +156,22 @@ if($_M['plugin']['doadmin']){
 				$_M['url']['own'] = $_M['url']['site'].'app/app/'.$val.'/';
 				if(file_exists($applistfile)&&!is_dir($applistfile)&&((file_get_contents($applistfile))!='metinfo')){
 					require_once $applistfile;
-					$newclass=str_replace('.class.php', '', 'plugin_'.$val);
-					$newclass=new $newclass;
-					call_user_func(array($newclass,  'doadmin'));
+					$app_plugin_name=str_replace('.class.php', '', 'plugin_'.$val);
+					if (class_exists($app_plugin_name)) {
+						$newclass=new $app_plugin_name;
+						if(method_exists($newclass, 'doadmin')){
+							call_user_func(array($newclass,  'doadmin'));
+						}
+					}
 				}
 		}
 		$_M['url']['own'] = '';
 		DB::close();
+		$db = new dbmysql();
+		$db->dbconn($con_db_host,$con_db_id,$con_db_pass,$con_db_name);
 	}
 }
 //结束
-/*手机后台*/
-$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
-if($_SERVER['HTTP_USER_AGENT']){
-	$uachar = "/(nokia|sony|ericsson|mot|samsung|sgh|lg|philips|panasonic|alcatel|lenovo|cldc|midp|mobile|wap|Android|ucweb)/i";
-	if(($ua == '' || preg_match($uachar, $ua))&& !strpos(strtolower($_SERVER['REQUEST_URI']),'wap')){
-		$metinfo_mobile=1;
-		echo '请打开JS，已保证可以正常访问后台！！！';
-	}
-}
 /*管理员权限处理*/
 $admin_list = $db->get_one("SELECT * FROM {$met_admin_table} WHERE admin_id='{$metinfo_admin_name}'");
 $metinfo_admin_pop=$admin_list['admin_type'];

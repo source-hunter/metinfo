@@ -229,7 +229,11 @@ function delnull($htm){
 }
 /*页面跳转*/
 function metsave($url,$text,$depth,$htm,$gent,$prent){
-global $db,$met_config,$lang,$met_sitemap_auto,$adminmodify;
+global $db,$met_config,$lang,$met_sitemap_auto,$adminmodify,$met_weburl,$met_adminfile,$lang_physicaldelok;
+	if(strstr($url, 'app/dlapp/')){
+		header('location:'.$met_weburl.$met_adminfile.'/index.php?anyid=44&n=myapp&c=myapp&a=doindex&lang='.$lang.'&turnovertext='.$lang_physicaldelok);
+		die();
+	}
 	$htm=$htm!=''?delnull($htm):'';
 	$url=$url=='-1'?$url:urlencode($url);
 	$text=urlencode($text);
@@ -993,7 +997,7 @@ function moduledb($module){
 }
 /*删除栏目*/
 function delcolumn($column){
-global $lang,$db,$met_deleteimg,$depth;
+global $lang,$db,$depth;
 global $met_admin_table,$met_column,$met_cv,$met_download,$met_feedback,$met_flist,$met_img,$met_job,$met_link,$met_list,$met_message,$met_news,$met_parameter,$met_plist,$met_product,$met_config,$met_mlist;
 if($column['releclass']){
 $classtype="class1";
@@ -1006,11 +1010,9 @@ switch ($column['module']){
      $db->query($query);
     break;
 	case 2:
-	 if($met_deleteimg){
-	 	 $query = "select * from $met_news where $classtype='$column[id]'";
-		 $del = $db->get_all($query);
-		 delimg($del,2,2);
-	 }
+	 $query = "select * from $met_news where $classtype='$column[id]'";
+	 $del = $db->get_all($query);
+	 delimg($del,2,2);
 	 $query = "delete from $met_news where $classtype='$column[id]'";
 	 $db->query($query);
 	 $query = "delete from $met_column where id='$column[id]'";
@@ -1056,11 +1058,9 @@ switch ($column['module']){
      $db->query($query);
 	break;
 	case 6:
-	if($met_deleteimg){
-		$query = "select * from $met_cv where lang='$lang'";
-		$del = $db->get_all($query);
-		delimg($del,2,6);
-	 }		
+	$query = "select * from $met_cv where lang='$lang'";
+	$del = $db->get_all($query);
+	delimg($del,2,6);	
 	 $query = "delete from $met_plist where lang='$lang' and module='$column[module]'";
 	 $db->query($query);
 	 $query = "delete from $met_cv where lang='$lang'";
@@ -1123,17 +1123,15 @@ if(!$admin_lists['id'] && ($column['classtype'] == 1 || $column['releclass'])){
 	}
 }
 /*删除栏目图片*/
-if($met_deleteimg){
 file_unlink($depth."../".$column[indeximg]);
 file_unlink($depth."../".$column[columnimg]);
-}
+
 }
 /*删除图片*/
 /*type1 删除1行，type2 为多行删除，$para_list为空时必须指定模块*/
 function delimg($del,$type,$module=0,$para_list=NULL){
-global $lang,$db,$met_deleteimg,$depth;
+global $lang,$db,$depth;
 global $met_admin_table,$met_column,$met_cv,$met_download,$met_feedback,$met_flist,$met_img,$met_job,$met_link,$met_list,$met_message,$met_news,$met_parameter,$met_plist,$met_product;
-if($met_deleteimg){
 	$table=$module==8?$met_feedback:$met_plist;
 	if($para_list==NULL&&$module!=2){
 		$query = "select * from $met_parameter where lang='$lang' and module='$module' and (class1='$del[class1]' or class1=0) and type='5'";
@@ -1212,7 +1210,6 @@ if($met_deleteimg){
 		}
 	}
 
-}
 }
 
 /*文件权限检测*/
@@ -1433,6 +1430,10 @@ function met_cooike_unset($userid){
 	met_setcookie("met_auth",'',time()-3600);
 	met_setcookie("met_key",'',time()-3600);
 	met_setcookie("appsynchronous",0,time()-3600,'');
+	
+	met_setcookie("upgraderemind",'',time()-3600);
+	met_setcookie("langset",'',time()-3600);
+	met_setcookie("appupdate",'',time()-3600);
 	unset($met_cookie);
 }
 function change_met_cookie($key,$val){

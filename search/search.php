@@ -5,6 +5,7 @@ require_once '../include/common.inc.php';
 $search_column=$db->get_one("select * from $met_column where module='11' and lang='$lang'");
 $metaccess=$search_column[access];
 $classnow=$search_column[id];
+$serch_sql='';
 require_once '../include/head.php';
 unset($search_list);
 function replaceHtmlAndJs($document)

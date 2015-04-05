@@ -84,6 +84,7 @@ if($action=="modify"){
 					$retxt=$retxt?$retxt.'<br/>'.$lang_langexplain12:$lang_jsok.$lang_langexplain12;
 				}
 			}
+			unlink(ROOTPATH.'cache/lang_json_'.$lang.'.php');
 		break;
 		case 'edit':
 			if($langname=='')metsave('-1',$lang_langnamenull,$depth);
@@ -123,6 +124,7 @@ if($action=="modify"){
 					$retxt=$lang_jsok.$lang_langexplain12;
 				}
 			}
+			unlink(ROOTPATH.'cache/lang_json_'.$lang.'.php');
 		break;
 		case 'delete':
 			if(count($met_langok)==1)metsave('-1',$lang_langone,$depth);
@@ -132,7 +134,11 @@ if($action=="modify"){
 			$db->query($query);
 			$query = "delete from $met_config where lang='$langeditor'";
 			$db->query($query);
-			if(file_exists($depth."../../templates/".$met_skin_user."/lang/language_".$langeditor.".ini"))@unlink($depth."../../templates/".$met_skin_user."/lang/language_".$langeditor.".ini");
+			$query = "delete from $met_templates where lang='$langeditor' and no='$met_skin_user'";
+			$db->query($query);
+			//if(file_exists($depth."../../templates/".$met_skin_user."/lang/language_".$langeditor.".ini"))@unlink($depth."../../templates/".$met_skin_user."/lang/language_".$langeditor.".ini");
+			
+			
 			$query = "select * from $met_column where lang='$langeditor'";
 			$result = $db->query($query);
 			while($list = $db->fetch_array($result)){
@@ -220,7 +226,7 @@ if($action=="modify"){
 			$query = "delete from $met_language where site='1' and lang='$langeditor'";
 			$result = $db->query($query);
 			$query = "delete from $met_lang where lang='metinfo' and mark='$langeditor'";
-			$result = $db->query($query);
+			$result = $db->query($query);	
 		break;
 	}
 	unlink('../../../cache/lang_'.$langeditor.'.php');
@@ -228,7 +234,13 @@ if($action=="modify"){
 	$prent=$langsetaction=='add'&&$lancount==1?2:'';
 	$txt=$isaddlang?$lang_langadderr3:'';
 	if($retxt)$txt=$retxt;
-	metsave('../system/lang/lang.php?anyid='.$anyid.'&lang='.$lang.'&cs='.$cs,$txt,$depth,'','',$prent);
+	if($langsetaction == 'delete' || $langsetaction == 'add'){
+	echo "<script language=JavaScript>
+			parent.location.href='../lang/lang.php?anyid={$anyid}&lang={$lang}&cs=1&turnovertext={$lang_jsok}'; 
+		 </script> ";	
+	}else{
+		metsave('../system/lang/lang.php?anyid='.$anyid.'&lang='.$lang.'&cs='.$cs,$txt,$depth,'','',$prent);
+	}
 }elseif($action=='flag'){
     $dir = $depth.'../../public/images/flag';
     $handle = opendir($dir);

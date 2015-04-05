@@ -6,7 +6,7 @@ INSERT INTO met_config VALUES('66','wap_download_list','5','','0','0','cn');
 INSERT INTO met_config VALUES('67','wap_product_list','5','','0','0','cn');
 INSERT INTO met_config VALUES('68','wap_news_list','5','','0','0','cn');
 INSERT INTO met_config VALUES('69','metconfig_wap_img','../upload/201207/1342516476.jpg','','0','0','cn');
-INSERT INTO met_config VALUES('70','metconfig_wap_logo','','','0','0','cn');
+INSERT INTO met_config VALUES('70','metconfig_wap_logo','../upload/201207/1342516579.png','','0','0','cn');
 INSERT INTO met_config VALUES('71','metconfig_wap_url','','','0','0','cn');
 INSERT INTO met_config VALUES('72','metconfig_wap_tpb','0','','0','0','cn');
 INSERT INTO met_config VALUES('73','metconfig_wap_tpa','1','','0','0','cn');
@@ -18,11 +18,11 @@ INSERT INTO met_config VALUES('78','wap_img_imgx','240','','0','0','cn');
 INSERT INTO met_config VALUES('79','wap_img_imgy','200','','0','0','cn');
 INSERT INTO met_config VALUES('80','wap_title','企业网站触屏版','','0','0','cn');
 INSERT INTO met_config VALUES('81','wap_description','','','0','0','cn');
-INSERT INTO met_config VALUES('82','wap_footertext','服务热线：','','0','0','cn');
+INSERT INTO met_config VALUES('82','wap_footertext','','','0','0','cn');
 INSERT INTO met_config VALUES('83','metconfig_weburl','http://192.168.1.181/metv52/','','0','0','cn');
 INSERT INTO met_config VALUES('84','metconfig_webname','网站名称','','0','0','cn');
-INSERT INTO met_config VALUES('85','metconfig_logo','../upload/201207/1342516579.png','','0','0','cn');
-INSERT INTO met_config VALUES('86','metconfig_skin_user','default','','0','0','cn');
+INSERT INTO met_config VALUES('85','metconfig_logo','../upload/201207/1342516529.png','','0','0','cn');
+INSERT INTO met_config VALUES('86','metconfig_skin_user','metx5','','0','0','cn');
 INSERT INTO met_config VALUES('87','metconfig_big_wate','0','','0','0','cn');
 INSERT INTO met_config VALUES('88','metconfig_thumb_wate','0','','0','0','cn');
 INSERT INTO met_config VALUES('89','metconfig_wate_class','1','','0','0','cn');
@@ -47,7 +47,7 @@ INSERT INTO met_config VALUES('107','metconfig_imgs_x','190','','0','0','cn');
 INSERT INTO met_config VALUES('108','metconfig_imgs_y','150','','0','0','cn');
 INSERT INTO met_config VALUES('109','metconfig_keywords','网站关键词','','0','0','cn');
 INSERT INTO met_config VALUES('110','metconfig_description','网站描述，一般显示在搜索引擎搜索结果中的描述文字，用于介绍网站，吸引浏览者点击。','','0','0','cn');
-INSERT INTO met_config VALUES('111','metconfig_title_type','3','','0','0','cn');
+INSERT INTO met_config VALUES('111','metconfig_title_type','2','','0','0','cn');
 INSERT INTO met_config VALUES('112','metconfig_seo','<p>优化推广-SEO参数设置-头部优化文字</p>','','0','0','cn');
 INSERT INTO met_config VALUES('113','metconfig_tools_ok','1','','0','0','cn');
 INSERT INTO met_config VALUES('114','metconfig_alt','图片关键词','','0','0','cn');
@@ -102,7 +102,7 @@ INSERT INTO met_config VALUES('162','metconfig_product_detail','1','','0','0','c
 INSERT INTO met_config VALUES('163','metconfig_img_detail','1','','0','0','cn');
 INSERT INTO met_config VALUES('164','metconfig_productdetail_x','400','','0','0','cn');
 INSERT INTO met_config VALUES('165','metconfig_productdetail_y','300','','0','0','cn');
-INSERT INTO met_config VALUES('166','metconfig_imgdetail_x','631','','0','0','cn');
+INSERT INTO met_config VALUES('166','metconfig_imgdetail_x','900','','0','0','cn');
 INSERT INTO met_config VALUES('167','metconfig_imgdetail_y','500','','0','0','cn');
 INSERT INTO met_config VALUES('168','metconfig_onlineright_top','110','','0','0','cn');
 INSERT INTO met_config VALUES('169','metconfig_onlineright_right','10','','0','0','cn');
@@ -131,7 +131,7 @@ INSERT INTO met_config VALUES('191','metconfig_pageclick','1','','0','0','cn');
 INSERT INTO met_config VALUES('192','metconfig_pagetime','1','','0','0','cn');
 INSERT INTO met_config VALUES('193','metconfig_pageprint','1','','0','0','cn');
 INSERT INTO met_config VALUES('194','metconfig_pageclose','1','','0','0','cn');
-INSERT INTO met_config VALUES('195','metconfig_deleteimg','0','','0','0','cn');
+INSERT INTO met_config VALUES('195','metconfig_deleteimg','1','','0','0','cn');
 INSERT INTO met_config VALUES('196','metconfig_columnshow','0','','0','0','cn');
 INSERT INTO met_config VALUES('197','metconfig_kzqie','1','','0','0','cn');
 INSERT INTO met_config VALUES('198','metconfig_cv_time','120','','0','0','cn');
@@ -140,7 +140,7 @@ INSERT INTO met_config VALUES('200','metconfig_cv_type','1','','0','0','cn');
 INSERT INTO met_config VALUES('201','metconfig_cv_image','32','','0','0','cn');
 INSERT INTO met_config VALUES('202','metconfig_cv_emtype','0','','0','0','cn');
 INSERT INTO met_config VALUES('203','metconfig_cv_to','','','0','0','cn');
-INSERT INTO met_config VALUES('204','metconfig_tools_code','<div class=\"jiathis_style\"><span class=\"jiathis_txt\">分享到：</span><a class=\"jiathis_button_icons_1\"></a><a class=\"jiathis_button_icons_2\"></a><a class=\"jiathis_button_icons_3\"></a><a class=\"jiathis_button_icons_4\"></a><a href=\"http://www.jiathis.com/share\" class=\"jiathis jiathis_txt jtico jtico_jiathis\" target=\"_blank\"></a></div><script type=\"text/javascript\" src=\"http://v3.jiathis.com/code/jia.js?uid=1346378669840136\" charset=\"utf-8\"></script>','','0','0','cn');
+INSERT INTO met_config VALUES('204','metconfig_tools_code','<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>','','0','0','cn');
 INSERT INTO met_config VALUES('524','metconfig_cv_back','0','','0','0','cn');
 INSERT INTO met_config VALUES('525','metconfig_cv_title','','','0','0','cn');
 INSERT INTO met_config VALUES('526','metconfig_cv_content','','','0','0','cn');
@@ -149,7 +149,7 @@ INSERT INTO met_config VALUES('533','index_hadd_ok','1','','0','0','cn');
 INSERT INTO met_config VALUES('535','metconfig_hometitle','','','0','0','cn');
 INSERT INTO met_config VALUES('537','metconfig_img_rename','1','','0','0','cn');
 INSERT INTO met_config VALUES('559','metconfig_index_content','<div><img alt=\"\" src=\"web_metinfo_urlupload/images/20120716_094159.jpg\" style=\"line-height: 2; margin: 8px; width: 196px; float: left; height: 209px;\" /></div><div style=\"padding-top:10px;\"><span style=\"font-size:14px;\"><strong>关于&ldquo;为合作伙伴创造价值&rdquo;</strong></span></div><div>米拓信息认为客户、供应商、公司股东、公司员工等一切和自身有合作关系的单位和个人都是自己的合作伙伴，并只有通过努力为合作伙伴创造价值，才能体现自身的价值并获得发展和成功。</div><div>&nbsp;</div><div><span style=\"font-size:14px;\"><strong>关于&ldquo;诚实、宽容、创新、服务&rdquo;</strong></span></div><div><span style=\"font-size:12px;\">米拓信息认为诚信是一切合作的基础，宽容是解决问题的前提，创新是发展事业的利器，服务是创造价值的根本。</span></div><div>&nbsp;</div>','','0','0','cn');
-INSERT INTO met_config VALUES('567','wap_skin_user','wap001','','0','0','cn');
+INSERT INTO met_config VALUES('567','wap_skin_user','metx5_mobile','','0','0','cn');
 INSERT INTO met_config VALUES('568','wap_search_list','5','','0','0','cn');
 INSERT INTO met_config VALUES('569','wap_message_list','5','','0','0','cn');
 INSERT INTO met_config VALUES('570','wap_index_content','<img alt=\"\" src=\"web_metinfo_urlupload/images/20131228_183101.jpg\" style=\"width: 150px; height: 100px; float: left; margin-left: 8px; margin-right: 8px;\" />米拓信息认为客户、供应商、公司股东、公司员工等一切和自身有合作关系的单位和个人都是自己的合作伙伴，并只有通过努力为合作伙伴创造价值，才能体现自身的价值并获得发展和成功。','','0','0','cn');
@@ -166,6 +166,21 @@ INSERT INTO met_config VALUES('580','metconfig_maptitle','演示公司名称',''
 INSERT INTO met_config VALUES('581','metconfig_mapcontents','地址：长沙市岳麓区南二环一段518号阳光100国际新城3-17栋803#<br/>电话：0000-88888888 0000-8888888','','0','0','cn');
 INSERT INTO met_config VALUES('597','wap_dimensional_size','200','0','0','0','cn');
 INSERT INTO met_config VALUES('599','metconfig_dimensional_logo','','','0','0','cn');
+INSERT INTO met_config VALUES('875','metconfig_menu_ok','1','','0','0','cn');
+INSERT INTO met_config VALUES('876','metconfig_menu_oks','1','','0','0','cn');
+INSERT INTO met_config VALUES('877','metconfig_menu_rgb','#e9280c','','0','0','cn');
+INSERT INTO met_config VALUES('878','metconfig_menu_bg','','','0','0','cn');
+INSERT INTO met_config VALUES('879','metconfig_menu_textbg','#ffffff','','0','0','cn');
+INSERT INTO met_config VALUES('880','metconfig_wapshowtype','0','','0','0','cn');
+INSERT INTO met_config VALUES('883','metconfig_bannerpagetype','0','','0','0','cn');
+INSERT INTO met_config VALUES('884','metconfig_theme_preview','','','0','0','cn');
+INSERT INTO met_config VALUES('901', 'metconfig_productTabname', '详细信息', '', '0', '0', 'cn');
+INSERT INTO met_config VALUES('902', 'metconfig_productTabname_1', '选项卡二', '', '0', '0', 'cn');
+INSERT INTO met_config VALUES('903', 'metconfig_productTabname_2', '选项卡三', '', '0', '0', 'cn');
+INSERT INTO met_config VALUES('904', 'metconfig_productTabname_3', '选项卡四', '', '0', '0', 'cn');
+INSERT INTO met_config VALUES('905', 'metconfig_productTabname_4', '选项卡五', '', '0', '0', 'cn');
+INSERT INTO met_config VALUES('906', 'metconfig_productTabok', '1', '', '0', '0', 'cn');
+INSERT INTO met_config VALUES('915', 'metconfig_htmlurl', '0', '', '0', '0', 'cn');
 INSERT INTO met_language VALUES('3715','system','系统参数','0','1','0','0','cn');
 INSERT INTO met_language VALUES('3716','sunday','星期日','0','1','1','0','cn');
 INSERT INTO met_language VALUES('3717','monday','星期一','0','2','1','0','cn');
@@ -497,52 +512,22 @@ INSERT INTO met_config VALUES('4367','wap_footertext_tel','0000-88888','0','0','
 INSERT INTO met_admin_array VALUES('1','普通会员','','0','','0','0','1','1','cn','');
 INSERT INTO met_admin_array VALUES('2','代理商','','0','','0','0','2','1','cn','');
 
-INSERT INTO met_language VALUES('30389','message_name','姓名字段名','1','240','4','0','cn');
-INSERT INTO met_language VALUES('30392','message_name1','用于获取用户的姓名，字段类型必须为“简短”','1','241','4','0','cn');
-INSERT INTO met_language VALUES('30395','message_content','留言内容字段名','1','242','4','0','cn');
-INSERT INTO met_language VALUES('30398','message_content1','用于获取用户的留言内容，字段类型必须为“文本”','1','243','4','0','cn');
-INSERT INTO met_language VALUES('30413','message_AcceptMail','留言邮件接收邮箱','1','244','4','0','cn');
+
 INSERT INTO met_config VALUES('637','metconfig_message_fd_class','115','','25','0','cn');
 INSERT INTO met_config VALUES('639','metconfig_message_fd_email','117','','25','0','cn');
 INSERT INTO met_config VALUES('641','metconfig_message_fd_sms','116','','25','0','cn');
 INSERT INTO met_config VALUES('643','metconfig_message_fd_content','119','','25','0','cn');
-INSERT INTO met_language VALUES('30401','popular_explain','当"替换为"的值为空时，则把"原文字"的值替换为空','1','25','5','0','cn');
-INSERT INTO met_language VALUES('30416','column_search','栏目搜索','1','245','4','0','cn');
-INSERT INTO met_language VALUES('30419','column_searchname','请输入栏目名称','1','246','4','0','cn');
-INSERT INTO met_language VALUES('30422','search_inthe','正在搜索中','1','247','4','0','cn');
-INSERT INTO met_language VALUES('30425','search_Noresults','抱歉，没有找到您要搜索的栏目','1','248','4','0','cn');
-INSERT INTO met_language VALUES('30404','membertips','会员设置','1','244','4','0','cn');
-INSERT INTO met_language VALUES('30407','memberstyle','会员组设置','1','245','4','0','cn');
-INSERT INTO met_language VALUES('30410','memberflashset','会员功能设置','1','246','4','0','cn');
-INSERT INTO met_language VALUES('30431','cvall','全部','0','39','4','0','tc');
-
-INSERT INTO met_language VALUES('30760','jsx36','注意：zip格式不允许上传，请到网站安全里面添加zip上传格式','1','444','8','0','cn');
-INSERT INTO met_language VALUES('30763','jsx37','注意：sql格式不允许上传，请到网站安全里面添加sql上传格式','1','445','8','0','cn');
-INSERT INTO met_language VALUES('30766','jsx38','您没有完全控制权限，请联系管理员开通','1','446','8','0','cn');
-INSERT INTO met_language VALUES('30769','appmodule','应用模块','1','1','3','0','cn');
-INSERT INTO met_language VALUES('30772','formerror1','请填写此字段。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30775','formerror2','请从这些选项中选择一个。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30778','formerror3','请输入正确的手机号码。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30781','formerror4','请输入正确的Email地址。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30784','formerror5','两次输入的密码不一致，请重新输入。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30787','formerror6','请输入至少&metinfo&个字符。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30790','formerror7','输入不能超过&metinfo&个字符。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30793','formerror8','输入的字符数必须在&metinfo&之间。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30796','smstips96','其它','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30799','smstips97','用户通知','1','0','8','0','cn');
-
-INSERT INTO met_language VALUES('30802','js72','是否导入管理员及会员信息，确定则当前的管理员及会员信息会被导入的数据替换，取消则管理员及会员还是当前的。','1','0','8','0','cn');
-INSERT INTO met_language VALUES('30805','upfileFail20','删除缩略图缓存','1','0','8','0','cn');
-
-
-
-
-
-
-
-
-
-
+INSERT INTO met_language VALUES('35716','formerror1','请填写此字段。','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35717','formerror2','请从这些选项中选择一个。','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35718','formerror3','请输入正确的手机号码。','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35719','formerror4','请输入正确的Email地址。','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35720','formerror5','两次输入的密码不一致，请重新输入。','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35721','formerror6','请输入至少&metinfo&个字符。','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35722','formerror7','输入不能超过&metinfo&个字符。','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35723','formerror8','输入的字符数必须在&metinfo&之间。','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35824','read','阅读','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35825','switching_category','切换类目','0','0','1','0','cn');
+INSERT INTO met_language VALUES('35724','js46','不能重复','0','0','1','0','cn');
 
 
 

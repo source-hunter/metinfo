@@ -444,56 +444,44 @@ require_once '../img/showimg.php';
 			$m_now_year=date('Y');
 			$metcms_v=$ver[value];
 $met404="
-<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
-<html xmlns=\"http://www.w3.org/1999/xhtml\">
+<!DOCTYPE HTML>
+<html>
 <head>
-<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />
+<meta charset=\"utf-8\" />
 <title>Page Not Found!</title>
-<meta http-equiv=\"refresh\" content=\"3; url='{$met_weburl}' \"> 
 <style type=\"text/css\">
 <!--
 body, td, th {  font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000; margin: 0; padding: 0;}
 a:link,
-a:visited {color: #0240a3;}
-.top {height: 50px;	background-image:  url({$met_weburl}upload/image/top.gif); background-position: top right; background-repeat: no-repeat;	margin-bottom:40px;	padding-top: 5px;padding-left: 10px; color:#FFFFFF;}
-.top a{color:#FFFFFF; text-decoration:none;}
-.logo{ float:left; width:auto; height:auto; margin:5px 0px 0px 5px; overflow:hidden;}
-.copyright{ float:right; width:auto; margin:5px 5px 0px 0px; text-align:right;}
-.content {width: 652px;	margin: auto;	border: 1px solid #D1CBD0;	background: #F9F9F9 url({$met_weburl}upload/image/top1.gif) no-repeat right top;}
-.content_TOP {width: 600px; margin: auto;}
-.message {width: 98%; margin: 15px auto; padding-top:10px;}
-.banner {height:100px; text-align:center; background: #F9F9F9 url({$met_weburl}upload/image/foot.gif) no-repeat center; overflow:auto;}
-.bannertext{ width:95%; height:20px; margin-top:70px; line-height:20px; color:#FFFFFF; text-align:right;}
-.bannertext a{ color:#FFFFFF; text-decoration:none;}
+a:visited {color: #545454;}
+.list-none{list-style:none; padding:0px; margin:0px;}
+.clear{clear:both;}
+.headLogo{width:720px; margin:0 auto; *margin:15px auto -6px; _margin:15px auto -6px;}
+.headLogo img{border:none;}
+.navspan{font-weight:bold; font-size:14px;}
+.headNav{margin:0 auto; width:707px; padding-left:13px; _width:710px; _padding-left:10px; height:43px; border:1px solid #9EAA99; border-radius: 3px; box-shadow: 0 0 4px rgba(0,0,0,.25);}
+.headNav ul .line{color:#9EAA99; width:2px;}
+.headNav ul .line2{color:#000; font-weight:bold; width:3px; overflow:hidden;}
+.headNav ul li{float:left; height:43px; line-height:43px; text-align:center;}
+.headNav ul li a{font-size:14px; text-decoration:none;}
+.headNav ul li a:hover{color:#000;}
+.mod_lost_child, .mod_lost_child_little{margin:20px auto 40px !important; *padding-bottom:40px; _padding-bottom:40px;}
 -->
 </style>
 </head>
 <body>
-<div class=\"top\">
-<div class=\"logo\"></div>
-<div class=\"copyright\">&copy;&nbsp;2008-{$m_now_year} {$webname}<br /> <a href=\"{$met_weburl}\" >{$metHOST}</a></div>
+
+<div class=\"headLogo\">
+			<h2 class=\"title\">
+				<a href=\"{$met_weburl}\" title=\"{$webname}\">
+					<img src=\"{$met_weburl}upload/201207/1342516529.png\" alt=\"{$webname}\" title=\"{$webname}\" />
+				</a>
+			</h2>
 </div>
 
-<div class=\"content_TOP\"></div>
-<div class=\"content\">
-  <div class=\"message\">
-  <table width=\"586\" height=\"220\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">
-    <tr>
-      <td width=\"134\" height=\"116\" valign=\"middle\"><img src=\"{$met_weburl}upload/image/notice.gif\" /></td>
-      <td width=\"452\" valign=\"middle\" >
-	  <br /><br />
-<p><big><b>Page Not Found!</b></big></p>
-<p>The requested URL was not found, please contact with your administrator. </p>
-<p><big><b>3 seconds, automatically jump to the home page.</b></big></p>
-<p>&raquo;&nbsp;<a href=\"{$met_weburl}\">Goto Home</a>
-</td>
-    </tr>
-  </table>
-<div class=\"banner\">
-<div class=\"bannertext\">
-<p style=\"font-family:arial;\">Powered by&nbsp;<a href=\"http://www.MetInfo.cn\" target=\"_blank\" ><b>MetInfo</b></a> {$metcms_v} &copy;&nbsp;2008-$m_now_year <a href=\"http://www.MetInfo.cn\" target=\"_blank\">www.MetInfo.cn</a></p></div></div>
-  </div>
-  
+<div class=\"headNav\"><ul class=\"list-none\"><li id=\"nav_10001\" style='width:99px;' class='navdown'><a href='{$met_weburl}' title='网站首页' class='nav'><span>网站首页</span></a></li><li class=\"line\">|</li><li id='nav_1' style='width:99px;' ><a href='about/'  title='关于我们' class='hover-none nav'><span>关于我们</span></a></li><li class=\"line\">|</li><li id='nav_2' style='width:99px;' ><a href='news/'  title='新闻资讯' class='hover-none nav'><span>新闻资讯</span></a></li><li class=\"line\">|</li><li id='nav_3' style='width:99px;' ><a href='product/'  title='产品展示' class='hover-none nav'><span>产品展示</span></a></li><li class=\"line\">|</li><li id='nav_32' style='width:99px;' ><a href='download/'  title='下载中心' class='hover-none nav'><span>下载中心</span></a></li><li class=\"line\">|</li><li id='nav_33' style='width:99px;' ><a href='case/'  title='客户案例' class='hover-none nav'><span>客户案例</span></a></li><li class=\"line\">|</li><li id='nav_36' style='width:98px;' ><a href='job/'  title='招贤纳士' class='hover-none nav'><span>招贤纳士</span></a></li></ul><div class=\"clear\"></div></div>
+<div style=\"width:720px; margin:20px auto;\">
+<iframe scrolling='no' frameborder='0' src='http://yibo.iyiyun.com/Home/Distribute/ad404/key/16748' width='654' height='470' style='display:block;'></iframe>
 </div>
 </body>
 </html>

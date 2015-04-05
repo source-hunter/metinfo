@@ -3,14 +3,29 @@
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
 //Head部分
 function metlabel_html5($closure=1,$iehack=1,$mobile=0){
-	global $met_title,$show,$m_now_year,$navurl,$met_js_access,$met_skin_css,$img_url,$met_webname,$metcms_v,$appscriptcss,$met_ch_lang,$lang,$met_ch_mark,$met_url,$metinfouiok,$classnow,$class_list,$met_headstat;
+	global $met_title,$show,$m_now_year,$navurl,$met_js_access,$met_skin_css,$img_url,$met_webname,$metcms_v,$appscriptcss,$met_ch_lang,$lang,$met_ch_mark,$met_url,$metinfouiok,$classnow,$class_list,$met_headstat,$metinfover,$id;
 	global $met_wap,$met_wap_tpa,$met_wap_tpb,$met_webhtm,$met_wap_url,$module,$metinfonow,$met_member_force,$met_weburl,$met_wapshowtype;
 	global $_M;
+	//静态页面手机版跳转
+	$mobileto = '';
+	if($metinfonow==$met_member_force&&$met_webhtm&&$met_wap&&($met_wap_tpa||$met_wap_tpb)&&isset($met_wapshowtype)){
+		$mobile_prefix=request_uri();
+		$allidlist=explode('&metmemberforce=',$mobile_prefix);
+		$mobile_prefix=$allidlist[0];
+		if($met_wap_tpb&&$met_wap_url)$mobile_prefix=str_replace($met_weburl,$met_wap_url,$mobile_prefix);
+		$mobileto.="<script type=\"text/javascript\">var met_wap_tpa={$met_wap_tpa},met_wap_tpb={$met_wap_tpb},met_wap_url='{$met_wap_url}',mobile_lang='{$lang}',mobile_prefix='{$mobile_prefix}';</script>\n";
+		$mobileto.="<script src=\"{$navurl}public/js/mobile.js\" type=\"text/javascript\"></script>\n";
+	}
+	//
+	if($metinfover == 'v1'){
+		return metlabel_head($closure,$iehack,$mobileto);
+	}
 	$metinfo="<!DOCTYPE HTML>\n";
 	$metinfo.="<html>\n";
 	$metinfo.="<head>\n";
 	if($mobile){
 		$metinfo.="<meta name='renderer' content='webkit'>\n";
+		$metinfo.="<meta http-equiv='Cache-Control' content='no-siteapp' />\n";
         $metinfo.="<meta charset='utf-8' />\n";
         $metinfo.="<title>{$met_title}</title>\n";
         $metinfo.="<meta content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0\" name=\"viewport\" />\n";
@@ -24,14 +39,7 @@ function metlabel_html5($closure=1,$iehack=1,$mobile=0){
 		$metinfo.="<meta name=\"renderer\" content=\"webkit\">\n"; 
         $metinfo.="<meta charset=\"utf-8\" />\n"; 
         $metinfo.="<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n";
-		if($metinfonow==$met_member_force&&$met_webhtm&&$met_wap&&($met_wap_tpa||$met_wap_tpb)&&isset($met_wapshowtype)){
-			$mobile_prefix=request_uri();
-			$allidlist=explode('&metmemberforce=',$mobile_prefix);
-			$mobile_prefix=$allidlist[0];
-			if($met_wap_tpb&&$met_wap_url)$mobile_prefix=str_replace($met_weburl,$met_wap_url,$mobile_prefix);
-			$metinfo.="<script type=\"text/javascript\">var met_wap_tpa={$met_wap_tpa},met_wap_tpb={$met_wap_tpb},met_wap_url='{$met_wap_url}',mobile_lang='{$lang}',mobile_prefix='{$mobile_prefix}';</script>\n";
-			$metinfo.="<script src=\"{$navurl}public/js/mobile.js\" type=\"text/javascript\"></script>\n";
-		}
+		$metinfo.=$mobileto;
 		$metinfo.="<title>".$met_title."</title>\n";
 		$metinfo.="<meta name=\"description\" content=\"".$show['description']."\" />\n";
 		$metinfo.="<meta name=\"keywords\" content=\"".$show['keywords']."\" />\n";
@@ -89,9 +97,61 @@ function metlabel_style($closure=1){
 	}
 }
 function metlabel_flash(){
-	global $methtml_flash,$met_flasharray,$classnow,$met_flashimg,$navurl;
+	global $methtml_flash,$met_flasharray,$classnow,$met_flashimg,$navurl,$metinfover;
 	if($met_flasharray[$classnow][type]){
 		if($met_flasharray[$classnow][type]==1){
+		if($metinfover=='v1'){
+		switch($met_flasharray[$classnow][imgtype]){
+			case 6:
+
+					$metinfo.="<div class='flash flash6' style=' height:".$met_flasharray[$classnow][y]."px;'>
+					";
+					$metinfo.="
+		<ul id='slider6' class='list-none'>
+					";
+					foreach($met_flashimg as $key=>$val){
+						$val[img_link]=str_replace('%26','&',$val[img_link]);
+						$metinfo.="
+			<li>
+				<a href='".$val[img_link]."' target='_blank' title='{$val[img_title]}' class='b6' style='background-image:url(".$val[img_path].");  height:".$met_flasharray[$classnow][y]."px;'></a>";
+						$metinfo.="
+			</li>"; 
+					}
+					$metinfo.="
+		</ul>";
+					$metinfo.="
+	</div>";
+
+			break;
+			case 8:
+
+					$thisflash_x=$met_flasharray[$classnow][x]-8;
+					$thisflash_y=$met_flasharray[$classnow][y]-8;
+					$metinfo.="
+					<div class='flash' style='height:{$met_flasharray[$classnow][y]}px; overflow:hidden;'>
+						<div class='flexslider flexslider_flash flashfld'>
+						   <ul class='slides list-none'>";
+					foreach($met_flashimg as $key=>$val){
+						$val[img_link]=str_replace('%26','&',$val[img_link]);
+						$metinfo.="
+							<li>
+							    <a href='".$val[img_link]."' target='_blank' title='{$val[img_title]}' class='b8' style='background-image:url({$val[img_path]}); height:{$met_flasharray[$classnow][y]}px; '></a>";
+						$metinfo.="
+							</li>
+						"; 
+					}
+					$metinfo.="
+						  </ul>
+						</div>
+					</div>";
+
+			break;
+			default:
+				if(!$hd)$metinfo=$methtml_flash;
+			break;
+		}
+		}else{
+		
 		switch($met_flasharray[$classnow][imgtype]){
 			case 6:
 					$metinfo.="\n<link href='{$navurl}public/banner/banner6/css.css' rel='stylesheet' type='text/css' />\n";
@@ -125,6 +185,8 @@ function metlabel_flash(){
 				if(!$hd)$metinfo=$methtml_flash;
 			break;
 		}
+		
+		}
 		}else{
 			$metinfo=$methtml_flash;
 		}
@@ -132,12 +194,13 @@ function metlabel_flash(){
 	}
 }
 function metlabel_foot(){
-	global $met_footright,$met_footstat,$met_footaddress,$met_foottel,$met_footother,$met_foottext,$_M;
+	global $met_footright,$wap_footertext,$met_footstat,$met_footaddress,$met_foottel,$met_footother,$met_foottext,$_M;
 	if($met_footright<>"" or $met_footstat<>"")$metinfo.="<p>".$met_footright." ".$met_footstat."</p>\n";
 	if($met_footaddress<>"")$metinfo.="<p>".$met_footaddress."</p>\n";
 	if($met_foottel<>"")$metinfo.="<p>".$met_foottel."</p>\n";
 	if($met_footother<>"")$metinfo.="<p>".$met_footother."</p>\n";
 	if($met_foottext<>"")$metinfo.="<p>".$met_foottext."</p>\n";
+	if($wap_footertext<>"")$metinfo.="<p>".$wap_footertext."</p>\n";
 	//接口代码
 	if($_M['html_plugin']['foot_script'])$metinfo.="{$_M['html_plugin']['foot_script']}";
 	//结束
@@ -145,7 +208,7 @@ function metlabel_foot(){
 }
 //顶部导航函数
 function metlabel_nav($type=1,$label='',$z,$l,$home=1){
-	global $index_url,$lang_home,$nav_list,$nav_list2,$nav_list3,$navdown,$lang,$db,$met_column,$lang_cvtitle,$index,$class_list,$cv;
+	global $index_url,$lang_home,$nav_list,$nav_list2,$nav_list3,$navdown,$lang,$db,$met_column,$lang_cvtitle,$index,$class_list,$cv,$metinfover;
 	
 	if($recruitment=$db->get_one("SELECT * FROM $met_column WHERE bigclass='0' and module='6' and lang='$lang'")){
 		if(!$nav_list2[$recruitment[id]][0][url]){
@@ -157,6 +220,118 @@ function metlabel_nav($type=1,$label='',$z,$l,$home=1){
 			$nav_list2[$recruitment[id]][1][url]=$cv['url'];
 		}
 	}
+
+if($metinfover == 'v1'){
+	//v1[begin]
+	
+	if($z){
+		$navV1 = "class='metNav list-none'";
+		if($home){$navnum=count($nav_list)+1;}else{$navnum=count($nav_list);}
+		$navData = "data-nav='{$z}|{$l}|{$navnum}'";
+	}
+    $in=stristr($label,'<li class="line">');
+	if(!$in && $label!=""){
+			$label = "<li class='line'>".$label."</li>";
+	}
+	
+	$cdown=$navdown==10001?"navdown":'';
+	$metinfo ="<ul {$navV1} {$navData}>
+	
+			    ";
+	switch($type){
+		case 1:
+			if($home){
+			$metinfo.="<li class='nav {$cdown}' ><a href='{$index_url}' title='{$lang_home}'>{$lang_home}</a></li>
+			    ";
+			}
+			foreach($nav_list as $key=>$val){
+			$cdown=$val['id']==$navdown?"class='navdown'":'';
+			$metinfo.=$label;
+			$metinfo.="
+			    <li {$cdown}><a href='{$val[url]}' {$val[new_windows]} title='{$val[name]}'>{$val[name]}</a></li>
+			    ";
+			}
+			break;
+		case 2:
+			if($home){
+			$metinfo.="<li class='nav {$cdown}'>";
+			$metinfo.="
+				  <a href='{$index_url}' title='{$lang_home}' class='nav'>{$lang_home}</a>";
+			$metinfo.="
+			    </li>";
+			}
+			foreach($nav_list as $key=>$val){
+			$cdown=$val['id']==$navdown?"class='navdown'":'';
+			$metinfo.=$label;
+			$metinfo.="
+			    <li {$cdown}>";
+			$metinfo.="
+				 <a href='{$val[url]}' {$val[new_windows]} title='{$val[name]}'>{$val[name]}</a>";
+			if(count($nav_list2[$val['id']])){
+				$metinfo.="
+				      <p>";
+				foreach($nav_list2[$val['id']] as $key=>$val2){
+					$metinfo.="
+					   <a href='{$val2[url]}' title='{$val2[name]}' {$val2[new_windows]}>{$val2[name]}</a>";
+				}
+				$metinfo.="
+				      </p>";
+			}
+			$metinfo.="
+			    </li>";
+			}
+			break;
+		case 3:
+
+			if($home){
+			$metinfo.="<li class='nav {$cdown}'>";
+			$metinfo.="
+				<a href='{$index_url}' title='{$lang_home}' class='nav'>{$lang_home}</a>";
+			$metinfo.="
+			    </li>
+			";
+			}
+			foreach($nav_list as $key=>$val){
+			$cdown=$val['id']==$navdown?"class='navdown'":'';
+			$metinfo.=$label;
+			$metinfo.="    <li {$cdown}>
+				";
+			$metinfo.="<a href='{$val[url]}' {$val[new_windows]} title='{$val[name]}'>{$val[name]}</a>";
+			if(count($nav_list2[$val['id']])){
+				$metinfo.="
+				    <p>";
+				foreach($nav_list2[$val['id']] as $key=>$val2){
+					$metinfo.="
+					<span><a href='{$val2[url]}' title='{$val2[name]}' {$val2[new_windows]}>{$val2[name]}</a>";
+					if(count($nav_list3[$val2['id']])){
+					$metinfo.="
+					      <i>";
+						foreach($nav_list3[$val2['id']] as $key=>$val3){
+							$metinfo.="
+						  <a href='{$val3[url]}' title='{$val3[name]}' {$val3[new_windows]}>{$val3[name]}</a>";
+						}
+					$metinfo.="
+					      </i>
+					";
+					}
+					$metinfo.="</span>";
+				}
+				$metinfo.="
+				    </p>";
+			}
+			$metinfo.="
+			    </li>
+			";
+			}
+
+			break;
+	}
+	$metinfo .="
+			</ul>";
+
+	//v1[over]  
+	
+}else{
 	
 	if($z){
 		$navnum=count($nav_list)+1;
@@ -262,13 +437,18 @@ function metlabel_nav($type=1,$label='',$z,$l,$home=1){
 			$metinfo.="</ul>";
 			break;
 	}
+
+}
 	
 	return $metinfo;
 }
-function metlable_lang($dt,$tp=1){
-	global $methtml_sethome,$methtml_addfavorite,$index_hadd_ok,$app_file,$met_adminfile;
+function metlable_lang($dt,$tp=1,$lok=1){
+	global $methtml_sethome,$methtml_addfavorite,$index_hadd_ok,$app_file,$met_adminfile,$metinfover;
+	if($metinfover == 'v1'){
+		return metlabel_topnav($dt,$tp,$lok);
+	}
 	$metinfo=methtml_lang($dt,$tp);
-	if($index_hadd_ok)$metinfo=$metinfo==''?$methtml_sethome.$dt.$methtml_addfavorite:$methtml_sethome.$dt.$methtml_addfavorite.$dt.$metinfo;
+	if($index_hadd_ok)$metinfo=$metinfo==''?$dt.$methtml_sethome.$dt.$methtml_addfavorite:$methtml_sethome.$dt.$methtml_addfavorite.$dt.$metinfo;
 	$file_site = explode('|',$app_file[4]);
 	foreach($file_site as $keyfile=>$valflie){
 		if(file_exists(ROOTPATH."$met_adminfile".$valflie)&&!is_dir(ROOTPATH."$met_adminfile".$valflie)&&((file_get_contents(ROOTPATH."$met_adminfile".$valflie))!='metinfo')){require_once ROOTPATH."$met_adminfile".$valflie;}
@@ -597,20 +777,63 @@ function membernavlist($type=0){
 }
 //文章模块列表函数
 function metlabel_news($time=1,$desc=0,$dlen,$dt=1,$n=0){
-	global $news_list,$metblank,$id;
+	global $news_list,$metblank,$id,$metinfover,$thumb_src,$met_newsimg_x,$met_newsimg_y;
 	$metinfo.="<ul class='list-none metlist'>";
 	$i=0;
-	foreach($news_list as $key=>$val){
-		if(!$n || $id!=$val[id]){
-			$i++;$top='';
-			if($dlen)$val['description']=utf8substr($val['description'],0,$dlen);
-			if($i==1)$top='top';
-			$metinfo.="<li class='list {$top}'>";
-			if($dt){$a='[';$b=']';}
-			if($time)$metinfo.="<span>{$a}{$val[updatetime]}{$b}</span>";
-			$metinfo.="<a href='{$val[url]}' title='{$val[title]}' {$metblank}>{$val[title]}</a>{$val[hot]}{$val[news]}{$val[top]}";
-			if($desc&&$val['description']!='')$metinfo.="<p>{$val[description]}</p>";
-			$metinfo.="</li>";	
+	$style=2;//样式展示列表   1/文章列表(默认)   2/图文列表
+	if($metinfover=="v1"){
+		if($style==2){
+			foreach($news_list as $key=>$val){
+				if($id!=$val[id]){
+					$i++;$top='';
+					if($dlen)$val['description']=utf8substr($val['description'],0,$dlen);
+					if($i==1)$top='top';
+					$marLeft=$met_newsimg_x+10;
+					$metinfo.="
+					<li class='list {$top}'>
+						<a href='{$val[url]}' class='aimg' title='{$val[title]}' {$metblank}>
+							<img src='{$thumb_src}dir={$val[imgurl]}&x={$met_newsimg_x}&y={$met_newsimg_y}' alt='{$val[title]}' class='img' />
+						</a>
+						<div class='divli' style='margin-left:{$marLeft}px;'>";
+					if($dt){$a='[';$b=']';}
+					$metinfo.="<a href='{$val[url]}' title='{$val[title]}' {$metblank} >{$val[title]}</a>{$val[hot]}{$val[news]}{$val[top]}";
+					if($desc&&$val['description']!='')$metinfo.="<p>{$val[description]}</p>";
+					if($time)$metinfo.="<span>{$a}{$val[updatetime]}{$b}</span>";
+					$metinfo.="
+						</div>
+						<div class='clear'></div>
+					</li>";	
+				}
+			}
+		}else{
+			foreach($news_list as $key=>$val){
+				if(!$n || $id!=$val[id]){
+					$i++;$top='';
+					if($dlen)$val['description']=utf8substr($val['description'],0,$dlen);
+					if($i==1)$top='top';
+					$metinfo.="<li class='listV1 {$top}'>";
+					if($dt){$a='[';$b=']';}
+					if($time)$metinfo.="<span>{$a}{$val[updatetime]}{$b}</span>";
+					$metinfo.="<a href='{$val[url]}' title='{$val[title]}' {$metblank}>{$val[title]}</a>{$val[hot]}{$val[news]}{$val[top]}";
+					if($desc&&$val['description']!='')$metinfo.="<p>{$val[description]}</p>";
+					$metinfo.="</li>";	
+				}
+			}
+		}
+
+	}else{
+		foreach($news_list as $key=>$val){
+			if(!$n || $id!=$val[id]){
+				$i++;$top='';
+				if($dlen)$val['description']=utf8substr($val['description'],0,$dlen);
+				if($i==1)$top='top';
+				$metinfo.="<li class='list {$top}'>";
+				if($dt){$a='[';$b=']';}
+				if($time)$metinfo.="<span>{$a}{$val[updatetime]}{$b}</span>";
+				$metinfo.="<a href='{$val[url]}' title='{$val[title]}' {$metblank}>{$val[title]}</a>{$val[hot]}{$val[news]}{$val[top]}";
+				if($desc&&$val['description']!='')$metinfo.="<p>{$val[description]}</p>";
+				$metinfo.="</li>";	
+			}
 		}
 	}
 	$metinfo.="</ul>";
@@ -621,16 +844,82 @@ function metlabel_news($time=1,$desc=0,$dlen,$dt=1,$n=0){
 
 //产品模块列表函数
 function metlabel_product($z,$w,$l,$n=0){
-	global $product_list,$metblank,$met_img_style,$met_img_x,$met_img_y,$met_product_page,$class1,$class2,$class3,$search,$nav_list2,$nav_list3,$weburly,$id,$met_agents_img,$class_list,$module_listall,$db,$lang,$met_parameter,$met_plist,$prices,$action,$product_para;
+	global $product_list,$metblank,$met_img_style,$met_img_x,$met_img_y,$met_product_page,$class1,$class2,$class3,$search,$nav_list2,$nav_list3,$weburly,$id,$met_agents_img,$class_list,$module_listall,$db,$lang,$met_parameter,$met_plist,$prices,$action,$product_para,$metinfover,$thumb_src;
 	
 	foreach($product_para as $key=>$val){
 		$inquiry="inquiry_".$val[id];
 		global $$inquiry;
 	}
-	
-			
+		
 	$met_img_x=$met_img_style?met_imgxy(1,'product'):$met_img_x;
 	$met_img_y=$met_img_style?met_imgxy(2,'product'):$met_img_y;
+	
+	if($metinfover=="v1"){
+	
+	$listarray=$product_list;
+	$metok=0;
+	if($met_product_page && $search<>'search'){
+		if($class2 && count($nav_list3[$class2]) && !$class3){
+			$listarray=$nav_list3[$class2];
+			$metok=1;
+		}
+		if(!$class2 && count($nav_list2[$class1]) && $class1 && !$class3){
+			$listarray=$nav_list2[$class1];
+			$metok=1;
+		}
+		if($class_list[$class1]['module']=='100'){
+			$listarray=array();
+			foreach($module_listall[3] as $key=>$val){
+				if($val['classtype']==1||$val['releclass']!=0){
+					$listarray[]=$val;
+				}
+			}
+			$metok=1;
+		}
+	}
+
+	$l=$l?$l:floor($z/$w);
+	$lists = count($listarray);
+	if($lists<$l){$z=ceil($z-($z/$l)*($l-$lists));}
+	$styw=$z?"style='width:".$z."px;' data-ie67='".$w."|".$l."'":"";
+	$metinfo.="<ul class='list-none metlist' {$styw}>";
+	
+	$i=0;$xb=$l-1;$tr=1;
+	foreach($listarray as $key=>$val){
+		if(!($key%$l)){
+			$metinfo.="
+			    <li class='list-none metlist'>";
+		}
+		if(!$n || $id!=$val[id]){
+			if($metok){
+				$val['title']=$val['name'];
+				$val['imgurls']=$val['columnimg']==''?$weburly.$met_agents_img:$val['columnimg'];
+			}
+			$metinfo.="
+			        <a href='{$val[url]}' title='{$val[title]}' {$metblank} class='img'>
+				        <img src='{$thumb_src}dir={$val[imgurl]}&x={$met_img_x}&y={$met_img_y}' alt='{$val[title]}' title='{$val[title]}' />
+				        <h3>{$val[title]}</h3>
+			        </a>";
+
+			$i++;
+			if($i==$l)$i=0;
+			if($key==$xb){	
+				$tr++;
+				$xb=$tr*$l-1;
+				$metinfo.="
+			    </li>";
+			}
+		}
+	}
+	if(($key+1)%3){
+				$metinfo.="
+			    </li>";
+	}
+$metinfo.="
+			</ul>";
+			
+	}else{
+	
 	$metinfo.="<ul class='list-none metlist'>";
 	$listarray=$product_list;
 	$metok=0;
@@ -653,7 +942,6 @@ function metlabel_product($z,$w,$l,$n=0){
 			$metok=1;
 		}
 	}
-	//dump($listarray);
 	
 	if($z){
 		$l=$l?$l:floor($z/$w);
@@ -694,13 +982,94 @@ function metlabel_product($z,$w,$l,$n=0){
 		}
 	}
 	$metinfo.="</ul>";
+	
+	}
+			
 	return $metinfo;
 }
 //图片模块列表函数
 function metlabel_img($z,$w,$l,$n=0){
-	global $img_list,$metblank,$met_img_style,$met_img_x,$met_img_y,$met_img_page,$class1,$class2,$class3,$search,$nav_list2,$nav_list3,$weburly,$id,$class_list,$module_listall;
+	global $img_list,$metblank,$met_img_style,$met_img_x,$met_img_y,$met_img_page,$class1,$class2,$class3,$search,$nav_list2,$nav_list3,$weburly,$id,$class_list,$module_listall,$metinfover,$thumb_src;
 	$met_img_x=$met_img_style?met_imgxy(1,'img'):$met_img_x;
 	$met_img_y=$met_img_style?met_imgxy(2,'img'):$met_img_y;
+	
+	if($metinfover=="v1"){
+
+	$listarray=$img_list;
+	$metok=0;
+	if($met_img_page && $search<>'search'){
+		if($class2 && count($nav_list3[$class2]) && !$class3){
+			$listarray=$nav_list3[$class2];
+			$metok=1;
+		}
+		if(!$class2 && count($nav_list2[$class1]) && $class1 && !$class3){
+			$listarray=$nav_list2[$class1];
+			$metok=1;
+		}
+		if($class_list[$class1]['module']=='101'){
+			$listarray=array();
+			foreach($module_listall[5] as $key=>$val){
+				if($val['classtype']==1||$val['releclass']!=0){
+					$listarray[]=$val;
+				}
+			}
+			$metok=1;
+		}
+	}
+
+	$l=$l?$l:floor($z/$w);
+	$lists = count($listarray);
+	if($lists<$l){$z=ceil($z-($z/$l)*($l-$lists));}
+	$styw=$z?"style='width:".$z."px;' data-ie67='".$w."|".$l."'":"";
+	$metinfo.="<ul class='list-none metlist' {$styw}>";
+	
+	$i=0;$xb=$l-1;$tr=1;
+	foreach($listarray as $key=>$val){
+		if(!($key%$l)){
+			$metinfo.="
+			    <li class='list-none metlist'>";
+		}
+		if(!$n || $id!=$val[id]){
+			if($metok){
+				$val['title']=$val['name'];
+				$val['imgurls']=$val['columnimg']==''?$weburly.$met_agents_img:$val['columnimg'];
+			}
+			$metinfo.="
+			        <a href='{$val[url]}' title='{$val[title]}' {$metblank} class='img'>
+				        <img src='{$thumb_src}dir={$val[imgurl]}&x={$met_img_x}&y={$met_img_y}' alt='{$val[title]}' title='{$val[title]}' />
+				        <h3>{$val[title]}</h3>
+			        </a>";
+					
+			$i++;
+			if($i==$l)$i=0;
+			if($key==$xb){	
+				$tr++;
+				$xb=$tr*$l-1;
+				$metinfo.="
+			    </li>";
+			}
+		}
+	}
+	if(($key+1)%3){
+				$metinfo.="
+			    </li>";
+	}
+	$metinfo.="
+			</ul>";
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}else{
+	
 	$metinfo.="<ul class='list-none metlist'>";
 	$listarray=$img_list;
 	$metok=0;
@@ -762,6 +1131,9 @@ function metlabel_img($z,$w,$l,$n=0){
 		}
 	}
 	$metinfo.="</ul>";
+	
+	}
+	
 	return $metinfo;
 }
 //下载模块列表函数
@@ -805,7 +1177,7 @@ function metlabel_job($type){
 			$metinfo.="<div class='mis'><span>{$lang_AddDate}：{$val[addtime]}</span>";
 			$metinfo.="<span>{$lang_WorkPlace}：{$val[place]}</span>";
 			$metinfo.="<span>{$lang_PersonNumber}：{$val[count]}</span></div>";
-			$metinfo.="<div class='editor'>{$val[content]}</span></div>";
+			$metinfo.="<div class='editor met_editor'>{$val[content]}</span></div>";
 			$metinfo.="<div class='dtail'><span><a href='{$val[cv]}' title='{$lang_cvtitle}' {$metblank}>{$lang_cvtitle}</a></span>";
 			$metinfo.="<span><a href='{$val[url]}' title='{$lang_Detail}' {$metblank}>{$lang_Detail}</a></span></div>";
 			$metinfo.="</dl>";
@@ -939,7 +1311,10 @@ function messagelabel_table($dy){
 				$fdjs=$fdjs."return false;}\n";
 			}
 		}
-		$fdjs=$fdjs."}</script>";
+		$fdjs=$fdjs."}";
+		$fdjs=$fdjs."function verification(){ ";
+		$fdjs=$fdjs."document.getElementById('new_code').click();}\n";	
+		$fdjs=$fdjs."</script>";
 		$lujin='';
 		if($dy)$lujin=$navurl.'message/';
 		if($mobile){
@@ -1004,8 +1379,8 @@ function messagelabel_table($dy){
 			}
 			if($met_memberlogin_code==1){
 				$metinfo.="<tr><td class='text'>".$lang_memberImgCode."</td>\n";
-				$metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' />";
-				$metinfo.="<img align='absbottom' src='{$navurl}member/ajax.php?action=code'  onclick=this.src='{$navurl}member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
+				$metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' onclick=verification() >";
+				$metinfo.="<img align='absbottom' id='new_code' src='{$navurl}member/ajax.php?action=code'  onclick=this.src='{$navurl}member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
 				$metinfo.="</td>\n";
 				$metinfo.="</tr>\n";
 			}
@@ -1047,6 +1422,7 @@ function metlabel_feedback($fid,$mobile){
 	global $lang,$message_list,$lang_Submit,$lang_Reset,$lang_Publish,$lang_Reply,$fromurl,$m_user_ip,$id,$title;
 	global $met_memberlogin_code,$lang_memberImgCode,$lang_memberTip1,$met_adminfile,$navurl,$settings_arr;
 	global $db,$met_parameter,$met_admin_array,$met_member_use,$metinfo_member_type,$met_list,$met_class,$class_list,$met_product,$lang_Choice,$lang_Empty;
+	global $metinfover;
 	if($fid)$id=$fid;
 	if(!$title){
 		foreach($settings_arr as $key=>$val){
@@ -1142,9 +1518,15 @@ function metlabel_feedback($fid,$mobile){
 	 $fdjs=$fdjs."return false;}\n";
 	}
 	}
-	$fdjs=$fdjs."}</script>";
+	$fdjs=$fdjs."}";
+	$fdjs=$fdjs."function verification(){ ";
+	$fdjs=$fdjs."document.getElementById('new_code').click();}\n";	
+	$fdjs=$fdjs."</script>";
 	$lujin='';
 	if($fid)$lujin=$navurl.'feedback/';
+	if($metinfover){
+		return metlabel_form($fd_para,'feedback');
+	}
 	if($mobile){
 		$metinfo1 =array();
 		foreach($fd_para as $key=>$val){
@@ -1207,8 +1589,8 @@ function metlabel_feedback($fid,$mobile){
     }
 if($met_memberlogin_code==1){  
      $metinfo.="<tr><td class='text'>".$lang_memberImgCode."</td>\n";
-     $metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' />";
-     $metinfo.="<img align='absbottom' src='{$navurl}member/ajax.php?action=code'  onclick=this.src='{$navurl}member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
+     $metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' onclick=verification() >";
+     $metinfo.="<img align='absbottom' id='new_code' src='{$navurl}member/ajax.php?action=code'  onclick=this.src='{$navurl}member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
      $metinfo.="</td>\n";
      $metinfo.="</tr>\n";
 }
@@ -1381,7 +1763,10 @@ function metlabel_member($fid,$mobile){
 	 $fdjs=$fdjs."return false;}\n";
 	}
 	}
-	$fdjs=$fdjs."}</script>";
+	$fdjs=$fdjs."}";
+	$fdjs=$fdjs."function verification(){ ";
+	$fdjs=$fdjs."document.getElementById('new_code').click();}\n";	
+	$fdjs=$fdjs."</script>";
 	$lujin='';
 	if($fid)$lujin=$navurl.'member/';
 	if($mobile){
@@ -1463,8 +1848,8 @@ function metlabel_member($fid,$mobile){
     }
 if($met_memberlogin_code==1){  
      $metinfo.="<tr><td class='zhuce_text'><span class='reqd'>*</span>".$lang_memberImgCode."</td>\n";
-     $metinfo.="<td class='zhuce_input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='input_text' id='code' size='6' maxlength='8' style='width:50px' />";
-     $metinfo.="<img align='absbottom' src='{$navurl}member/ajax.php?action=code'  onclick=this.src='{$navurl}member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
+     $metinfo.="<td class='zhuce_input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='input_text' id='code' size='6' maxlength='8' style='width:50px' onclick=verification() >";
+     $metinfo.="<img align='absbottom' id='new_code' src='{$navurl}member/ajax.php?action=code'  onclick=this.src='{$navurl}member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
      $metinfo.="</td>\n";
      $metinfo.="</tr>\n";
 }
@@ -1487,6 +1872,7 @@ function metlabel_message($fid,$mobile){
 	global $lang,$message_list,$lang_Submit,$lang_Reset,$lang_Publish,$lang_Reply,$fromurl,$m_user_ip,$id,$title;
 	global $met_memberlogin_code,$lang_memberImgCode,$lang_memberTip1,$met_adminfile,$navurl,$settings_arr;
 	global $db,$met_parameter,$met_admin_array,$met_member_use,$metinfo_member_type,$met_list,$met_class,$class_list,$met_product,$lang_Choice,$lang_Empty;
+	global $metinfover;
 	if($fid)$id=$fid;
 	if(!$title){
 		foreach($settings_arr as $key=>$val){
@@ -1582,9 +1968,16 @@ function metlabel_message($fid,$mobile){
 	 $fdjs=$fdjs."return false;}\n";
 	}
 	}
-	$fdjs=$fdjs."}</script>";
+	$fdjs=$fdjs."}";
+	$fdjs=$fdjs."function verification(){ ";
+	$fdjs=$fdjs."document.getElementById('new_code').click();}\n";
+	
+	$fdjs=$fdjs."</script>";
 	$lujin='';
 	if($fid)$lujin=$navurl.'message/';
+	if($metinfover){
+		return metlabel_form($fd_para,'message');
+	}
 	if($mobile){
 		$metinfo1 =array();
 		foreach($fd_para as $key=>$val){
@@ -1647,8 +2040,8 @@ function metlabel_message($fid,$mobile){
     }
 if($met_memberlogin_code==1){  
      $metinfo.="<tr><td class='text'>".$lang_memberImgCode."</td>\n";
-     $metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' />";
-     $metinfo.="<img align='absbottom' src='{$navurl}member/ajax.php?action=code'  onclick=this.src='{$navurl}member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
+     $metinfo.="<td class='input'><input type='text' name='code' onKeyUp='pressCaptcha(this)' class='code' id='code' size='6' maxlength='8' style='width:50px' value='' onclick=verification() > ";
+     $metinfo.="<img align='absbottom' id='new_code' src='{$navurl}member/ajax.php?action=code'  onclick=this.src='{$navurl}member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
      $metinfo.="</td>\n";
      $metinfo.="</tr>\n";
 }
@@ -1766,7 +2159,10 @@ function metlabel_messageold($fid,$mobile){
 	 $fdjs=$fdjs."return false;}\n";
 	}
 	}
-	$fdjs=$fdjs."}</script>";
+	$fdjs=$fdjs."}";
+	$fdjs=$fdjs."function verification(){ ";
+	$fdjs=$fdjs."document.getElementById('new_code').click();}\n";	
+	$fdjs=$fdjs."</script>";
 	$lujin='';
 	if($fid)$lujin=$navurl.'message/';
 	if($mobile){
@@ -1831,8 +2227,8 @@ function metlabel_messageold($fid,$mobile){
 	}
 	if($met_memberlogin_code==1){
 		$metinfo.="<tr class='message_tr'><td align='right' bgcolor='#FFFFFF' class='message_td1'>".$lang_memberImgCode."</td>\n";
-		$metinfo.="<td bgcolor='#FFFFFF' class='message_input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' />";
-		$metinfo.="<img align='absbottom' src='../member/ajax.php?action=code'  onclick=this.src='../member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
+		$metinfo.="<td bgcolor='#FFFFFF' class='message_input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' onclick=verification() >";
+		$metinfo.="<img align='absbottom' id='new_code' src='../member/ajax.php?action=code'  onclick=this.src='../member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
 		$metinfo.="</td>\n";
 		$metinfo.="</tr>\n";
 	}
@@ -1855,6 +2251,13 @@ function metlabel_messageold($fid,$mobile){
 function metlabel_addlink($tt=1){
 	global $lang_Info4,$lang_LinkInfo2,$lang_LinkInfo3,$lang_OurWebName,$met_linkname,$lang_OurWebUrl,$met_weburl,$lang_OurWebLOGO,$met_logo,$lang_OurWebKeywords,$met_keywords,$lang_YourWebName,$lang_YourWebUrl,$lang_LinkType,$lang_TextLink,$lang_PictureLink,$lang_YourWebLOGO,$lang_YourWebKeywords,$lang_Contact,$lang_Submit,$lang_Reset,$lang;
 	global $met_memberlogin_code,$lang_memberImgCode,$lang_memberTip1,$met_adminfile;
+	if($metinfover){
+		return metlabel_form($fd_para,'addlink');
+	}
+	$metinfo.="<script language='javascript'>";
+	$metinfo.="function verification(){ ";
+	$metinfo.="document.getElementById('new_code').click();}\n";	
+	$metinfo.="</script>";
 	$metinfo.="<form method='POST' name='myform' onSubmit='return addlinksubmit(\"{$lang_LinkInfo2}\",\"{$lang_LinkInfo3}\");' action='addlink.php?action=add' target='_self'>\n";
 	$metinfo.="<table class='addlink_table'>\n";
 	if($tt)$metinfo.="<tr><td class='title' colspan='2'>{$lang_Info4}</td></tr>\n";
@@ -1880,8 +2283,8 @@ function metlabel_addlink($tt=1){
 	$metinfo.="<td class='input'><textarea name='contact' cols='50' class='textarea-text' rows='6'></textarea></td></tr>\n";
 if($met_memberlogin_code==1){  
      $metinfo.="<tr><td class='text'>".$lang_memberImgCode."</td>\n";
-     $metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' />";
-     $metinfo.="<img align='absbottom' src='../member/ajax.php?action=code'  onclick=this.src='../member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
+     $metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' onclick=verification()>";
+     $metinfo.="<img align='absbottom' id='new_code' src='../member/ajax.php?action=code'  onclick=this.src='../member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
      $metinfo.="</td>\n";
      $metinfo.="</tr>\n";
 }
@@ -1895,7 +2298,10 @@ if($met_memberlogin_code==1){
 }
 //在线应聘提交表单函数
 function metlabel_cv($mobile=0){
-	global $fdjs,$lang,$lang_Nolimit,$lang_memberPosition,$selectjob,$cv_para,$paravalue,$met_memberlogin_code,$lang_memberImgCode,$lang_memberTip1,$lang_Submit,$lang_Reset,$met_adminfile;
+	global $fdjs,$lang,$lang_Nolimit,$lang_memberPosition,$selectjob,$cv_para,$paravalue,$met_memberlogin_code,$lang_memberImgCode,$lang_memberTip1,$lang_Submit,$lang_Reset,$met_adminfile,$metinfover;
+	if($metinfover){
+		return metlabel_form($cv_para,'cv');
+	}
 	if($mobile){
 		$cv_para1=array();
 		foreach($cv_para as $key=>$val){
@@ -2001,8 +2407,8 @@ function metlabel_cv($mobile=0){
    }
 if($met_memberlogin_code==1){  
      $metinfo.="<tr><td class='text'>".$lang_memberImgCode."</td>\n";
-     $metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' />";
-     $metinfo.="<img align='absbottom' src='../member/ajax.php?action=code'  onclick=this.src='../member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
+     $metinfo.="<td class='input'><input name='code' onKeyUp='pressCaptcha(this)' type='text' class='code' id='code' size='6' maxlength='8' style='width:50px' onclick=verification() >";
+     $metinfo.="<img align='absbottom' id='new_code' src='../member/ajax.php?action=code'  onclick=this.src='../member/ajax.php?action=code&'+Math.random() style='cursor: pointer;' title='".$lang_memberTip1."'/>";
      $metinfo.="</td>\n";
      $metinfo.="</tr>\n";
 }	  
@@ -2019,6 +2425,29 @@ function sitemaplist(){
 	global $db,$nav_listall,$m_now_date,$met_sitemap_not1,$met_sitemap_not2,$lang,$met_langok,$met_index_url,$met_webname,$met_weburl;
 	global $met_config,$langmark,$class_list,$met_index_type,$met_pseudo,$met_webhtm,$met_htmtype,$met_htmpagename,$met_listhtmltype,$met_htmlistname,$met_chtmtype,$metadmin;
 	
+	$met_webname=$db->get_one("select * from $met_config where name='met_webname' and lang='$lang'");
+	$met_webname=$met_webname[value];
+	
+	$met_weburl=$db->get_one("select * from $met_config where name='met_weburl' and lang='$lang'");
+	$met_weburl=$met_weburl[value];
+	
+	$met_pseudo=$db->get_one("select * from $met_config where name='met_pseudo' and lang='$lang'");
+	$met_pseudo=$met_pseudo[value];
+	
+	$met_webhtm=$db->get_one("select * from $met_config where name='met_webhtm' and lang='$lang'");
+	$met_webhtm=$met_webhtm[value];
+	
+	$met_htmtype=$db->get_one("select * from $met_config where name='met_htmtype' and lang='$lang'");
+	$met_htmtype=$met_htmtype[value];
+	
+	$met_htmpagename=$db->get_one("select * from $met_config where name='met_htmpagename' and lang='$lang'");
+	$met_htmpagename=$met_htmpagename[value];
+	
+	$met_listhtmltype=$db->get_one("select * from $met_config where name='met_listhtmltype' and lang='$lang'");
+	$met_listhtmltype=$met_listhtmltype[value];
+	
+	$met_htmlistname=$db->get_one("select * from $met_config where name='met_htmlistname' and lang='$lang'");
+	$met_htmlistname=$met_htmlistname[value];
 	if($met_index_type==$lang){
 		$met_chtmtype='.'.$met_htmtype;
 		$met_htmtype='.'.$met_htmtype;
@@ -2027,7 +2456,7 @@ function sitemaplist(){
 		$met_htmtype='_'.$lang.'.'.$met_htmtype;
 	}
 	$langmark="lang=$lang";
-	include ROOTPATH.'include\lang.php';
+	//include ROOTPATH.'include\lang.php';
 	$indexar=array('title'=>$met_webname,'url'=>$met_index_url[$lang],'updatetime'=>date("Y-m-d"),'priority'=>1);
 	$nav_listall=array();
 	include ROOTPATH.'include/global/pseudo.php';
@@ -2087,6 +2516,10 @@ $file_site = explode('|',$app_file[2]);
 foreach($file_site as $keyfile=>$valflie){
 	if(file_exists(ROOTPATH."$met_adminfile".$valflie)&&!is_dir(ROOTPATH."$met_adminfile".$valflie)&&((file_get_contents(ROOTPATH."$met_adminfile".$valflie))!='metinfo')){require_once ROOTPATH."$met_adminfile".$valflie;}
 }
+include_once ROOTPATH.$met_adminfile.'/app/wap/menu_map.php';
+//接口
+if(strstr($_SERVER['PHP_SELF'], 'met_shop'))$special = 1;
+if($metinfover == 'v1' && ($_M['html_plugin']['head_script'] || $appscriptcss || $special))$_M['html_plugin']['head_script'] = "<script src=\"{$navurl}public/js/jQuery1.8.2.js\" type=\"text/javascript\"></script>{$_M['html_plugin']['head_script']}";
 # This program is an open source system, commercial use, please consciously to purchase commercial license.
 # Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
 ?>

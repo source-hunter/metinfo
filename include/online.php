@@ -4,7 +4,7 @@
 $met_oline=1;
 require_once 'common.inc.php';
 if($met_online_type<>3){
-	$met_url   = $navurl.'public/';
+	$met_url   = $met_weburl.'public/';
 	$cache_online = met_cache('online_'.$lang.'.inc.php');
 	if(!$cache_online){$cache_online=cache_online();}
 	foreach($cache_online as $key=>$list){
@@ -63,16 +63,35 @@ if($met_online_type<>3){
 	$metinfo.='<div class="onlinebox-bottom-bg"></div>';
 	if($met_online_skin<3)$metinfo.='</div>';
 	$metinfo.='</div>';
-	$_REQUEST['jsoncallback'] = strip_tags($_REQUEST['jsoncallback']);
-	if($_REQUEST['jsoncallback']){
-		$metinfo=str_replace("'","\'",$metinfo);
-		$metinfo=str_replace('"','\"',$metinfo);
-		$metinfo=preg_replace("'([\r\n])[\s]+'", "", $metinfo);
-		echo $_REQUEST['jsoncallback'].'({"metcms":"'.$metinfo.'"})';
-	}else{
-		echo $metinfo;
+
+	$tmpincfile=ROOTPATH."templates/{$_M[config][met_skin_user]}/metinfo.inc.php";
+	if(file_exists($tmpincfile)){
+		require_once $tmpincfile;
 	}
-	die();
+
+	if($metinfover == 'v1'){
+		//处理回传数据(sea.js处理方式)
+		$onlinex=$met_online_type<2?$met_onlineleft_left:$met_onlineright_right;
+		$onliney=$met_online_type<2?$met_onlineleft_top:$met_onlineright_top;
+		$data['html']=$metinfo;
+		$data['t']=$met_online_type;
+		$data['x']=$onlinex;
+		$data['y']=$onliney;
+		echo json_encode($data);
+	}else{
+		//处理回传数据(老模板处理方式)
+		$_REQUEST['jsoncallback'] = strip_tags($_REQUEST['jsoncallback']);
+		if($_REQUEST['jsoncallback']){
+			$metinfo=str_replace("'","\'",$metinfo);
+			$metinfo=str_replace('"','\"',$metinfo);
+			$metinfo=preg_replace("'([\r\n])[\s]+'", "", $metinfo);
+			echo $_REQUEST['jsoncallback'].'({"metcms":"'.$metinfo.'"})';
+		}else{
+			echo $metinfo;
+		}
+		die();
+	}
+
 }
 # This program is an open source system, commercial use, please consciously to purchase commercial license.
 # Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.

@@ -28,6 +28,8 @@
 	}
 
 /*Flash*/
+	$bannernid = $met_bannerpagetype?10001:$classnow;
+	if($met_bannerpagetype&&$classnow!=10001)$met_flasharray[$classnow] = $met_flasharray[10001];
 	if($metview_flash==$met_member_force){
 		$met_flasharray[$classnow]['type']=$metview_flash_type;
 		$met_flasharray[$classnow]['imgtype']=$metview_flash_imgtype;
@@ -38,7 +40,7 @@
 	if($met_flasharray[$classnow]['type']){
 		$query_x=$met_flasharray[$classnow]['type']==2?"and flash_path!=''":"and img_path!=''";
 		$qsql=$met_mobileok?"and wap_ok='1'":"and wap_ok='0'";//mobile
-		$query="select * from $met_flash where lang='$lang' {$qsql} and (module like '%,{$classnow},%' or module='metinfo') {$query_x} order by no_order";
+		$query="select * from $met_flash where lang='$lang' {$qsql} and (module like '%,{$bannernid},%' or module='metinfo') {$query_x} order by no_order";
 		$result= $db->query($query);
 		if($db->affected_rows()==0){
 			$superior=$class_list[$classnow]['bigclass'];
@@ -182,6 +184,36 @@
 		$met_flash_xpx=$met_flash_x."px";
 		$met_flash_ypx=$met_flash_y."px";
 	}
+/*模板设置预览*/
+if($theme_preview&&$met_theme_preview){
+	$met_flashimg = $classnow == 10001 ?$php_json['banner']['index']:($met_bannerpagetype?$php_json['banner']['index']:$met_flashimg);
+	
+	if($classnow != 10001 && $met_bannerpagetype){
+		$met_flashimg_theme_preview = array();
+		foreach($met_flashimg as $key=>$val){
+			$val['img_path']='../'.$val['img_path'];
+			$met_flashimg_theme_preview[$key] = $val;
+		}
+		$met_flashimg = $met_flashimg_theme_preview;
+	}
+	$met_flash_img='';
+	$met_flash_imglink='';
+	$met_flash_imgtitle='';
+	foreach($met_flashimg as $key=>$val){
+		if($val['img_path']!=""){
+			$met_flash_img=$met_flash_img.$val['img_path']."|";
+			$met_flash_imglink=$met_flash_imglink.$val['img_link']."|";
+			$met_flash_imgtitle=$met_flash_imgtitle.$val['img_title']."|";
+		}
+	}
+	$met_flashall = $met_flashimg;
+	$met_flash_img=substr($met_flash_img, 0, -1);
+	$met_flash_imglink=substr($met_flash_imglink, 0, -1);
+	$met_flash_imgtitle=substr($met_flash_imgtitle, 0, -1);
+	//wap_y
+	$otherinfo = $php_json['otherinfo'];
+}
+	//$met_flashimg
 /*parameter*/
 	if(!isset($dataoptimize[$pagemark]['parameter']))$dataoptimize[$pagemark]['parameter']=$dataoptimize[10000]['parameter'];
 	if($dataoptimize[$pagemark]['parameter']||$search=='search'){
@@ -257,7 +289,7 @@
 $met_js_access="<script type='text/javascript' id='metccde'>
 var jsFile = document.createElement('script');
 jsFile.setAttribute('type','text/javascript');
-jsFile.setAttribute('src','../include/access.php?metuser={$metuser}&lang={$lang}&metaccess={$metaccess}&random='+Math.random());
+jsFile.setAttribute('src','../include/access.php?&metmemberforce={$metmemberforce}&metuser={$metuser}&lang={$lang}&metaccess={$metaccess}&random='+Math.random());
 document.getElementsByTagName('head').item(0).appendChild(jsFile);
 </script>";
 			$query="select * from $met_admin_array where id='$metaccess'";

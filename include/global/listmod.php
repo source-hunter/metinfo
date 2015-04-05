@@ -186,8 +186,9 @@ $order_sql=$class3?list_order($class_list[$class3]['list_order']):($class2?list_
 $order_sql=($search=="search" && $mdmendy)?" order by top_ok desc,com_ok desc,no_order desc,updatetime desc,id desc":$order_sql;
 $order_sql=$order_sql==''?" order by top_ok desc,com_ok desc,no_order desc,updatetime desc,id desc":$order_sql;
 if($mdname=='news'||$mdname=='product'||$mdname=='download'||$mdname=='img'||$mdname=='job'){
-		$serch_sql .="and displaytype='1'";
+		$serch_sql .=" and displaytype='1'";
 }
+$serch_sql .= " and addtime<='{$m_now_date}'";
 $total_count = $db->counter($dbname, "$serch_sql", "*");
 require_once '../include/pager.class.php';
     $page = (int)$page;
@@ -217,7 +218,7 @@ require_once '../include/pager.class.php';
 					if(intval($metparaaccess)>0&&$met_member_use){
 						$paracode=authcode($list[$nowpara1], 'ENCODE', $met_member_force);
 						$paracode=codetra($paracode,1); 
-						$list[$nowpara1]="<script language='javascript' src='../include/access.php?metuser=para&metaccess=".$metparaaccess."&lang=".$lang."&listinfo=".$paracode."&paratype=".$metpara[$list1['paraid']]['type']."'></script>";
+						$list[$nowpara1]="<script language='javascript' src='../include/access.php?metmemberforce={$metmemberforce}&metuser=para&metaccess=".$metparaaccess."&lang=".$lang."&listinfo=".$paracode."&paratype=".$metpara[$list1['paraid']]['type']."'></script>";
 					}
 					$nowparaname="";
 					$nowparaname=$nowpara1."name";
@@ -260,7 +261,11 @@ require_once '../include/pager.class.php';
 		$phpname=$showname.'.php?'.$langmark."&id=".$list['id'];
 		$panyid = $list['filename']!=''?$list['filename']:$list['id'];
 		$met_ahtmtype = $list['filename']<>''?$met_chtmtype:$met_htmtype;
-		$list['url']=$met_pseudo?$panyid.'-'.$lang.'.html':($met_webhtm?$htmname.$met_ahtmtype:$phpname);
+		if($list['links']){
+			$list['url']=$list['links'];
+		}else{
+			$list['url']=$met_pseudo?$panyid.'-'.$lang.'.html':($met_webhtm?$htmname.$met_ahtmtype:$phpname);
+		}
 		if($class_list[$class1]['module']>=100||$search=='search'||$list['class1']!=$class1)$list['url']='../'.$class_list[$list['class1']]['foldername'].'/'.$list['url'];
 		if($mdname=='download'){
 			if(intval($list['downloadaccess'])>0&&$met_member_use){

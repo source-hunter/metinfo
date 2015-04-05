@@ -76,7 +76,7 @@ foreach($renow as $key=>$val){
 				if($met_thumb_img!=$depth."../".str_ireplace("/thumb","",$val['imgurls'])){
 					$imgurls='../'.str_ireplace("../","",$imgurls);
 					$query="update $table set imgurls='$imgurls' where id='$val[id]'";
-					if($met_deleteimg==1&&$db->query($query)){@file_unlink("../../$val[imgurls]");}
+					if($db->query($query)){@file_unlink("../../$val[imgurls]");}
 				}
 			}
 			$met_img_x='';

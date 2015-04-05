@@ -8,6 +8,7 @@ $showname = 'showdownload';
 $dbname = $met_download;
 $dbname_list = $met_download_list;
 $mdmendy = 1;
+$class1re = '';
 require_once '../include/global/listmod.php';
 
 $download_listnow = $modlistnow;

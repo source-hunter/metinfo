@@ -53,7 +53,7 @@ if($mdmendy){
 		if(intval($metparaaccess)>0&&$met_member_use){
 			$paracode=authcode($news[$nowpara1], 'ENCODE', $met_member_force);
 			$paracode=codetra($paracode,1); 
-			$news[$nowpara1]="<script language='javascript' src='../include/access.php?metuser=para&metaccess=".$metparaaccess."&lang=".$lang."&listinfo=".$paracode."&paratype=".$metpara[$list1['paraid']]['type']."'></script>";
+			$news[$nowpara1]="<script language='javascript' src='../include/access.php?metmemberforce={$metmemberforce}&metuser=para&metaccess=".$metparaaccess."&lang=".$lang."&listinfo=".$paracode."&paratype=".$metpara[$list1['paraid']]['type']."'></script>";
 		}
 		$nowparaname="";
 		$nowparaname=$nowpara1."name";
@@ -246,6 +246,10 @@ if($dataoptimize[$pagemark]['nextlist']){
     if($nextnews)$nextnews['url']=$met_pseudo?$nextid.'-'.$lang.'.html':($met_webhtm?($nextnews['filename']?$nextid.$met_ahtmtypep:$nexthtmname.$nextnews['id'].$met_ahtmtypen):$phpname.$nextnews['id']);
 	$preinfo=$prenews;
 	$nextinfo=$nextnews;
+	$preinfo[url]    = $preinfo[url]?$preinfo[url]:'#';
+	$preinfo[title]  = $preinfo[title]?$preinfo[title]:$lang_Noinfo;
+	$nextinfo[url]   = $nextinfo[url]?$nextinfo[url]:'#';
+	$nextinfo[title] = $nextinfo[title]?$nextinfo[title]:$lang_Noinfo;
 }
 $class2=$class_list[$class1]['releclass']?$class1:$class2;
 $class1=$class_list[$class1]['releclass']?$class_list[$class1]['releclass']:$class1;	
@@ -259,8 +263,9 @@ if($news[tag]){
 	$tagstr="<br /><span>{$lang_tagweb}:&nbsp";
 	$tags=explode('|',$news[tag]);
 	foreach($tags as $key=>$val){
-		if($met_pseudo||$met_tag_pseudo){$tagstr.="&nbsp<a href=\"../tag/{$val}-{$lang}\" target=\"_blank\">$val</a>";}
-		else{$tagstr.="&nbsp<a href=\"../search/search.php?class1=&class2=&class3=&searchtype=0&searchword={$val}&lang={$lang}\" target=\"_blank\">$val</a>";}
+		$urlval = urlencode($val);
+		if($met_pseudo||$met_tag_pseudo){$tagstr.="&nbsp<a href=\"../tag/{$urlval}-{$lang}\" target=\"_blank\">$val</a>";}
+		else{$tagstr.="&nbsp<a href=\"../search/search.php?class1=&class2=&class3=&searchtype=0&searchword={$urlval}&lang={$lang}\" target=\"_blank\">$val</a>";}
 	}
 	$class_concent.=$tagstr.'</span>';
 }
@@ -296,15 +301,15 @@ if($pagemark==3||$pagemark==5){
 	}
 }
 if($news['classother']){
-	$met_pnorder=0;
+	//$met_pnorder=0;
 	//$lang_sidebarjstype=1;
-	$csnow='x';
-	$class3='x';
-	$class_list[$classnow][name]=$class1_info[name];
-	$navdown='';
+	//$csnow='x';
+	//$class3='x';
+	//$class_list[$classnow][name]=$class1_info[name];
+	//$navdown='';
 }
 require_once '../public/php/methtml.inc.php';
 if($news['classother']){
-	$nav_x[name]="<a href=".$news['url']." >".$news['title']."</a>";
+	//$nav_x[name]="<a href=".$news['url']." >".$news['title']."</a>";
 }
 ?>

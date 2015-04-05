@@ -56,7 +56,7 @@ if(count($met_module[$j])==0 or ($j<=5 || $j==8)){
 if($type!=3){	
 		$structure=$db->get_all("select * from $met_ifcolumn");		
 		foreach($structure as $key=>$val){
-			$structure1=$db->get_one("select * from $met_column where module='$val[no]'");
+			$structure1=$db->get_one("select * from $met_column where module='$val[no]' and lang='$lang'");
 			if(!$structure1||$val[uniqueness]==0){
 				if(!$structure1||!$val[fixed_name]){
 					$val[appname]=get_word($val[appname]);

@@ -86,6 +86,17 @@ class upfile {
 	  if($met_img_rename||$file){
 		$this->set_savename($file); //Save the settings file name
 	  }else{
+		$name_verification = explode('.',$filear["name"]);
+		$verification_mun = count($name_verification);
+		if($verification_mun>2){
+			$verification_mun1 = $verification_mun-1;
+			$name_verification1 = $name_verification[0];
+			for($i=0;$i<$verification_mun1;$i++){
+				$name_verification1 .= '_'.$name_verification[$i];
+			}
+			$name_verification1 .= '.'.$name_verification[$verification_mun1];
+			$filear["name"] = $name_verification1;
+		}
 		$this->savename = str_replace(array(":", "*", "?", "|", "/" , "\\" , "\"" , "<" , ">" , "¡ª¡ª" , " " ),'_',$filear["name"]);
 	  }
 	  if(stristr(PHP_OS,"WIN")){

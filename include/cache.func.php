@@ -38,6 +38,7 @@ function cache_column(){
 	$query="select * from $met_column where lang='$lang' order by classtype desc,no_order";
 	$result= $db->query($query);
 	while($list = $db->fetch_array($result)){
+		$list['new_windows'] = $list['new_windows']?$list['new_windows']:'';
 		$cache_column[$list['id']]=$list;
 	}
 	return cache_page("column_".$lang.".inc.php",$cache_column);

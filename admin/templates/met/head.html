@@ -15,7 +15,18 @@ echo <<<EOT
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="$img_url/css/metinfo.css?$jsrand" />
 <link rel="stylesheet" type="text/css" href="$img_url/css/newstyle.css?$jsrand" />
-<script type="text/javascript">var basepath='{$img_url}?$jsrand';</script>
+<style>
+body{ display:none;}
+</style>
+<script type="text/javascript">
+if(window.parent.document.getElementById('metcmsbox')==null){
+window.location.href='{$_M[url][site_admin]}index.php?lang={$lang}&iframeurl='+encodeURIComponent(location.href);
+}
+</script> 
+<style>
+body{ display:block;}
+</style>
+<script type="text/javascript">var basepath='{$img_url}?$jsrand',lang = '$lang',adminurl='{$_M[url][site_admin]}';</script>
 <!--
 EOT;
 if(strpos($php_self,'skin_editor') !== false){
@@ -39,7 +50,6 @@ echo <<<EOT
 <script type="text/javascript" src="{$img_url}/js/cookie.js?$jsrand"></script>
 <script type="text/javascript">
 /*ajax执行*/
-var lang = '$lang';
 var metimgurl='{$img_url}/';
 var depth='{$depth}';
 $(document).ready(function(){

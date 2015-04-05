@@ -14,6 +14,8 @@ while($list_config= $db->fetch_array($result)){
 		$_M[langlist][web][$list_config['mark']]=$list_config;
 	}
 }
+/*静态页面转伪静态*/
+require_once ROOTPATH.'include/htmlurl.php';
 /*域名跳转判断*/
 if($lang==""){
 	foreach($met_langok as $key=>$val){
@@ -57,6 +59,44 @@ while($list_config= $db->fetch_array($result)){
 }
 $_M[lang]=$lang;
 @extract($settings);
+/*静态页面转伪静态，规则不匹配*/
+if(isset($html_met_htmlistname) && $html_met_htmlistname!=$met_htmlistname){
+	okinfo('../404.html');
+}
+if(isset($html_met_listhtmltype) && $html_met_listhtmltype!=$met_listhtmltype){
+	okinfo('../404.html');
+}
+if(isset($html_met_htmpagename) && $html_met_htmpagename!=$met_htmpagename){
+	okinfo('../404.html');
+}
+/*模板设置预览*/
+if($theme_preview){
+	$met_pseudo=0;//关闭伪静态
+	$met_webhtm=0;//关闭静态页面
+	$met_online_type=3;//关闭在线客服
+	$met_stat=0;//关闭访问统计
+	$_M['config']['met_pseudo'] = 0;
+	$_M['config']['met_webhtm'] = 0;
+	$_M['config']['met_online_type'] = 3;
+	$_M['config']['met_stat'] = 0;
+	if($met_theme_preview){
+		//echo $met_theme_preview;
+		$php_json = json_decode($met_theme_preview,true); 
+		foreach($php_json['config'] as $key=>$val){
+			$patten = '/^[a-zA-Z0-9_]+$/';
+			//echo $key.'='.$val.'<br/>';
+			if(preg_match($patten, $key) == 1){
+				$$key = $val;
+				$_M['config'][$key] = $val;
+			}
+		}
+		$indexbannerset=explode('|',$_M['config']['flash_10001']);
+		$met_flasharray['10001']['x']=$indexbannerset[1];
+		$met_flasharray['10001']['y']=$indexbannerset[2];
+		$met_flasharray['10001']['imgtype']=$indexbannerset[3];
+		$met_flasharray['10001']['wap_y']=$indexbannerset[1];
+	}
+}
 /*系统安全密钥*/
 $met_webkeys=file_get_contents(ROOTPATH.'/config/config_safe.php');
 $met_webkeys=str_replace('<?php/*','',$met_webkeys);

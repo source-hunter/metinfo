@@ -38,10 +38,12 @@ if(!file_get_contents(ROOTPATH.'cache/langadmin_'.$langset.'.php')){
 		$name = 'lang_'.$listlang['name'];
 		$$name= trim($listlang['value']);
 		$str.='$'."{$name}='".str_replace(array('\\',"'"),array("\\\\","\\'"),trim($listlang['value']))."';";
+		$lang_json[$listlang['name']]=$listlang['value'];
 	}
 	$js1='$'."js='".str_replace("'","\\'",$js).'\';';
 	$str="<?php\n".$str.$js1."\n?>";
 	file_put_contents(ROOTPATH.'cache/langadmin_'.$langset.'.php',$str);
+	file_put_contents(ROOTPATH.'cache/lang_json_admin_'.$langset.'.php',json_encode($lang_json));
 }else{
 	require_once ROOTPATH.'cache/langadmin_'.$langset.'.php';
 }

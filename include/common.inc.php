@@ -24,7 +24,7 @@ require_once ROOTPATH.'include/global.func.php';
 foreach(array('_COOKIE', '_POST', '_GET') as $_request) {
 	foreach($$_request as $_key => $_value) {
 		$_key{0} != '_' && $$_key = daddslashes($_value,0,0,1);
-		$_M['from'][$_key] = daddslashes($_value,0,0,1);
+		$_M['form'][$_key] = daddslashes($_value,0,0,1);
 	}
 }
 $met_cookie=array();
@@ -40,7 +40,7 @@ $mettables=explode('|',$mettable[value]);
 foreach($mettables as $key=>$val){
 	$tablename='met_'.$val;	
 	$$tablename=$tablepre.$val;
-	$_M['table'][$tablename] = $tablepre.$val;
+	$_M['table'][$val] = $tablepre.$val;
 }
 require_once ROOTPATH.'include/cache.func.php';
 require_once ROOTPATH.'config/config.inc.php';
@@ -132,9 +132,14 @@ if($_M['plugin']['doweb']){
 				$_M['url']['own'] = $_M['url']['site'].'app/app/'.$val.'/';
 				if(file_exists($applistfile)&&!is_dir($applistfile)&&((file_get_contents($applistfile))!='metinfo')){
 					require_once $applistfile;
-					$newclass=str_replace('.class.php', '', 'plugin_'.$val);
-					$newclass=new $newclass;
-					call_user_func(array($newclass,  'doweb'));
+					$app_plugin_name=str_replace('.class.php', '', 'plugin_'.$val);
+					if (class_exists($app_plugin_name)) {
+						$newclass=new $app_plugin_name;
+						if(method_exists($newclass, 'doweb')){
+							call_user_func(array($newclass,  'doweb'));
+						}
+					}
+					
 				}
 		}
 		$_M['url']['own'] = '';
@@ -148,6 +153,7 @@ if($met_oline!=1){
 		if(file_exists(ROOTPATH."$met_adminfile".$valflie)&&!is_dir(ROOTPATH."$met_adminfile".$valflie)&&((file_get_contents(ROOTPATH."$met_adminfile".$valflie))!='metinfo')){require_once ROOTPATH."$met_adminfile".$valflie;}
 	}
 }
+include_once ROOTPATH.$met_adminfile.'/app/wap/wapjs.php';
 if (!$search && !$action){jump_pseudo();}
 # This program is an open source system, commercial use, please consciously to purchase commercial license.
 # Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.

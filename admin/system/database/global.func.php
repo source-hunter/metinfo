@@ -204,6 +204,31 @@ function traversal($jkdir)
 	}
 	return $allfileunm;
 }
+
+
+
+function eliminate() {
+	$path = '../../databack/';
+	$current_dir = opendir($path);
+	while(($file = readdir($current_dir)) !== false) {  
+		$sub_dir = $path . DIRECTORY_SEPARATOR . $file;  
+		if($file == '.' || $file == '..') {
+			continue;
+		} else if(is_dir($sub_dir)) {   
+			if($file!='sql' && $file!='web' && $file!='stat'){
+				$dir = $path.$file;
+				deltree($dir);
+				rmdir($dir);
+			}
+		} else {   
+			$suffix = explode('.',$file);
+			$info1=pathinfo($file);
+			if($info1['extension'] != 'sql') {
+				cache_delete($file);
+			}
+		}
+	}
+}
 # This program is an open source system, commercial use, please consciously to purchase commercial license.
 # Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
 ?>

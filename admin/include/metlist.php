@@ -34,7 +34,8 @@ foreach($sidebarcolumn as $key=>$val){
 			$purview=$val['field']==0?'metinfo':$$purview;
 			if($metinfo_admin_pop=="metinfo" || $purview=='metinfo'){
 				if(strstr($val['url'],"http://")){
-					$val['property']='target="_blank"';
+					//$val['property']='target="_blank"';
+					$val['property']='target="main"';
 				}else{
 					$val['property']="target='main' id='nav_{$val[bigclass]}_{$val[id]}'";
 					if($val['url']=='/interface/info.php'){

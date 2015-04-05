@@ -56,7 +56,7 @@ if($action=="editor"){
 		$db->query($query);
 	}
 	/*delete images*/
-	if($met_deleteimg && $type==5){
+	if($type==5){
 		$query="select * from $met_plist where paraid='$id'";
 		$result= $db->query($query);
 		while($list = $db->fetch_array($result)){
@@ -78,7 +78,7 @@ if($action=="editor"){
 			$db->query($query);
 		}
 		/*delete images*/
-		if($met_deleteimg && $type==5){
+		if($type==5){
 			$query="select * from $met_plist where paraid='$val'";
 			$result= $db->query($query);
 			while($list = $db->fetch_array($result)){

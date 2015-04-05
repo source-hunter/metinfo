@@ -32,9 +32,10 @@ if($action=="add"){
 	$time2 = strtotime($m_now_date);
 	$timeok= (float)($time2-$time1);
 	$timeok2=(float)($time2-$_COOKIE['submit']);
-	if($timeok<=$met_fd_time&&$timeok2<=$met_fd_time){
+	if($timeok<=$met_fd_time||$timeok2<=$met_fd_time){
 		$fd_time="{$lang_Feedback1} ".$met_fd_time." {$lang_Feedback2}";
 		okinfo('javascript:history.back();',$fd_time);
+		exit;
 	}
 	$pname="para".$met_message_fd_class;
 	$pname=$$pname;
@@ -98,6 +99,21 @@ if($action=="add"){
 						  customerid 		 = '$customerid'";
 	$db->query($query);
 	$fname=$db->get_one("select * from $met_column where module='7' and lang='$lang'");
+	$news_id=$db->insert_id();
+	$news_type = "message-".$class1;
+	$infos ="para".$met_message_fd_content;
+	$info=$$infos;
+	$new_time = time();
+	$titlt = $fname['name']."-".$_M['word']['messageonline'];
+	$query = "INSERT INTO $met_infoprompt SET
+					  news_id           = '$news_id',
+					  newstitle         = '$titlt',
+					  content           = '$info',
+					  member            = '$customerid',
+					  type              = '$news_type',
+					  time              = '$new_time',
+					  lang              = '$lang'";
+	$db->query($query);
 	$met_ahtmtype = $fname['filename']<>''?$met_chtmtype:$met_htmtype;
 	$msfilename=$fname['filename']<>''?$fname['filename'].'_1':($met_htmlistname?"message_list_1":"index_list_1");
 	$returnurl=$met_pseudo?'index-'.$lang.'.html':($met_webhtm==2?$msfilename.$met_ahtmtype:"index.php?lang=".$lang);
@@ -124,7 +140,7 @@ if($action=="add"){
 			}
 			if($val[type]==5){$info="../upload/file/$info";}
 			$query = "INSERT INTO $met_mlist SET
-						  listid         = '$use_id[id]',
+						  listid         = '$news_id',
 						  info           = '$info',
 						  paraid         = '$val[id]',
 						  module         = '7',
@@ -160,7 +176,7 @@ if($action=="add"){
 				}
 			}
 			$query = "INSERT INTO $met_mlist SET
-						  listid         = '$use_id[id]',
+						  listid         = '$news_id',
 						  paraid         = '$val[id]',
 						  info           = '$infos',
 						  module         = '7',
