@@ -6,19 +6,11 @@ define(function(require, exports, module) {
 		var ih = $(window).height();
 		$(".theme-right iframe").height(ih);
 		$(".theme .tab_content").height(ih-80);
-		var iw = parseInt($(window).width()*0.27);
-		if(iw>300){
-			$(".theme-left").width(iw);
-			$(".theme-right").css("margin-left",'-'+iw+'px');
-			$(".theme-right .theme-right-iframe").css("margin-left",iw+'px');
-		}
-		$(".theme ul.tabs li.list ul li a").width(parseInt($(".theme-left").width()/2));
 		if($(".mobileiframe").length>0){
 			$(".mobileiframe").css("margin",function(){
 				return ((ih-$(this).outerHeight())/2)+'px auto';
 			});
 		}
-		$(".theme").show();
 	}
 	exports.iht = function(){
 		iht();

@@ -4,7 +4,7 @@ define(function(require, exports, module) {
 	var common = require('common');
 	var themefunc = require('tem/js/func');//函数
 	var set = require('tem/js/set');//模板设置
-	var langtxt = common.langtxt();
+	var langtxt = ownlangtxt;
 	/*选项卡*/
 	$('.theme ul.tabs').addClass('active').find('> li:eq(1)').addClass('current1');
 	$('.theme ul.tabs li.list').hover(
@@ -55,15 +55,6 @@ define(function(require, exports, module) {
 	function iframechuli(d){
 		/*获取当前页面URL*/
 		d.attr("data-src",window.frames["themeshow"].document.location.href);
-		/*if($(".mobileiframe").length==0){
-		调整比例
-			var y =$(".theme-right-iframe").width()/$(window.frames["themeshow"].document).width();
-			y = y.toFixed(2)*100;
-			if(y<100){
-				y = y - 3;
-				$(window.frames["themeshow"].document).find("body").attr("style","zoom:"+y+"%;");
-			}
-		}*/
 		/*a链接*/
 		var a = $(window.frames["themeshow"].document).find("a");
 		var mobile = $("input[name='mobile']").val();
@@ -143,7 +134,6 @@ define(function(require, exports, module) {
 						+'&met_skin_user='+$("input[name='met_skin_user']").val()
 						+'&mobile='+$("input[name='mobile']").val();
 				d.load(url, function(t) {
-					//d.show();
 					themefunc.iht();
 					lidb(index,f);
 					if(index==5){//全部加载完成后初始化
@@ -193,9 +183,10 @@ define(function(require, exports, module) {
 	}
 	
 	/*底部保存按钮*/
-	$(".theme-save a").click(function(){
+	$("form").submit(function(){
 		themefunc.ajaxiframe(1,1);
-		//$(".ui-from").submit();
+	});
+	$(".theme-save a").click(function(){
 		$("input[name='submit']").click();
 	});
 

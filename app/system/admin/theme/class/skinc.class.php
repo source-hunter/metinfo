@@ -27,6 +27,7 @@ class skinc{
 		$this->iniclass = new skininc($this->no, $this->lang);
 		$configlist = array();
 		$configlist[] = 'met_skin_user';
+		$configlist[] = 'met_logo';
 		/*首页*/
 		$configlist[] = 'met_skin_css';
 		$configlist[] = 'met_index_content';
@@ -77,6 +78,7 @@ class skinc{
 		$mobile_configlist = array();
 		$mobile_configlist[] = 'wap_skin_user';
 		$mobile_configlist[] = 'wap_skin_css';
+		$mobile_configlist[] = 'met_wap_logo';
 		$mobile_configlist[] = 'flash_10001';
 		$mobile_configlist[] = 'met_bannerpagetype';
 		$mobile_configlist[] = 'wap_news_list';
@@ -168,7 +170,8 @@ class skinc{
 			$have['wap_skin_user'] = $have['met_skin_user'];
 			$have['wap_skin_css'] = $have['met_skin_css'];
 			$cglist = $this->mobile_configlist;
-			$have['flash_10001'] = $_M['config']['flash_10001'];
+			//$have['flash_10001'] = $_M['config']['flash_10001'];
+			$have['flash_10001'] = '1|'.$have['met_flash_10001_y'];
 			$wap_ok = 1;
 		}else{
 			/*备用字段*/

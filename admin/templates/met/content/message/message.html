@@ -79,15 +79,20 @@ echo <<<EOT
 <!--
 EOT;
 foreach($message_list as $key=>$val){
-$message_id = $messagesNames[3][$key][listid];
+$query="select * from $met_mlist where paraid='$messagesName1[value]' and listid='$val[id]' and lang='$lang'";
+$message_name=$db->get_one($query);
+$query="select * from $met_mlist where paraid='$messagesName2[value]' and listid='$val[id]' and lang='$lang'";
+$message_sms=$db->get_one($query);
+$query="select * from $met_mlist where paraid='$messagesName3[value]' and listid='$val[id]' and lang='$lang'";
+$message_email=$db->get_one($query);
 echo <<<EOT
 -->          
               <tr class="mouse click">
               <td  class="list-text"><input name='id' type='checkbox' onClick="unselectall()" id="id" value='$val[id]' /></td>
 	<td  class="list-text">$val[customerid]</td>
-             <td  class="list-text">{$messagesNames[1][$key][info]}</td>
-	<td  class="list-text color999">{$messagesNames[2][$key][info]}</td>
-	<td  class="list-text color999">{$messagesNames[3][$key][info]}</td>
+             <td  class="list-text">{$message_name[info]}</td>
+	<td  class="list-text color999">{$message_sms[info]}</td>
+	<td  class="list-text color999">{$message_email[info]}</td>
              <td  class="list-text color999">$val[readok]</td>				
              <td  class="list-text color999">$val[addtime]</td>
 <!--
@@ -101,7 +106,7 @@ EOT;
 }
 echo <<<EOT
 --> 
-				<td class="list-text"><a href="editor.php?anyid={$anyid}&id={$message_id}&lang=$lang&class1={$class1}&customerid={$customerid}" >{$lang_View}</a>&nbsp;&nbsp;<a href="delete.php?anyid={$anyid}&id={$val[id]}&lang=$lang&class1={$class1}&customerid={$customerid}" onClick="return linkSmit($(this),1);" >{$lang_delete}</a></td>
+				<td class="list-text"><a href="editor.php?anyid={$anyid}&id={$val[id]}&lang=$lang&class1={$class1}&customerid={$customerid}" >{$lang_View}</a>&nbsp;&nbsp;<a href="delete.php?anyid={$anyid}&id={$val[id]}&lang=$lang&class1={$class1}&customerid={$customerid}" onClick="return linkSmit($(this),1);" >{$lang_delete}</a></td>
               </tr>
 <!--
 EOT;

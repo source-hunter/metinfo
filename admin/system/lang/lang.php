@@ -236,7 +236,7 @@ if($action=="modify"){
 	if($retxt)$txt=$retxt;
 	if($langsetaction == 'delete' || $langsetaction == 'add'){
 	echo "<script language=JavaScript>
-			parent.location.href='../lang/lang.php?anyid={$anyid}&lang={$lang}&cs=1&turnovertext={$lang_jsok}'; 
+			window.location.href='../lang/lang.php?anyid={$anyid}&lang={$lang}&cs=1&turnovertext={$lang_jsok}'; 
 		 </script> ";	
 	}else{
 		metsave('../system/lang/lang.php?anyid='.$anyid.'&lang='.$lang.'&cs='.$cs,$txt,$depth,'','',$prent);

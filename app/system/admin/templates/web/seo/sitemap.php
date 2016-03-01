@@ -7,6 +7,12 @@ defined('IN_MET') or exit('No permission');
 require $this->template('ui/head');
 echo <<<EOT
 -->
+<script>
+var ownlangtxt = {
+	"being_generated":"{$_M[word][being_generated]}",
+	"physicalgenok":"{$_M[word][physicalgenok]}"
+};
+</script>
 <form method="POST" class="ui-from" name="myform" action="{$_M[url][own_form]}a=dositemapeditor" target="_self">
 <div class="v52fmbx" data-gent="{$_M[form][gent]}">
 	<h3 class="v52fmbx_hr">{$_M['word']['unitytxt_1']}

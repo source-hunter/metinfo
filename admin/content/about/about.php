@@ -14,13 +14,12 @@ if($action=="modify"){
 	}
 	if(!$description){
 		$description=strip_tags($content);
-		$description=str_replace("&nbsp;",'',$description); 
-		$description=str_replace(" ","",$description);
 		$description=str_replace("\n", '', $description); 
 		$description=str_replace("\r", '', $description); 
 		$description=str_replace("\t", '', $description);
 		$description=mb_substr($description,0,200,'utf-8');
 	}
+	$content = concentwatermark_compatible($content);
 	$query = "update $met_column SET 
 						  content     = '$content',
 						  keywords    = '$keywords',

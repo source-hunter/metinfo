@@ -18,7 +18,7 @@ if($met_member_use){
 		if($val['user_webpower']>=intval($lev)){
 			$accessnow=$val['id']==$list_access['access']?"selected='selected'":'';
 			$webpower=$val[id];
-			$level.="<option value='$webpower' $accessnow>$val[array_name]</option>";	
+			$level.="<option value='$webpower' {$accessnow}>$val[array_name]</option>";	
 		}
 	}
 	$level.=$menbermanage?'':($list_access['access']==3?"<option value='3' selected='selected'>$lang_access3</option>":"<option value='3'>$lang_access3</option>");

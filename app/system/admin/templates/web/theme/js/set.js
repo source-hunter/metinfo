@@ -129,8 +129,8 @@ define(function(require, exports, module) {
 			function chang1(){		
 				var content,d = $('.ftype_ckeditor_theme .fbox textarea');
 					d.each(function(){
-						if(CKEDITOR.instances[$(this).attr('name')]){
-							content = CKEDITOR.instances[$(this).attr('name')].getData();
+						if(UE.getEditor[$(this).attr('name')]){
+							content = UE.getEditor[$(this).attr('name')].getContent();
 							if($(this).val()!=content){
 								clearTimeout(theme_e);
 								$(this).val(content);	
@@ -149,6 +149,23 @@ define(function(require, exports, module) {
 			$(".tabs_item:eq("+index+")").slideDown();
 			$('.theme ul.tabs').addClass('active').find('li ul li:eq('+(index-1)+')').addClass('current1');
 		}
+		if($.browser.msie || ($.browser.mozilla && $.browser.version == '11.0')){ 
+			var v = Number($.browser.version);
+			if(v<10){
+				function dlie(dl){
+					var dw;
+					dl.each(function(){
+						var dt = $(this).find("dt"),dd = $(this).find("dd");
+						if(dt.length>0){
+							dt.css({"float":"left","width":"105px"});
+							dd.css({"float":"left","width":"180px"});
+						}
+					});
+				}
+				var dl = $(".v52fmbx dl");
+				dlie(dl);
+			}
+		}
 	}
  
 	/*编辑器内容获取*/
@@ -157,8 +174,8 @@ define(function(require, exports, module) {
 		if(d.length>0){
 			d.each(function(){
 				var n = $(this).attr('name');
-				if(CKEDITOR.instances[n]){
-					CKEDITOR.remove(CKEDITOR.instances[n]);
+				if(UE.getEditor[n]){
+					UE.destroy(UE.getEditor[n]);
 				}
 			});
 		}

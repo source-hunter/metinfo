@@ -8,6 +8,9 @@ require $this->template('ui/head');
 $adm = admin_information();
 echo <<<EOT
 -->
+<script>
+var ownlangtxt = '';
+</script>
 <input id="secret_key" type="hidden" value="{$_M['config']['met_secret_key']}">
 <input id="position" type="hidden" value="lr">
 <form method="POST" class="ui-from" name="myform" action="{$_M['url']['app_api']}a=domember_registration&user_type={$_M['form']['user_type']}&user_id={$_M['form']['user_id']}&user_pass={$_M['form']['user_pass']}&user_mobile={$_M['form']['user_mobile']}&user_email={$_M['form']['user_email']}'&user_passpay={$_M['form']['user_passpay']}&return_type=jump&admin_url={$_M['url']['site_admin']}" target="_self">
@@ -60,6 +63,7 @@ echo <<<EOT
 				<span class="tips">{$_M['word']['services_future']}</span>
 			</dd>
 		</dl>
+		<!--
 		<h3 class="v52fmbx_hr">{$_M['word']['set_password']}</h3>
 		<dl>
 			<dt>{$_M['word']['pay_password']}</dt>
@@ -77,7 +81,8 @@ echo <<<EOT
 					<input type="password" name="repasswordpay" value=""  data-password="user_passpay" placeholder="{$_M['word']['verify_password']}">
 				</div>
 			</dd>
-		</dl>		
+		</dl>	
+		-->
 		<dl class="noborder">
 			<dt> </dt>
 			<dd>

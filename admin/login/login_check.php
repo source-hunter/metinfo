@@ -82,19 +82,22 @@ if($action=="login"){
 			}
 		}
 		if($re_url&&file_exists('../..'.$filedir)&&$filedir){
-			Header("Location: $re_url");
-			met_setcookie("re_url",$re_url,time()-3600);
+			if(!strstr($re_url, ".php")){
+				$re_url .= "index.php?lang=".$lang;
+			}
+			Header("Location: {$re_url}");
+			met_setcookie("re_url",$re_url,time()-21600);
 			exit;
 		}else{
-			if($re_url)met_setcookie("re_url",$re_url,time()-3600);
-			echo "<script type='text/javascript'> var nowurl=parent.location.href; var metlogin=(nowurl.split('login')).length-1; if(metlogin==0)location.href='../system/sysadmin.php?anyid=8&lang=$lang'; if(metlogin!=0)location.href='../index.php?lang=$lang';</script>";
+			if($re_url)met_setcookie("re_url",$re_url,time()-21600);
+			echo "<script type='text/javascript'> var nowurl=parent.location.href; var metlogin=(nowurl.split('login')).length-1; if(metlogin==0)window.parent.frames.location.href='../index.php?lang=$lang'; if(metlogin!=0)location.href='../index.php?lang=$lang';</script>";
 		}	
 	}
 }else{
 	if(!$metinfo_admin_name||!$metinfo_admin_pass){
 		if($admin_index){
 			met_cooike_unset();
-			met_setcookie("re_url",$re_url,time()-3600);
+			met_setcookie("re_url",$re_url,time()-21600);
 			Header("Location: login/login.php");
 		}else{
 			if(!$re_url){
@@ -106,7 +109,7 @@ if($action=="login"){
 					$re_url="http://$_SERVER[SERVER_NAME]$_SERVER[REQUEST_URI]";
 				}
 			}
-			if(!$_COOKIE[re_url]&&!strstr($re_url, "return.php"))met_setcookie("re_url",$re_url,time()+3600);
+			if(!$_COOKIE[re_url]&&!strstr($re_url, "return.php"))met_setcookie("re_url",$re_url,time()+21600);
 			met_cooike_unset();
 			Header("Location: ".$depth."../login/login.php");
 		}
@@ -116,7 +119,7 @@ if($action=="login"){
 		if(!$admincp_ok){
 			if($admin_index){
 				met_cooike_unset();
-				met_setcookie("re_url",$re_url,time()-3600);
+				met_setcookie("re_url",$re_url,time()-21600);
 				Header("Location: login/login.php");
 			}else{
 				if(!$re_url){
@@ -129,7 +132,7 @@ if($action=="login"){
 					}
 				}
 				if(!strstr($re_url, "return.php")){
-				if(!$_COOKIE[re_url])met_setcookie("re_url",$re_url,time()+3600);
+				if(!$_COOKIE[re_url])met_setcookie("re_url",$re_url,time()+21600);
 				}
 				met_cooike_unset();
 				Header("Location: ".$depth."../login/login.php");

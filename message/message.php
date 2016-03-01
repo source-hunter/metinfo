@@ -88,7 +88,7 @@ if($action=="add"){
 	/**/
 	if($tel&&$met_fd_sms_back){
 		require_once ROOTPATH.'include/export.func.php';
-		sendsms($tel,$met_fd_sms_content,1);
+		sendsms($tel,$met_fd_sms_content,4);
 	}
 	/**/
 	$customerid=$metinfo_member_name!=''?$metinfo_member_name:0;
@@ -98,8 +98,8 @@ if($action=="add"){
 						  lang               = '$lang', 
 						  customerid 		 = '$customerid'";
 	$db->query($query);
-	$fname=$db->get_one("select * from $met_column where module='7' and lang='$lang'");
 	$news_id=$db->insert_id();
+	$fname=$db->get_one("select * from $met_column where module='7' and lang='$lang'");
 	$news_type = "message-".$class1;
 	$infos ="para".$met_message_fd_content;
 	$info=$$infos;

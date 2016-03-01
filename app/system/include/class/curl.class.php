@@ -52,7 +52,7 @@ class curl{
 		if(get_extension_funcs('curl') && function_exists('curl_init') && function_exists('curl_setopt') && function_exists('curl_exec') && function_exists('curl_close')){
 			$curlHandle = curl_init();
 			curl_setopt($curlHandle, CURLOPT_URL, 'http://'.$this->host.'/'.$this->file); 
-			curl_setopt($curlHandle, CURLOPT_REFERER, HTTP_HOST);
+			curl_setopt($curlHandle, CURLOPT_REFERER, $_M['config']['met_weburl']);
 			curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, 1); 
 			curl_setopt($curlHandle, CURLOPT_CONNECTTIMEOUT, $timeout);
 			curl_setopt($curlHandle, CURLOPT_TIMEOUT, $timeout);
@@ -81,7 +81,7 @@ class curl{
 				}
 				else {
 					$result = '';
-					$out = "POST {$this->file} HTTP/1.0\r\n";
+					$out = "POST /{$this->file} HTTP/1.0\r\n";
 					$out .= "Host: {$this->host}\r\n";
 					$out .= "Referer: {$_M['config']['met_weburl']}\r\n";
 					$out .= "Content-type: application/x-www-form-urlencoded\r\n";

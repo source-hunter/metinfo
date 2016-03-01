@@ -10,6 +10,45 @@ load::sys_func('admin');
 class index extends admin {
 	public function doindex() {
 		global $_M;
+		$jsrand=str_replace('.','',$_M[config][metcms_v]).$_M[config][met_patch];
+		if ($_M['config']['met_agents_type'] >= 2) {
+			$met_admin_logo = "{$_M[url][site]}".str_replace('../', '', $_M['config']['met_agents_logo_index']);
+			$query = "SELECT * FROM {$_M['table']['config']} WHERE lang='{$_M['langset']}-metinfo'";
+			$result = DB::query($query);
+			while($list_config= DB::fetch_array($result)){
+				$lang_agents[$list_config['name']]=$list_config['value'];
+			}
+			
+			$_M['word']['metinfo'] = $lang_agents['met_agents_name'];
+		}
+		//
+
+		$toparr = get_adminnav();
+
+		if ($_M['config']['met_agents_type'] >= 2) {
+			$met_admin_logo = "{$_M[url][site]}".str_replace('../', '', $_M['config']['met_agents_logo_index']);
+			$query = "SELECT * FROM {$_M['table']['config']} WHERE lang='{$_M['langset']}-metinfo'";
+			$result = DB::query($query);
+			while($list_config= DB::fetch_array($result)){
+				$lang_agents[$list_config['name']]=$list_config['value'];
+			}
+			
+			$_M['word']['indexthanks'] = $lang_agents['met_agents_thanks'];
+			$_M['word']['metinfo'] = $lang_agents['met_agents_name'];
+			$_M['word']['copyright'] = $lang_agents['met_agents_copyright'];
+			$_M['word']['oginmetinfo'] = $lang_agents['met_agents_depict_login'];
+			
+			$met_agents_display = "style=\"display:none\"";
+		}else{
+			$met_admin_logo = "{$_M[url][ui]}images/logo.png";
+		}
+
+		//
+		
+		require $this->template('tem/index');
+	}
+	public function dohome() {
+		global $_M;
 		
 		/*获取统计数据*/
 		function statime($ymd,$day=''){
@@ -80,15 +119,9 @@ class index extends admin {
 		$query = "select * from {$_M['table']['admin_column']} where bigclass='44'";
 		$app_in = DB::get_all($query);
 		$privilege = background_privilege();
-		require $this->template('tem/index');
+		require $this->template('tem/home');
 	}
 	
-	public function doindex1() {
-		$authinfo = DB::get_all("SELECT * FROM met_templates where lang='tc'");
-		foreach($authinfo as $key=>$val){
-		echo "INSERT INTO met_templates VALUES('{$val[id]}','{$val[no]}','{$val[pos]}','{$val[no_order]}','{$val[type]}','{$val[style]}','{$val[selectd]}','{$val[name]}','{$val[value]}','{$val[defaultvalue]}','{$val[valueinfo]}','{$val[tips]}','{$val[lang]}');"."<br>";
-		}
-	}
 }
 
 # This program is an open source system, commercial use, please consciously to purchase commercial license.

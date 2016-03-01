@@ -133,7 +133,15 @@ function operation_column() {
 		}
 		$sql_id.= ")";
 		$query = "SELECT * from {$_M['table']['column']} WHERE lang = '{$_M['lang']}'{$sql_id} AND module < 100";
-		$admin_column = DB::get_all($query);
+		$admin_column_1 = DB::get_all($query);
+		$query = "SELECT * from {$_M['table']['column']} WHERE lang = '{$_M['lang']}' AND classtype!=1 AND module < 100";
+		$admin_column_2 = DB::get_all($query);
+		foreach($admin_column_1 as $key=>$val){
+			$admin_column[] = $val;
+		}
+		foreach($admin_column_2 as $key=>$val){
+			$admin_column[] = $val;
+		}
 	}
 	foreach($admin_column as $key=>$val){
 		$column[$val['id']] = $admin_column[$key];
@@ -361,9 +369,16 @@ function configsave($config, $have = '', $lang = ''){
 	$c = copykey($have, $config);
 	foreach($c as $key=>$val){
 		$value = mysqlcheck($have[$key]);
-		if(isset($_M['config'][$key])&&$value!=$_M['config'][$key]&&(isset($have[$key])or(isset($have[$key]) && !$have[$key]))){
-			$query = "update {$_M[table][config]} SET value = '{$value}' WHERE name = '{$key}' and (lang='{$_M[lang]}' or lang='metinfo')";
-			DB::query($query);
+		if($key == 'flash_10001' && $have['mobile']=='1') {
+			if(isset($_M['config'][$key])&&$value!=$_M['config'][$key]&&(isset($have[$key])or(isset($have[$key]) && !$have[$key]))){
+				$query = "update {$_M[table][config]} SET mobile_value = '{$value}' WHERE name = '{$key}' and (lang='{$_M[lang]}' or lang='metinfo')";
+				DB::query($query);
+			}
+		} else{
+			if(isset($_M['config'][$key])&&$value!=$_M['config'][$key]&&(isset($have[$key])or(isset($have[$key]) && !$have[$key]))){
+				$query = "update {$_M[table][config]} SET value = '{$value}' WHERE name = '{$key}' and (lang='{$_M[lang]}' or lang='metinfo')";
+				DB::query($query);
+			}
 		}
 	}
 }
@@ -402,6 +417,7 @@ function sitemap_robots($sitemaptype=0){
 	$robots=str_replace("\n\n","\n",$robots);
 	file_put_contents(PATH_WEB.'robots.txt',$robots);
 }
+
 # This program is an open source system, commercial use, please consciously to purchase commercial license.
 # Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
 ?>

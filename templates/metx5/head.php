@@ -5,7 +5,7 @@ echo <<<EOT
 -->
 {$methtml_head}
 <body>
-    <header>
+    <header data-waypointsok="{$lang_waypointsok}">
 		<section>
 			<div class="tem_inner tem_top">
 				<h2>{$met_seo}</h2>
@@ -49,13 +49,19 @@ echo <<<EOT
 EOT;
 $h=$classnow==10001?'1':'2';
 $navnow = $classnow==10001?'class="navdown"':'';
+if($met_logo){
 echo <<<EOT
 -->
 			<h{$h}>
 				<a href="{$index_url}" title="{$met_webname}">
-					<img src="{$met_logo}" alt="{$met_webname}" title="{$met_webname}" data-logo-offset="{$lang_LogoTop}|{$lang_LogoLeft}" />
+					<img src="{$met_logo}" alt="{$met_webname}" style="margin:{$lang_LogoTop}px 0px 0px {$lang_LogoLeft}px;" title="{$met_webname}" />
 				</a>
 			</h{$h}>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
 			<nav>
 <ul>
 	<li><a href="{$index_url}" title="{$lang_home}" {$navnow}>{$lang_home}</a></li>
@@ -150,7 +156,7 @@ EOT;
 if($met_flasharray[$classnow][type]==1){
 echo <<<EOT
 -->
-		<ul class="slides">
+		<ul class="slides" style="height:{$met_flasharray[$classnow][y]}px;"">
 <!--
 EOT;
 foreach($met_flashimg as $key=>$val){
@@ -166,7 +172,7 @@ echo <<<EOT
 		</ul>
 <!--
 EOT;
-}elseif(!$id||$class_list[$classnow][module]==1){
+}else{
 $methtml_flash=metlabel_flash();
 echo <<<EOT
 -->	

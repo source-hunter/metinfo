@@ -7,6 +7,10 @@ require_once '../global.func.php';
 require_once ROOTPATH.'public/php/searchhtml.inc.php';
 $backurl="../content/message/editor.php?anyid={$anyid}&lang={$lang}&class1={$class1}&id={$id}&customerid={$customerid}";
 if($action=="editor"){
+	$useinfo = str_replace('<script>','',$useinfo);
+	$message_info = str_replace('<script>','',$message_info);
+	$useinfo = str_replace('</script>','',$useinfo);
+	$message_info = str_replace('</script>','',$message_info);
 	$query = "update $met_message SET
 						  useinfo            = '$useinfo',
 						  readok             = '$readok',

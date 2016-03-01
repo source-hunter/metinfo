@@ -1,12 +1,6 @@
 define(function(require, exports, module) {
 
-	if(met_mobile=='mobile'){
-			require('effects/amazeui/css/font.css');
-		$ = require('effects/amazeui/js/jquery.min');
-			require('effects/amazeui/js/amazeui.min');
-	}else{
-		var $ = require('jquery');
-	}
+	var $ = require('jquery');
 	window.jQuery = window.$ = $;
 	
 	/*语言文字*/
@@ -34,18 +28,6 @@ define(function(require, exports, module) {
 			var w = 1/h*100;
 			w = w.toFixed(5)+'%';
 			ld.css({"width":w});
-			/*
-			var i =0,l=1;
-			ld.each(function(){//等高
-				i++;
-				$(this).find('h1,h2,h3,h4,h5,h6').addClass("met_denggao_"+l);
-				if(i==h){
-					metHeight($(".met_denggao_"+l));
-					i=0;
-					l++;
-				}
-			});
-			*/
 		}else{
 			listpun(zd,ld,min,h-1);
 		}

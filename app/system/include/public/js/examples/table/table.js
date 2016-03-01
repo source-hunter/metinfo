@@ -32,8 +32,8 @@ define(function(require, exports, module) {
 			"info": true, //左下角条数信息
 			"lengthChange": false,//让用户可以下拉无刷新设置显示条数
 			"pageLength":pageLength,//默认每一页的显示数量
-			"paging": true,  //分页功能
-			"processing": true, //
+			//"paging": true,  //分页功能
+			//"processing": true, //
 			"serverSide": true, //ajax服务开启
 			//"stateSave": true,//记录当前页
 			"ajax": {
@@ -63,7 +63,6 @@ define(function(require, exports, module) {
 			"initComplete": function(settings, json) { //加载完成后
 				//alert(JSON.stringify(json));
 				common.defaultoption();
-				common.ifreme_methei();
 			},
 			"columnDefs": cjson
 		});
@@ -106,7 +105,7 @@ define(function(require, exports, module) {
 		})
 	
 		//按钮提交表单
-		$(document).on('click',".ui-table input[type='submit']",function(){
+		$(document).on('click',".ui-table *[type='submit']",function(){
 			var nm = $(this).attr('name'),ip=$("input[name='submit_type']");
 			if(ip.length>0){
 				ip.val(nm);
@@ -190,7 +189,17 @@ define(function(require, exports, module) {
 		
 		//表格控件事件
 		$(document).on( 'init.dt', function ( e, settings ) {
-				
+		
+			var page = $.cookie('tablepage');
+			if(page){
+				var y = page.split('|'),u = metn+','+metc+','+meta;
+				if(y[1]==u){
+					table.page(parseInt(y[0])).draw( false );
+				}else{
+					$.cookie('tablepage',null);
+				}
+			}
+			
 			var api = new $.fn.dataTable.Api( settings );
 
 			var show = function ( str ) {
@@ -201,7 +210,7 @@ define(function(require, exports, module) {
 				
 				//alert(str);
 				table_check();
-				var cklist = $("select[data-checked]");
+				var cklist = $(".ui-table td select[data-checked]");
 				if(cklist.length>0){
 					cklist.each(function(){
 						var v = $(this).attr('data-checked');
@@ -212,7 +221,7 @@ define(function(require, exports, module) {
 						}
 					});
 				}
-				common.defaultoption();
+				//common.defaultoption();
 				modifytick();
 			};
 
@@ -227,8 +236,10 @@ define(function(require, exports, module) {
 				show( json );
 			} );
 			
-			api.on( 'draw.dt', function ( e, settings, json ) { //点击分页，数据重载完成后，等高
+			api.on( 'draw.dt', function ( e, settings, json ) { 
 				show( json );
+				var info = table.page.info();
+				$.cookie('tablepage',info.page+'|'+metn+','+metc+','+meta);
 			} );
 			
 		} );

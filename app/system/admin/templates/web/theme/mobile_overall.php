@@ -52,6 +52,16 @@ EOT;
 }
 echo <<<EOT
 -->	
+	<h3 class="v52fmbx_hr">LOGO</h3>
+	<dl>
+		<dt>{$_M[word][upfiletips9]}</dt>
+		<dd class="ftype_upload">
+			<div class="fbox">
+				<input name="met_wap_logo" type="text" data-upload-type="doupimg" class="text" value="{$_M['config']['met_wap_logo']}">
+			</div>
+			<span class="tips">为空则调用电脑版LOGO，推荐尺寸：130*50 (像素)</span>
+		</dd>
+	</dl>
 <!--
 EOT;
 require $this->template('tem/zujian');

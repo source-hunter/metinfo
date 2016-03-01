@@ -80,48 +80,17 @@ function metHeight(group) {
 	group.height(tallest);
 }
 function ifreme_methei(mh) {
+/*
 	mh=mh?mh:0;
 	var m = $("body").height();
 	var l = $('.metcms_cont_left', parent.document).height()-65;
 	l = m < l ? l : m;
 	l = l < mh ? mh : l;
 	$(window.parent.document).find("#main").height(l);
+*/
 }
 function met_ckeditor(depthm, name, type) {
-	$("textarea[name='" + name + "']").before('<div id="linzai_' + name + '">' + user_msg['jsx5'] + '</div>');
-	var wi = $(".ckeditormetbox");
-	var width = '';
-	if (wi.length > 0) {
-		width = wi.width();
-	}
-	var config = {};
-	config.filebrowserBrowseUrl = depth + '../ckfinder/ckfinder.html';
-	config.filebrowserImageBrowseUrl = depth + '../ckfinder/ckfinder.html?Type=Images';
-	config.filebrowserFlashBrowseUrl = depth + '../ckfinder/ckfinder.html?Type=Flash';
-	config.filebrowserUploadUrl = depth + '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
-	config.filebrowserImageUploadUrl = depth + '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
-	config.filebrowserFlashUploadUrl = depth + '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
-	if (type == 1) {
-		config.toolbar_Full = [['FontSize', 'Bold', 'TextColor', 'Link', 'Unlink', 'Image', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Source']];
-		config.height = 160;
-		config.width = '80%';
-		config.enterMode=2;
-	} else if (type == 2) {
-		config.toolbar_Full = [['FontSize', 'Bold', 'TextColor', 'Link', 'Unlink', 'Image', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Source']];
-		config.height = 100;
-		config.width = '80%';
-		config.enterMode=2;
-	} else {
-		config.height = 400;
-		config.width = width;
-	}
-	CKEDITOR.replace(name, config);
-	CKEDITOR.on('instanceReady',
-	function() {
-		$('#linzai_' + name).remove();
-		ifreme_methei(630);
-		wi.find('iframe').css('width', width + 'px');
-	});
+
 }
 function changelocation_contents(locationid, classtype) {
 	changelocation1(locationid, classtype);
@@ -1342,7 +1311,7 @@ function adddisplayimg(my) {
 			at.after(data);
 			at.next('.newlist').hide();
 			var mt = '';
-			if(jQuery.browser.msie&&parseInt($.browser.version)==6)mt = 135;
+			//if(jQuery.browser.msie&&parseInt($.browser.version)==6)mt = 135;
 			expandtan(at.next('.newlist'),mt);
 			at.next('.newlist').find("input[type='text']").eq(0).focus();
 			$('#loadtxt').empty();

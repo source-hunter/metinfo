@@ -35,9 +35,9 @@ $show['keywords']=$met_keywords;
 require_once 'public/php/methtml.inc.php';
 if($met_indexskin=="" or (!file_exists("templates/".$met_skin_user."/".$met_indexskin.".".$dataoptimize_html)))$met_indexskin='index';
 if($map&&$met_mobileok&&is_numeric($uid)) {
-	if($wap_skin_user == 'metx5_mobile') {
+	if($wap_skin_user != 'wap001' && $wap_skin_user != 'mobile_001' && $wap_skin_user != 'mobile_002' && $wap_skin_user != 'mobile_003' && $wap_skin_user != 'mobile_004' && $wap_skin_user != 'mobile_005' && $wap_skin_user != 'mobile_006') {
 		$met_indexskin = 'map';
-	}
+	} 
 }
 include template($met_indexskin);
 footer();

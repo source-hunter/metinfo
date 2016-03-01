@@ -8,6 +8,7 @@ if($lang_about_img1)$tem_aboutimg[1]  = $lang_about_img1;
 if($lang_about_img2)$tem_aboutimg[2]  = $lang_about_img2;
 if($lang_about_img3)$tem_aboutimg[3]  = $lang_about_img3;
 $txtwd100 = $tem_aboutimg||$lang_about_video?'':'txtwd100';
+$tem_wp1 = $lang_waypointsok==1?'tem_wp1':'';
 echo <<<EOT
 -->
 <section class="tem_index_about">
@@ -18,7 +19,7 @@ echo <<<EOT
 				<p></p>
 			</span>
 		</h3>
-		<div class="tem_index_about_cont tem_wp1">
+		<div class="tem_index_about_cont {$tem_wp1}">
 			<div class="tem_index_about_txt {$txtwd100}">
 				<div class="met_editor">
 					{$lang_about_content}<div class="met_clear"></div>

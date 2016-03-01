@@ -27,7 +27,7 @@ class member extends admin {
 		global $_M;
 		nav::set_nav(1, $_M['word']['account_information'], $_M['url']['own_form'].'&a=doinformation&anyid='.$_M['form']['anyid']);
 		nav::set_nav(2, $_M['word']['login_password_changing'], $_M['url']['own_form'].'&a=doinformation_1&anyid='.$_M['form']['anyid']);
-		nav::set_nav(3, $_M['word']['password_changing'], $_M['url']['own_form'].'&a=doinformation_2&anyid='.$_M['form']['anyid']);
+		//nav::set_nav(3, $_M['word']['password_changing'], $_M['url']['own_form'].'&a=doinformation_2&anyid='.$_M['form']['anyid']);
 	}
 	
 	public function doinformation() {
@@ -114,7 +114,8 @@ class member extends admin {
 		global $_M;
 		$user_id	= $_M['form']['user_id'];
 		$curl = load::sys_class('curl', 'new'); 
-		$curl -> set('file', "index.php?n=platform&c=platform&a=doverifica&user_id={$user_id}"); 
+		$curl -> set('host', 'http://account.metinfo.cn/');
+		$curl -> set('file', "index.php?n=register&c=register&a=doappstoreuserok&username={$user_id}"); 
 		$post = array('post' => ''); 
 		$info = $curl -> curl_post($post); 
 		echo $info;

@@ -17,8 +17,8 @@ echo <<<EOT
 		</dd>
 	</dl>
 	<dl>
-		<dd class="banner_set_more">
-			<a href="{$_M[url][site_admin]}interface/flash/flash.php?anyid=18&lang={$_M[lang]}" target="_blank">{$_M['word']['click_here_settings']}<br/>{$_M['word']['defined_separately']}</a>
+		<dd>
+			<a href="{$_M[url][site_admin]}interface/flash/flash.php?anyid=18&lang={$_M[lang]}" target="_blank" class="ui-addlist" style="margin-left:70px;">更多自定义设置（原Banner设置）</a>
 		</dd>
 	</dl>
 <!--

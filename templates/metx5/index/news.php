@@ -24,6 +24,7 @@ $tem_news[4]['name']   = $lang_news_list4_title?$lang_news_list4_title:$tem_news
 $tem_news[4]['imgurl'] = $lang_news_list4_img?$lang_news_list4_img:"{$img_url}newlistbg4.jpg";
 $tem_news[4]['list']   = methtml_getarray($lang_news_list4_id,$lang_news_list4_type,'','',$lang_news_num);
 }
+$tem_wp3 = $lang_waypointsok==1?'tem_wp3':'';
 echo <<<EOT
 -->
 <section class="tem_index_news {$into}">
@@ -60,7 +61,7 @@ $i++;
 $none = $i>1?'met_none':'';
 echo <<<EOT
 --> 
-		<ul class="tem_index_news_list tem_wp3 {$none}">
+		<ul class="tem_index_news_list {$tem_wp3} {$none}">
 <!--
 EOT;
 $i=0;

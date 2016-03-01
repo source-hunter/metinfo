@@ -52,8 +52,13 @@ class seo extends admin {
 		$configlist = array();
 		$configlist[] = 'met_pseudo';
 		configsave($configlist);/*保存系统配置*/
-		$query = "update {$_M['table']['lang']} SET met_webhtm = '3' where lang='{$_M['lang']}'";
-		DB::query($query);
+		if($_M['form']['met_pseudo']){
+			$query = "update {$_M['table']['lang']} SET met_webhtm = '3' where lang='{$_M['lang']}'";
+			DB::query($query);
+		}else{
+			$query = "update {$_M['table']['lang']} SET met_webhtm = '0' where lang='{$_M['lang']}'";
+			DB::query($query);
+		}
 		/*生成规则文件*/
 		if($_M['form']['met_pseudo']||$_M['form']['pseudo_download']){
 			if(!$_M['form']['pseudo_download']){
@@ -284,7 +289,10 @@ class seo extends admin {
 		$configlist[] = 'met_sitemap_lang';
 		$configlist[] = 'met_sitemap_xml';
 		$configlist[] = 'met_sitemap_txt';
-		
+		$_M['form']['met_sitemap_not1'] = $_M['form']['met_sitemap_not1'] ? $_M['form']['met_sitemap_not1'] : 0;
+		$_M['form']['met_sitemap_not2'] = $_M['form']['met_sitemap_not2'] ? $_M['form']['met_sitemap_not2'] : 0;
+		$_M['form']['met_sitemap_xml'] = $_M['form']['met_sitemap_xml'] ? $_M['form']['met_sitemap_xml'] : 0;
+		$_M['form']['met_sitemap_txt'] = $_M['form']['met_sitemap_txt'] ? $_M['form']['met_sitemap_txt'] : 0;
 		configsave($configlist);/*保存系统配置*/
 		
 		load::sys_func('file');

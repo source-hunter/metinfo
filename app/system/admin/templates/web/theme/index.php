@@ -9,6 +9,12 @@ $mobcss = $_M[form][mobile]?'class="mobileiframe"':'';
 echo <<<EOT
 -->
 <link rel="stylesheet" href="{$_M[url][own_tem]}css/metinfo.css?{$jsrand}" />
+<script>
+var ownlangtxt = {
+	"skinusenow":"{$_M[word][skinusenow]}",
+	"skinused":"{$_M[word][skinused]}"
+};
+</script>
 <div class="theme">
 	<div class="theme-left">
 		<ul class="tabs">

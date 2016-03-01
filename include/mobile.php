@@ -2,6 +2,7 @@
 # MetInfo Enterprise Content Management System 
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
 require_once 'mobile_detect.php';
+if($pcok=='deleted')$pcok='';
 if($pcok){
 	if($pcok!='wap'&&$pcok!='pc'){
 		header("location:404.html");die;
@@ -152,7 +153,7 @@ if($pcok!='pc'){
 		$met_footother ='';
 		$met_foottext ='';
 		
-		if(!$metinfover){
+		if($metinfover){
 		$wap_footertext.="
 		<script src=\"../public\ui\mobile\js\ini.js\" type=\"text/javascript\"></script>\n
 		<link rel=\"stylesheet\" type=\"text/css\" href=\"../public/ui/v1/js/effects/video-js/video-js.css\" />\n

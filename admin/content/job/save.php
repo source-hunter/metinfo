@@ -25,8 +25,6 @@ if($action=="add"){
 	}
 	if(!$description){
 		$description=strip_tags($content);
-		$description=str_replace("&nbsp;",'',$description); 
-		$description=str_replace(" ","",$description);
 		$description=str_replace("\n", '', $description); 
 		$description=str_replace("\r", '', $description); 
 		$description=str_replace("\t", '', $description);

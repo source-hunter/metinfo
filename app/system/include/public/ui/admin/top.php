@@ -3,6 +3,7 @@
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
 echo <<<EOT
 -->
+<div class="metappcontentbox">
 <!--
 EOT;
 if($_M['form']['turnovertext']){

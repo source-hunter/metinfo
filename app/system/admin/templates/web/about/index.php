@@ -5,20 +5,37 @@
 defined('IN_MET') or exit('No permission');
 
 require $this->template('ui/head');
+
+if($_M[config][met_agents_type] < 2) {
+	$copyright_info = $_M[word][copyright];
+	$metinfo_info = $_M[word][metinfo];
+	$metinfo_ver = $_M[config][metcms_v];
+} else {
+	$copyright_info = $_M['word'][copyright];
+	$metinfo_info = $_M['word'][metinfo];
+	$metinfo_ver = $_M[config][metcms_v];
+}
 echo <<<EOT
 -->
+<script>
+var ownlangtxt = {
+	"be_updated":"{$_M[word][be_updated]}",
+	"checkupdate":"{$_M[word][checkupdate]}",
+	"latest_version":"{$_M[word][latest_version]}"
+};
+</script>
 <div class="v52fmbx" data-metcms_v="{$_M[config][metcms_v]}" data-patch="{$_M[config][met_patch]}">
 	<h3 class="v52fmbx_hr">{$_M['word']['program_information']}</h3>
 	<dl>
 		<dt>{$_M['word']['upfiletips43']}</dt>
 		<dd>
-			<span class="newpatch">{$_M['word']['get_in']}...<span class='metcms_upload_download'></span></span>
+			<span class="newpatch" data-auto="{$data_auto}">{$_M['word']['get_in']}...<span class='metcms_upload_download'></span></span>
 		</dd>
 	</dl>
 	<dl>
 		<dt>{$_M['word']['upfiletips39']}</dt>
 		<dd>
-			{$_M[word][metinfo]}&nbsp;&nbsp;&nbsp;&nbsp;
+			{$metinfo_info}&nbsp;&nbsp;&nbsp;&nbsp;
 			
 <span class="bdsharebuttonbox" 
 			data-bdUrl="http://www.metinfo.cn/web/metcms.htm" 
@@ -33,7 +50,7 @@ echo <<<EOT
 	<dl>
 		<dt>{$_M['word']['current_version']}</dt>
 		<dd>
-			{$_M[config][metcms_v]}
+			{$metinfo_ver}
 		</dd>
 	</dl>
 	<dl {$met_agents_display}>
@@ -45,7 +62,7 @@ echo <<<EOT
 	<dl>
 		<dt>{$_M['word']['reserved']}</dt>
 		<dd>
-			{$_M[word][copyright]}
+			{$copyright_info}
 		</dd>
 	</dl>
 	<dl {$met_agents_display}>
@@ -81,6 +98,7 @@ echo <<<EOT
 		<dt>MySQL{$_M['word']['the_version']}</dt>
 		<dd>{$mysql}</dd>
 	</dl>
+	<!--
 	<h3 class="v52fmbx_hr" {$met_agents_display}>{$_M['word']['special_thanks']}</h3>
 	<dl {$met_agents_display}>
 		<dd>
@@ -89,6 +107,7 @@ echo <<<EOT
 			月明影
 		</dd>
 	</dl>
+	-->
 </div>
 <div class="remodal met_uplaod_remodal" data-remodal-id="modal"><div class="temset_box"></div></div>
 <!--

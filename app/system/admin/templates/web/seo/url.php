@@ -11,13 +11,18 @@ echo <<<EOT
 <div class="v52fmbx">
 	<h3 class="v52fmbx_hr">{$_M['word']['unitytxt_1']}</h3>
 	<dl>
-		<dt>URL{$_M['word']['sys_static']}</dt>
+		<dt>{$_M['word']['sys_static']}</dt>
 		<dd class="ftype_radio">
 			<div class="fbox">
 				<label><input type="radio" name="met_pseudo" value="1" data-checked="{$_M[config][met_pseudo]}" />{$_M[word][open]}</label>
 				<label><input type="radio" name="met_pseudo" value="0" />{$_M[word][close]}</label>
 			</div>
 			<span class="tips">{$_M['word']['simplify_front_desk']}URL{$_M['word']['and_to']}html{$_M['word']['sys_end']}</span>
+		</dd>
+	</dl>
+	<dl>
+		<dd class="ftype_description">
+			{$_M[word][mod_rewrite_column]}
 		</dd>
 	</dl>
 	<h3 class="v52fmbx_hr">URL{$_M['word']['structure_mode']}</h3>
@@ -58,7 +63,7 @@ echo <<<EOT
 		<dt>{$_M['word']['indexhtmset']}</dt>
 		<dd>
 			<div class="fbox">
-			<a href="{$_M[url][siteadmin]}seo/sethtm.php?anyid={$_M[form][anyid]}&lang={$_M[lang]}" target="_blank">{$_M['word']['static_page']}</a>
+			<a href="{$_M[url][siteadmin]}seo/sethtm.php?anyid={$_M[form][anyid]}&lang={$_M[lang]}">{$_M['word']['static_page']}</a>
 			<span class="tips" style="padding-left:10px;">{$_M['word']['stations_recommended']}</span>
 			</div>
 		</dd>

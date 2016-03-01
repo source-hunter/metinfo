@@ -33,11 +33,12 @@ while($list= $db->fetch_array($result)){
 		}
 	}	
 	$list[readok] = $list[readok] ? $lang_yes : $lang_no;
+	
 	$message_list[]=$list;
 }
-$messagesName1=$db->get_one("select value from $met_config where name='met_message_fd_class' and lang='$lang'");
-$messagesName2=$db->get_one("select value from $met_config where name='met_message_fd_sms' and lang='$lang'");
-$messagesName3=$db->get_one("select value from $met_config where name='met_message_fd_email' and lang='$lang'");
+$messagesName1=$db->get_one("select * from $met_config where name='met_message_fd_class' and lang='$lang'");
+$messagesName2=$db->get_one("select * from $met_config where name='met_message_fd_sms' and lang='$lang'");
+$messagesName3=$db->get_one("select * from $met_config where name='met_message_fd_email' and lang='$lang'");
 $query = "SELECT * FROM {$met_message} {$serch_sql} {$order_sql} LIMIT {$from_record}, {$list_num}";
 $result1 = $db->query($query);
 while($list1= $db->fetch_array($result1)){

@@ -49,7 +49,7 @@ $pk=1;
 if($type==2 && $i==$module)$pk=0;
 if($type==3 && $i!=$module)$pk=0;
 if($pk){
-if(count($met_module[$j])==0 or ($j<=5 || $j==8)){
+if((count($met_module[$j])==0 or ($j<=5 || $j==8)) && $j != 100 && $j != 101){
 		$newlist.= "<option value='$j'>{$langmod1}</option>";
 }}}
 		$newlist.= "<option value='999'>{$lang_modout}</option>";

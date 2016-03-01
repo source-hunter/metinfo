@@ -25,7 +25,7 @@ header section{border-bottom:1px solid #e7e8ed;background:#f7f8fa;}
 .tem_top_nav dl dd a{display:block;height:35px;line-height:35px;}
 .tem_top_nav div.line{float:right;width:30px;color:#eee;text-align:center;}
 .tem_head{min-height:100px;}
-.tem_head h1 img,.tem_head h2 img{position:relative;z-index:999;visibility:hidden;font-size:0;}
+.tem_head h1 img,.tem_head h2 img{position:relative;z-index:999;font-size:0;}
 header h1{display:inline;}
 .tem_head nav{position:absolute;top:50%;right:0;margin-top:-17px;height:34px;line-height:34px;}
 .tem_head nav ul{margin:0;padding:0;list-style:none;}
@@ -46,9 +46,8 @@ header h1{display:inline;}
 .tem_head nav ul li dl.tem_pronoaw dd div h3{margin-bottom:5px;border-bottom:1px solid #888;font-weight:normal;}
 .tem_head nav ul li dl.tem_pronoaw dd div p a{margin:0;}
 .tem_banner{position:relative;overflow:hidden;background:#fafafa;text-align:center;font-size:0;}
-.tem_banner li{list-style:none;}
-.tem_banner ul{ visibility:hidden;}
-.tem_banner ul li{float:left;background-position:center center;background-repeat:no-repeat;}
+.tem_banner ul { overflow:hidden; }
+.tem_banner ul li{float:left;width:100%;list-style:none;background-position:50% 50%;background-repeat:no-repeat;}
 .tem_banner ul li a{display:block;width:100%;height:100%;}
 .tem_banner ul li img{ max-width:100%; height:auto;}
 .tem_banner .flex-control-nav{position:absolute;right:0;bottom:20px;left:0;text-align:center;}
@@ -115,7 +114,6 @@ header h1{display:inline;}
 .tem_index_news_list li dl:hover{background:#f7f8fa;}
 .tem_index_news_list .tem_index_more{float:none;width:200px;text-align:center;}
 .tem_index_case{padding:50px 0 80px;}
-.tem_index_case_list ul.slides{ visibility:hidden;}
 .tem_index_case_list ul.slides li{float:left;list-style:none;}
 .tem_index_case_list .tem_list{float:left;width:25%;}
 .tem_index_case_list .tem_list dt{ text-align:center;font-size:0;}

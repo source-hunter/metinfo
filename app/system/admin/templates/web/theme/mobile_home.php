@@ -8,6 +8,11 @@ echo <<<EOT
 				<div class="v52fmbx">
 	<h3 class="v52fmbx_hr">{$_M['word']['larger_wheel']}</h3>
 	<dl>
+	<dd class="ftype_description" style="padding:10px;">
+		图片建议尺寸：500*500 (像素)
+	</dd>
+	</dl>
+	<dl>
 		<dd class="bannerlist index_bannerlist ftype_input">
 			<input type="hidden" name="indexbannerlist" value="" />
 			<textarea name="bannerlist_li_html" style="display:none;">

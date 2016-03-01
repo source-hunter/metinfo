@@ -64,6 +64,16 @@ EOT;
 }
 echo <<<EOT
 -->	
+	<h3 class="v52fmbx_hr">LOGO</h3>
+	<dl>
+		<dt>{$_M[word][upfiletips9]}</dt>
+		<dd class="ftype_upload">
+			<div class="fbox">
+				<input name="met_logo" type="text" data-upload-type="doupimg" class="text" value="{$_M['config']['met_logo']}">
+			</div>
+			<span class="tips">{$_M['word']['suggested_size']} 180 * 60 ({$_M['word']['setimgPixel']})</span>
+		</dd>
+	</dl>
 <!--
 EOT;
 require $this->template('tem/zujian');

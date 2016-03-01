@@ -4,31 +4,20 @@ define(function(require, exports, module) {
 	var $ = require('jquery');
 	window.jQuery = window.$ = $;
 	
-	/*cookie*/
-	require('epl/include/cookie');
-		
-	/*全局变量*/
-	window.adminlang = $.cookie('langset');
-	window.own_form  = $("#metcmsbox").attr("data-own_form");
-	window.own_name  = $("#metcmsbox").attr("data-own_name");
-	window.apppath   = $("#metcmsbox").attr("data-apppath");
-	window.adminurl  = $("#metcmsbox").attr("data-adminurl");
-	window.tem       = $("#metcmsbox").attr("data-tem");
-	
 	/*增加对$.browser.msie的支持*/
 	require('epl/include/jquery-migrate-1.2.1.min');
 	
 	function AssemblyLoad(dom){
 		/*上传组件*/
 		if(dom.find('.ftype_upload .fbox input').length>0){
-			require.async('epl/uploadify/upload',function(a){
+			require.async('epl/upload/own',function(a){
 				a.func(dom);
 			});
 		}
 		
 		/*编辑器*/
 		if(dom.find('.ftype_ckeditor .fbox textarea').length>0){
-			require.async('epl/ckeditor/ckeditor',function(a){
+			require.async('epl/editor/own',function(a){
 				a.func(dom);
 			});
 		}
@@ -79,37 +68,6 @@ define(function(require, exports, module) {
 	/*加载组件*/
 	exports.AssemblyLoad = function(dom){
 		AssemblyLoad(dom);
-	}
-	
-	/*loading*/
-	exports.loading = function(txt){
-		require('epl/loading/css/iosOverlay.css');
-		require('epl/loading/iosOverlay');
-		require('epl/loading/spin.min');
-		var opts = {
-			lines: 13, // The number of lines to draw
-			length: 11, // The length of each line
-			width: 5, // The line thickness
-			radius: 17, // The radius of the inner circle
-			corners: 1, // Corner roundness (0..1)
-			rotate: 0, // The rotation offset
-			color: '#FFF', // #rgb or #rrggbb
-			speed: 1, // Rounds per second
-			trail: 60, // Afterglow percentage
-			shadow: false, // Whether to render a shadow
-			hwaccel: false, // Whether to use hardware acceleration
-			className: 'spinner', // The CSS class to assign to the spinner
-			zIndex: 2e9, // The z-index (defaults to 2000000000)
-			top: 'auto', // Top position relative to parent in px
-			left: 'auto' // Left position relative to parent in px
-		};
-		var target = document.createElement("div");
-		document.body.appendChild(target);
-		var spinner = new Spinner(opts).spin(target);
-		window.overlay = iosOverlay({
-			text: txt,
-			spinner: spinner
-		});
 	}
 	
 	/*默认选中*/
@@ -236,19 +194,9 @@ define(function(require, exports, module) {
 	exports.ifreme_methei = function(mh){ }
 	
 	/*语言文字*/
+		
 	exports.langtxt = function(){
-		var bol = '';
-			$.ajax({
-				type: "GET",
-				async:false,
-				cache: false,
-				dataType: "json",
-				url: siteurl + 'cache/lang_json_admin_'+adminlang+'.php',
-				success: function(json){
-					bol = json;
-				}
-			});
-		return bol;
+		return langtxt;
 	}
 	
 });

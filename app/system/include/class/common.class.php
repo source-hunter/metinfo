@@ -8,6 +8,7 @@ load::sys_func('common');
 load::sys_func('power');
 load::sys_func('array');
 load::sys_class('mysql');
+load::sys_class('cache');
 
 /**
  * 系统一级基类
@@ -245,7 +246,7 @@ class common {
 			}
 		}
 	}
-	
+	  
 	/**
 	  * 销毁
 	  */

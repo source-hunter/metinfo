@@ -72,11 +72,11 @@ echo <<<EOT
 		</dl>
 		</div>
 		<dl>
-			<dt>{$_M['word']['pay_password']}{$_M['word']['marks']}</dt>
+			<dt>{$_M['word']['sys_password']}{$_M['word']['marks']}</dt>
 			<dd class="ftype_input">
 				<div class="fbox">
 					<input type="text" value="" style="display:none" />
-					<input type="password" name="user_passpay" value="" placeholder="{$_M['word']['password_input']}" data-required="1" style="width:100px;">
+					<input type="password" name="user_passpay" value="" placeholder="{$_M['word']['memberjstxt2']}" data-required="1" style="width:100px;">
 				</div>
 			</dd>
 		</dl>
@@ -217,7 +217,6 @@ echo <<<EOT
 			</div>
 			</div>
 		</div>
-	
 
 		<div class="appdetail_develp">
 			<h3 class="v52fmbx_hr">{$_M['word']['name_developers']}</h3>

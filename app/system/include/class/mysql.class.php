@@ -107,8 +107,7 @@ class DB {
 		if(!($query = $func($sql, self::$link))) {
 			if(in_array(self::errno(), array(2006, 2013)) && substr($type, 0, 5) != 'RETRY') {
 				self::close();
-				global $config_db;
-				$db_settings = parse_ini_file("$config_db");
+				$db_settings = parse_ini_file(PATH_WEB.'config/config_db.php');
 	            @extract($db_settings);
 				self::dbconn($con_db_host,$con_db_id,$con_db_pass, $con_db_name = '',$pconnect);
 				self::query($sql, 'RETRY'.$type);

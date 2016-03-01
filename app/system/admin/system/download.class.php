@@ -222,7 +222,7 @@ class download extends admin {
 			$this-> add_power($this->info['no']);
 			$getapp = load::mod_class('myapp/class/getapp', 'new');
 			$app = $getapp->get_oneapp($this->info['no']);
-			$html = "<a target=\"_blank\" href=\"{$app['url']}\">{$_M['word']['dlapptips5']}</a>";
+			$html = "<a href=\"{$app['url']}\">{$_M['word']['dlapptips5']}</a>";
 			return $this->suc_data('end', 0, $html); 
 		}
 		if ($this->info['type'] == 'tem') {
@@ -293,15 +293,16 @@ class download extends admin {
 			$jurisdiction = '1';
 		}
 		return "
-		<div class='v52fmbx'>
+		<div class='v52fmbx' style='border-bottom: none;'>
 			<h3 class='v52fmbx_hr'>{$title}</h3>
 			<dl>
 				<dd class='ftype_input'>
 					{$html}
 				</dd>
 			</dl>
+			<br>
 			<dl class='noborder'>
-				<dd>
+				<dd style='margin-left: 200px;'>
 					<input id='olupdate_type' name='olupdate_type' type='hidden' value='{$jurisdiction}' />
 					<input type='submit' name='remodal-cancel' value='{$cancel}' class='submit'>
 					<input type='submit' name='remodal-confirm' value='{$confirm}' class='submit'>
@@ -313,7 +314,7 @@ class download extends admin {
 	protected function del_dl_file() {
 		global $_M;
 		if($_M['config']['met_adminfile'] && $this->info['type'] && $this->info['no']){
-				deldir(PATH_WEB.$_M['config']['met_adminfile'].'/update/'.$this->info['type'].'/'.$this->info['no'].'/');
+				//deldir(PATH_WEB.$_M['config']['met_adminfile'].'/update/'.$this->info['type'].'/'.$this->info['no'].'/');
 		}
 	}
 	

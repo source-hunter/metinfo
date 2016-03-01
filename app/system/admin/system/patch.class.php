@@ -24,7 +24,7 @@ class patch extends admin {
 					$dlfile = load::sys_class('dlfile', 'new');
 					$copydir = str_replace(':/admin/', ':/'.$_M['config']['met_adminfile'].'/', ':/'.$val);
 					$copydir = str_replace(':/', '', $copydir);
-					$re = $dlfile->dlfile('file_v'.$_M['config']['metcms_v'].'/'.$val, PATH_WEB.$copydir, 'metcms');
+					$re = $dlfile->dlfile('file/v'.$_M['config']['metcms_v'].'/file/'.$val, PATH_WEB.$copydir, 'metcms');
 					if($re != 1){
 						break;
 					}

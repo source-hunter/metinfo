@@ -3,6 +3,40 @@
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
 $depth='../';
 require_once $depth.'../login/login_check.php';
+if($action == 'html'){
+	$later_news=$db->get_one("select * from $met_product order by updatetime DESC limit 0,1");
+	$id=$later_news[id];
+	$class1=$later_news[class1];
+	$class2=$later_news[class2];
+	$class3=$later_news[class3];
+	$filename=$later_news[filename];
+	$addtime=$later_news[addtime];
+	$htmjs = contenthtm($class1,$id,'showproduct',$filename,0,'',$addtime).'$|$';
+	foreach($met_classindex[3] as $key=>$val){
+		if($val['id'] == $class1){
+			$htmjs.=classhtm($val[id],0,0,1,0,$htmpack).'$|$';
+			if($val['releclass']){
+				foreach($met_class3[$val[id]] as $key=>$val3){
+					$htmjs.=classhtm($val[id],$val3[id],0,1,2,$htmpack).'$|$';
+				}
+			}
+			else{
+				foreach($met_class22[$val[id]] as $key=>$val2){
+					$htmjs.=classhtm($val[id],$val2[id],0,1,2,$htmpack).'$|$';
+					foreach($met_class3[$val2[id]] as $key=>$val3){
+						$htmjs.=classhtm($val[id],$val2[id],$val3[id],1,3,$htmpack).'$|$';
+					}
+				}
+			}
+		}
+	}
+	$htmjs.= indexhtm().'$|$';	
+	
+	$turl  ="../index.php?lang=$lang&anyid=29&n=content&c=product_admin&a=doindex&class1=$class1&class2=$class2&class3=$class3";
+	$gent='../../sitemap/index.php?lang='.$lang.'&htmsitemap='.$met_member_force;
+	metsave($turl,'',$depth,$htmjs,$gent);
+	die();
+}
 $filename=namefilter($filename);
 $filenameold=namefilter($filenameold);
 if($filename_okno){
@@ -70,8 +104,6 @@ if($metinfover)$metadmin[productother] = $met_productTabok-1;
 if($action=="add"){
 	if(!$description){
 		$description=strip_tags($content);
-		$description=str_replace(" ","",$description);
-		$description=str_replace("&nbsp;",'',$description); 
 		$description=str_replace("\n",'',$description); 
 		$description=str_replace("\r",'',$description); 
 		$description=str_replace("\t",'',$description);
@@ -161,17 +193,13 @@ if($action=="add"){
 if($description){
 	$description_type=$db->get_one("select * from $met_product where id='$id'");
 	$description1=strip_tags($description_type[content]);
-	$description1=str_replace("&nbsp;",'',$description1); 
-	$description1=str_replace(" ","",$description1);
 	$description1=str_replace("\n", '', $description1); 
 	$description1=str_replace("\r", '', $description1); 
 	$description1=str_replace("\t", '', $description1);
 	$description1=mb_substr($description1,0,200,'utf-8');
 	if($description1==$description){
 		$description=strip_tags($content);
-		$description=str_replace("&nbsp;",'',$description); 
-		$description=str_replace(" ","",$description);
-		$description=str_replace("\n", '', $description); 
+		$description=str_replace("\n", '',$description); 
 		$description=str_replace("\r", '', $description); 
 		$description=str_replace("\t", '', $description);
 		$description=mb_substr($description,0,200,'utf-8');

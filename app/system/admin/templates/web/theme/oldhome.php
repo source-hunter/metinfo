@@ -96,7 +96,7 @@ echo <<<EOT
 			<div class="fbox">
 <!--
 EOT;
-$tips = $_M['word']['height_setting'];
+$tips = $_M['word']['height_setting'].'<br/><br/>如果是全屏图片，图片建议尺寸：1920(宽) * 自定义(高)（像素），能够适应绝大部分电脑屏幕。';
 if(!$metinfover){
 $tips = "{$_M[word][setimgWidth]}×{$_M[word][setimgHeight]}({$_M[word][setimgPixel]})";
 echo <<<EOT
@@ -128,21 +128,11 @@ EOT;
 }
 echo <<<EOT
 -->
-<!--
-EOT;
-if(!$metinfover){
-echo <<<EOT
--->
 	<dl>
-		<dd class="banner_set_more">
-			<a href="{$_M[url][site_admin]}interface/flash/setflash.php?anyid=18&lang={$_M[lang]}" target="_blank">{$_M['word']['click_enter']}{$_M['word']['such_uploadfile']}</a>
+		<dd>
+			<a href="{$_M[url][site_admin]}interface/flash/setflash.php?anyid=18&lang={$_M[lang]}" target="_blank" class="ui-addlist" style="margin-left:70px;">更多自定义设置（原Banner设置）</a>
 		</dd>
 	</dl>
-<!--
-EOT;
-}
-echo <<<EOT
--->
 <!--
 EOT;
 require $this->template('tem/zujian');

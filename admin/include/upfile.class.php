@@ -408,7 +408,11 @@ class upfile {
         }
 
 		$path = $path?$this->savepath.$path:$this->savepath.'thumb/';
+		/*
 		if(stristr($_SERVER['PHP_SELF'],'include/thumb.php') !== false){
+			if(stristr(PHP_OS,"WIN")){
+				$this->savename = @iconv("GBK","utf-8",$this->savename);
+			}
 			$ext1 = explode("/", $img);
 			$count = count($ext1);
 			$count1 = $ext1[$count-1];
@@ -416,7 +420,7 @@ class upfile {
 			$ext3 = $ext2[1];
 			$path1 = $ext2[0];
 			/* $last = strrpos($img,'/');
-			$path2 = substr($img,0,$last); */
+			$path2 = substr($img,0,$last); *//*
 			$path = '../upload/thumb_src/'.$thumb_width.'_'.$thumb_height.'/';
 			$this->savename = $path1.'.'.$this->getext($img);
 			$thumbname1 = $path.$this->savename;
@@ -424,6 +428,7 @@ class upfile {
 				return $thumbname1;
 			}
 		}
+		*/
         if (!file_exists($path)) {
 			if (!$this->make_dir($path)) {
 				return $this->halt($lang_upfileFail4);

@@ -19,17 +19,35 @@ function HrefUrl(){
 
 /*MetInfo*/
 var lang = getQueryString('lang'),ret = HrefUrl(),siteurl = ret['url'],basepath = siteurl+ret['admin']+'/',pubjspath = siteurl + 'app/system/include/public/',table;
-var metcmsbox=document.getElementById("metcmsbox");
+var metn = getQueryString('n'),metc = getQueryString('c'),meta = getQueryString('a');
 seajs.config({
   paths: {
-    'epl': 'examples/',
-	'own': siteurl+'app/app/'+getQueryString('n')+'/',
-	'tem': metcmsbox.getAttribute("data-tem")
+    'pub': pubjspath.substring(0,pubjspath.length-1),
+    'epl': 'examples',
+	'own': siteurl+'app/app/'+getQueryString('n'),
+	'tem': tem.substring(0,tem.length-1)
   },
   alias: {
-    "jquery": "jquery/1.11.1/jquery.js",
+    "jquery": "jquery/1.11.1/jquery_seajs.js",
     "common": "epl/include/common.js"
-  }
+  },
+  map: [
+    [ /^(.*\/app\/.*\.(?:css|js))(?:.*)$/i, '$1?'+jsrand ]
+  ]
 })
-
-seajs.use("epl/include/min");
+if (typeof(indexbox) == "undefined") {
+	seajs.use("epl/include/min");
+}else{
+	seajs.use("epl/include/box");
+}
+var str = window.parent.document.URL; 
+var s = str.indexOf("lang="+lang);
+var z = str.indexOf("lang");
+if(s == '-1' && z != '-1'){
+	var s1 = str.indexOf('#');
+	if(s1 == '-1'){
+		str = str.replace(/(lang=[^#]*)/g,"lang="+lang+"#");
+	}
+	str = str.replace(/(lang=[^#]*#)/g,"lang="+lang+"#");
+	parent.location.href=str;
+}

@@ -1,50 +1,6 @@
 define(function(require, exports, module) {
 	var common = require('common');   		//公用类
 	
-	/*设为首页*/
-	var SetHome = $(".SetHome");        		
-	if(SetHome.length>0){
-		SetHome.click( function () {
-			var obj=this,vrl=window.location,info="浏览器不支持此功能，请手动设置！";
-			if(!document.all){
-				alert(info);
-				return false;
-			}
-			try{
-				obj.style.behavior='url(#default#homepage)';obj.setHomePage(vrl);
-			}catch(e){
-				if(window.netscape){
-					try{
-						netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-					}catch(e){
-						alert("Your Browser does not support");
-					}
-					var prefs=Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
-						prefs.setCharPref('browser.startup.homepage',vrl);
-				}
-			}
-		})
-	}
-	
-	/*收藏本站*/
-	var addFavorite = $(".addFavorite");        
-	if(addFavorite.length>0){
-		addFavorite.click( function () {
-			var info = "浏览器不支持此功能，请手动设置！";
-			if(!document.all){
-				alert(info);
-				return false;
-			}
-			var vDomainName=window.location.href;
-			var description=document.title;
-			try{
-				window.external.AddFavorite(vDomainName,description);
-			}catch(e){
-				window.sidebar.addPanel(description,vDomainName,"");
-			}
-		})
-	}
-	
 	/*繁体中文*/
 	var StranBody = $(".StranBody");        	
 	if(StranBody.length>0){
@@ -79,18 +35,21 @@ define(function(require, exports, module) {
 			})
 			function mPage(mett,metv){
 				var metPageI = mett.attr("value"),metPageNums = parseInt(metPageI);
+				//var metPageNums = parseInet(document.getElementById(metPageT).value);
 				if(metPageNums){
 					var pageData = mett.data("pageurl");	
 					PageStr=pageData.split("|");
-					PageStr0=PageStr[0].split("."); 
+					//PageStr0=PageStr[0].split("."); 
+					var url = window.location.href.split("/");
+					var folder = url[url.length-2];
 					if(metPageNums<0){
-						var pageUrl = met_weburl + PageStr0[0] + "/" +  PageStr[0] + "1" + PageStr[1];
+						var pageUrl = met_weburl + folder + "/" +  PageStr[0] + "1" + PageStr[1];
 						window.location.href = pageUrl;
 					}else if(metPageNums>PageStr[2]){
-						var pageUrl = met_weburl + PageStr0[0] + "/" +  PageStr[0] + PageStr[2] + PageStr[1];
+						var pageUrl = met_weburl + folder + "/" +  PageStr[0] + PageStr[2] + PageStr[1];
 						window.location.href = pageUrl;
 					}else{
-						var pageUrl = met_weburl + PageStr0[0] + "/" + PageStr[0] + metPageNums + PageStr[1];
+						var pageUrl = met_weburl + folder + "/" + PageStr[0] + metPageNums + PageStr[1];
 						window.location.href = pageUrl;
 					}
 				}else{metPageT.attr("value",metv);}

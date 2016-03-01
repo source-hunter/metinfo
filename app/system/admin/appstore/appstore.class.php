@@ -56,7 +56,7 @@ class appstore extends admin {
 			$getapp = load::mod_class('myapp/class/getapp', 'new');
 			$app = $getapp->get_oneapp($appdetail['no']);
 			if($app){
-				$app['url'] = "<a target=\"_blank\" href=\"{$app['url']}\">{$_M['word']['dlapptips5']}</a>";
+				$app['url'] = "<a href=\"{$app['url']}\">{$_M['word']['dlapptips5']}</a>";
 			}
 			$buy_Explain = $_M['word']['langshuom'];
 			$buy_Explain1 = $_M['word']['purchase_application'];

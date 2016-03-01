@@ -8,7 +8,7 @@ require $this->template('ui/head');
 echo <<<EOT
 -->
 <form method="POST" class="ui-from" name="myform" action="{$_M[url][own_form]}a=doaddsubmit" target="_self">
-<div class="v52fmbx">
+<div class="v52fmbx content_add">
 	<dl>
 		<dt>{$_M['word']['release_to']}</dt>
 		<dd class="ftype_select-linkage">
@@ -17,7 +17,7 @@ echo <<<EOT
 				<select name="add_class2" class="city"></select>
 				<select name="add_class3" class="dist"></select>
 			</div>
-			<span class="tips" style="float:left; margin-left:20px;"><a href="{$_M[url][site_admin]}column/index.php?anyid=25&lang={$_M[lang]}" target="_blank">{$_M['word']['configuration_section']}</a></span>
+			<span class="tips" style="float:left; margin-left:20px;"><a href="{$_M[url][site_admin]}column/index.php?anyid=25&lang={$_M[lang]}" >{$_M['word']['configuration_section']}</a></span>
 		</dd>
 	</dl>
 	<dl class="noborder">

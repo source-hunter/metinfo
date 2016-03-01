@@ -7,6 +7,12 @@ defined('IN_MET') or exit('No permission');
 require $this->template('ui/head');
 echo <<<EOT
 -->
+<script>
+var ownlangtxt = {
+	"jsx18":"{$_M[word][jsx18]}",
+	"jsx19":"{$_M[word][jsx19]}"
+};
+</script>
 <form method="POST" class="ui-from" name="myform" action="{$_M[url][own_form]}a=doemaileditor" target="_self">
 <div class="v52fmbx">
 	<dl>

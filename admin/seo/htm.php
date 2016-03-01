@@ -355,8 +355,8 @@ if($action=="all"){
 
 	if($class1=='login'&&$met_member_use!=0){
 		//$methtm[]=onepagehtm('member','index',1);
-		$methtm[]=onepagehtm('member','login',1);
-		$methtm[]=onepagehtm('member','register',1);
+		//$methtm[]=onepagehtm('member','login',1);
+		//$methtm[]=onepagehtm('member','register',1);
 	}
 
 	if($action=='sitemap'){

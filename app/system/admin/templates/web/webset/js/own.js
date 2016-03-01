@@ -2,7 +2,6 @@ define(function(require, exports, module) {
 
 	var $ = require('jquery');
 	var common = require('common');
-	var langtxt = common.langtxt();
 	var doa = getQueryString('a');
 
 	if(doa=='doindex'){
@@ -44,6 +43,7 @@ define(function(require, exports, module) {
 		});
 		
 		$("a.emailtest").click(function(){
+			var langtxt = ownlangtxt;
 			var d = $(this);
 			d.next('span').html(langtxt.jsx18);
 			$.ajax({

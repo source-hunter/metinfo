@@ -112,7 +112,7 @@ EOT;
 echo <<<EOT
 -->		
 		</select>
-		<a href="{$met_weburl}{$met_adminfile}/column/index.php?anyid=25&lang=$lang" target="_blank">{$lang_indexcolumn}</a>
+		<a href="{$met_weburl}{$met_adminfile}/column/index.php?anyid=25&lang=$lang">{$lang_indexcolumn}</a>
 			</dd>
 		</dl>
 		</div>
@@ -212,7 +212,7 @@ $(document).ready(function(){
 		</dl>
 		</div>
 	</div>
-	<h3 class="v52fmbx_hr metsliding" sliding="2"><a href="{$met_weburl}{$met_adminfile}/column/parameter/parameter.php?module={$module}&anyid={$anyid}&class1={$class1}&lang={$lang}" target="_blank">{$lang_article6}</a></h3>
+	<h3 class="v52fmbx_hr metsliding" sliding="2"><a href="{$met_weburl}{$met_adminfile}/column/parameter/parameter.php?module={$module}&anyid={$anyid}&class1={$class1}&lang={$lang}" >{$lang_article6}</a></h3>
 	<div class="metsliding_box metsliding_box_2" id='parastart'>
 <!--
 EOT;
@@ -342,7 +342,7 @@ EOT;
 if($met_htmlurl == 0 && ($met_webhtm == 2 || $met_webhtm == 1)){
 echo <<<EOT
 -->	
-				您开启了静态页面功能，必须开启“静态页面伪静态化”才可以使用定时发布功能。<a href="../../seo/sethtm.php?anyid=37&lang={$lang}&nojump=1" target="_blank">{$lang_clickset}</a>
+				您开启了静态页面功能，必须开启“静态页面伪静态化”才可以使用定时发布功能。<a href="../../seo/sethtm.php?anyid=37&lang={$lang}&nojump=1" >{$lang_clickset}</a>
 <!--
 EOT;
 }

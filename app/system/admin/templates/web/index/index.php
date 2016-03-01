@@ -3,138 +3,114 @@
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
 
 defined('IN_MET') or exit('No permission');
-
-require $this->template('ui/head');
 echo <<<EOT
 -->
-<link rel="stylesheet" href="{$_M[url][own_tem]}css/metinfo.css?{$jsrand}" />
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{$_M[word][metinfo]}</title>
+<meta name="renderer" content="webkit">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<link href="{$_M[url][site]}favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link rel="stylesheet" href="{$_M[url][pub]}ui/admin/css/box.css?{$jsrand}" />
+<link rel="stylesheet" href="{$_M[url][pub]}font-awesome/css/font-awesome.min.css?{$jsrand}" />
 <script>
-var chartdata = '{$chartdata}';
+var langtxt = {
+	"checkupdatetips":"{$_M[word][checkupdatetips]}",
+	"detection":"{$_M[word][detection]}",
+	"try_again":"{$_M[word][try_again]}"
+},
+anyid="{$_M[form][anyid]}",
+own_form="{$_M[url][own_form]}",
+own_name="{$_M[url][own_name]}",
+tem="{$_M[url][own_tem]}",
+adminurl="{$_M[url][adminurl]}",
+renewable="{$_M[form][renewable]}",
+apppath="{$_M[url][api]}",
+jsrand="{$jsrand}"
+;
 </script>
-<!--[if lte IE 8]><script src="{$_M[url][own_tem]}js/excanvas.js"></script><![endif]-->
+<!--[if IE]><script src="{$_M[url][site]}public/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body>
 <input id="met_automatic_upgrade" type="hidden" value="{$_M['config']['met_automatic_upgrade']}" />
-<div class="index_box">
-	<section class="index_point">
-		<h3>{$_M['word']['new_guidelines']}<a href="http://edu.metinfo.cn/" target="_blank" {$met_agents_display}>{$_M['word']['extension_school']}<i class="fa fa-angle-right"></i></a></h3>
-		<ul>
-			<li class="speed"><a href="{$_M[url][site_admin]}index.php?n=webset&c=webset&a=doindex&anyid=57&lang={$_M[lang]}" target="_blank"><div class="d"><div class="Sector"> <div class="center" data-value="10">10%</div> <div class="mask"></div> <div class="partO"></div> <div class="partT"></div> </div> <i class="x"></i> </div> <i class="fa fa-newspaper-o"></i> {$_M['word']['upfiletips7']} </a></li>
-			<li class="speed"><a href="{$_M[url][site_admin]}column/index.php?anyid=25&lang={$_M[lang]}" target="_blank"><div class="d"><div class="Sector"> <div class="center" data-value="30">30%</div> <div class="mask"></div> <div class="partO"></div> <div class="partT"></div> </div> <i class="x"></i></div><i class="fa fa-sitemap"></i>{$_M['word']['configuration_section']}</a></li>
-			<li class="speed"><a href="{$_M[url][site_admin]}index.php?n=theme&c=theme&a=doindex&anyid=18&lang={$_M[lang]}" target="_blank"><div class="d"><div class="Sector"> <div class="center" data-value="50">50%</div> <div class="mask"></div> <div class="partO"></div> <div class="partT"></div> </div><i class="x"></i></div><i class="fa fa-tachometer"></i>{$_M['word']['debug_appearance']}</a></li>
-			<li class="speed"><a href="{$_M[url][site_admin]}index.php?n=content&c=content&a=doadd&anyid=68&lang={$_M[lang]}" target="_blank"><div class="d"><div class="Sector"> <div class="center" data-value="70">70%</div> <div class="mask"></div> <div class="partO"></div> <div class="partT"></div> </div><i class="x"></i></div><i class="fa fa-plus"></i>{$_M['word']['publish_content']}</a></li>
-			<li class="speed"><a href="{$_M[url][site]}" target="_blank"><div class="d"><div class="Sector"> <div class="center" data-value="100">100%</div> <div class="mask"></div> <div class="partO"></div> <div class="partT"></div></div></div></a><div class="bdsharebuttonbox" 
-			data-bdUrl="{$_M[config][met_weburl]}" 
-			data-bdText="{$_M['word']['sys_use']} MetInfo {$_M['word']['build_site']} {$_M[config][met_weburl]} {$_M['word']['everyone_see']}" 
-			data-bdPic="{$_M[url][site]}templates/{$_M[config][met_skin_user]}/view.jpg" 
-			data-bdCustomStyle="{$_M[url][own_tem]}css/metinfo.css" 
-			data-tag="share_1"> <a href="#" class="bds_more" data-cmd="more"><i class="fa fa-share-alt"></i>{$_M['word']['share_mood']}</a></div></li>
-		</ul>
-	</section>
-	<section class="index_stat">
-		<h3>{$_M['word']['upfiletips30']}</h3>
-		<dl>
-			<dd class="index_stat_chart">
-			<div class="index_stat_chart_tips">
-				<ul>
-					<li><i class="ip"></i>IP</li>
-					<li><i class="uv"></i>{$_M['word']['statvisitors']}</li>
-					<li><i class="pv"></i>{$_M['word']['sys_views']}（PV）</li>
-				</ul>
-				{$_M['word']['sys_nearly']}8{$_M['word']['Traffic_trends']}
-			</div>
-			<canvas id="myChart" width="550" height="200"></canvas>
-			</dd>
-			<dd class="index_stat_table">
-<table cellpadding="0" cellspacing="1" class="stat_table">
-	<tr>
-		<th width="25%">{$_M['word']['statips35']}</th>
-		<th width="25%">PV</th>
-		<th width="25%">{$_M['word']['statvisitors']}</th>
-		<th width="25%">IP</th>
-	</tr>
+<div class="metcms_cont v52fmbx" id="metcmsbox" data-metcms_v="{$_M[config][metcms_v]}" data-patch="{$_M[config][met_patch]}">
+	<div class="metcms_cont_left hidden-xs">
+		<div class="metlogo">
+			<a href="{$_M[url][site_admin]}index.php?lang={$_M[lang]}" hidefocus="true">
+				<img 
+					src="{$met_admin_logo}"
+					alt="{$_M[word][metinfo]}"
+					title="{$_M[word][metinfo]}"
+				/>
+			</a>
+		</div>
+		<dl class="jslist">
+			<dt><a target="_blank" href="{$_M['config']['met_weburl']}index.php?lang={$_M['lang']}" title="{$_M[word][indexhome]}"><i class="fa fa-home"></i>{$_M[word][indexhome]}</a></dt>
+		</dl>
 <!--
 EOT;
-foreach($stat as $key=>$val){
-echo <<<EOT
--->
-	<tr>
-		<td>{$val[day]}</td>
-		<td>{$val[pv]}</td>
-		<td>{$val[alone]}</td>
-		<td>{$val[ip]}</td>
-	</tr>
-<!--
-EOT;
+$i=0;
+foreach($toparr as $key=>$val){
+if($val['type']==1){
+$cnm='';
+$dt="{$val[name]}";
+if($val[icon]!=''){
+$cnm = 'class="jslist"';
+$dt="{$val[icon]}{$val[name]}<i class=\"fa fa-angle-right\"></i>";
 }
 echo <<<EOT
 -->
-</table>
+		<dl {$cnm}>
+			<dt>{$dt}</dt>
+			<dd>
+<!--
+EOT;
+foreach($toparr as $key=>$val2){
+if($val2['type']==2&&$val2['bigclass']==$val['id']){
+$target = $val2[id]==70||$val2[id]==18?'target="_blank"':'';
+echo <<<EOT
+-->
+					<a href="{$val2[url]}" {$val2[property]} title="{$val2[name]}" {$target} id="metinfo_metnav_{$val2[id]}">{$val2[icon]}{$val2[name]}</a>
+<!--
+EOT;
+}}
+echo <<<EOT
+-->	
 			</dd>
 		</dl>
-		<div class="clear"></div>
-	</section>
-	<section class="index_myapp none">
-		<h3>{$_M['word']['myapp']}</h3>
-		<ul>
 <!--
 EOT;
-foreach($app_in as $key=>$val){
-if(strstr($val[name], "lang_")) {
-	$name = str_replace('lang_','',$val[name]);
-	$val[name] = $_M['word'][$name];
-}
+$i++;
+}}
 echo <<<EOT
 -->
-	<li>
-		<a href="{$val[url]}" title="{$val[name]}">
-			<img src="{$_M[url][tem]}myapp/images/{$val[icon]}">
-			<h4>{$val[name]}</h4>
-		</a>
-	</li>
+	</div>
+	<div class="metcms_cont_right">
+		<div class="metcms_cont_right_box">
 <!--
 EOT;
-}
+$ifurl = "{$_M[url][own_form]}a=dohome";
 echo <<<EOT
 -->
-		</ul>
-		<div class="clear"></div>
-	</section>
-<!--
-EOT;
-if(($privilege['navigation'] == 'metinfo' || strstr($privilege['navigation'], '1507')) && $_M['config']['met_agents_app']) {
-echo <<<EOT
--->
-	<section class="index_hotapp index_hot">
-		<h3>{$_M['word']['recommended']}<a href="{$_M[url][site_admin]}index.php?lang={$_M[lang]}&anyid=65&n=appstore&c=appstore&a=doindex">{$_M['word']['more_applications']}<i class="fa fa-angle-right"></i></a></h3>
-		<ul>
-		</ul>
-		<div class="clear"></div>
-	</section>
-	<section class="index_hottem index_hot">
-		<h3>{$_M['word']['recommended_template']}<a href="{$_M[url][site_admin]}index.php?lang={$_M[lang]}&anyid=65&n=appstore&c=appstore&a=dotem_market">{$_M['word']['more_tems']}<i class="fa fa-angle-right"></i></a></h3>
-		<ul>
-		</ul>
-		<div class="clear"></div>
-	</section>
-<!--
-EOT;
-}
-if ($_M['config']['met_agents_type'] < 2) {
-echo <<<EOT
--->
-	<section class="index_news">
-		<h3>MetInfo {$_M['word']['upfiletips37']}<a href="http://www.metinfo.cn/" target="_blank">{$_M['word']['columnmore']}<i class="fa fa-angle-right"></i></a></h3>
-		<div id="newslist" data-newslisturl="http://www.metinfo.cn/metv5news.php?fromurl={$_M[config][met_weburl]}&action=json&listnum=6">
+			<iframe src="{$ifurl}" frameborder="0"></iframe>
 		</div>
-	</section>
-<!--
-EOT;
-}
-echo <<<EOT
--->
+	</div>
+	<div class="clear"></div>
 </div>
+<script>
+var indexbox = 1;
+</script>
+<script src="{$_M[url][pub]}js/sea.js?{$jsrand}"></script>
+</body>
+</html>
 <!--
 EOT;
-require $this->template('ui/foot');
 # This program is an open source system, commercial use, please consciously to purchase commercial license.
 # Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
-?>
+?>-->

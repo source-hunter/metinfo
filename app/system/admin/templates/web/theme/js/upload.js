@@ -10,7 +10,6 @@ define(function(require, exports, module) {
 	var themefunc = require('tem/js/func');
 	
 	function uperror(r,t){ //错误提示
-		//t.html(r);
 		alert(r);
 	}
 	function upHandle(o,d,lval,cval){ //处理回传值
@@ -56,6 +55,8 @@ define(function(require, exports, module) {
 				type: "POST",
 				url: url,
 				uploadProgress:function(e, w, l, r){
+					d.parent(".banner_rep").css("opacity",1);
+					d.parent(".banner_rep").find(".upbutn").html(r+'%');
 					//t.html(r+'%');
 				},
 				error: function (r) {
@@ -65,6 +66,8 @@ define(function(require, exports, module) {
 				success: function (r) {
 					var obj = eval('('+r+')');
 					if(obj.error==0){
+						d.parent(".banner_rep").find(".upbutn").html(text1);
+						d.parent(".banner_rep").css("opacity",0);
 						//t.html(text3);
 						upHandle(obj,d,lval,cval);
 					}else{

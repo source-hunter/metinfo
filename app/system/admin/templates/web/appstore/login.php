@@ -7,6 +7,9 @@ defined('IN_MET') or exit('No permission');
 require $this->template('ui/head');
 echo <<<EOT
 -->
+<script>
+var ownlangtxt = '';
+</script>
 <input id="secret_key" type="hidden" value="{$_M['config']['met_secret_key']}">
 <input id="position" type="hidden" value="lr">
 <form method="POST" class="ui-from" name="myform" action="{$_M['url']['app_api']}a=dologin&domain={$_M['url']['site']}&user_id={$_M['form']['user_id']}&user_pass={$_M['form']['user_pass']}&admin_url={$_M['url']['site_admin']}&return_type=jump" target="_self">
@@ -31,15 +34,15 @@ echo <<<EOT
 			</dd>
 		</dl>
 		<dl>
-			<dt></dt>
-			<dd>
-				<span class="tips">{$_M['word']['website_manually']}</span>
+			<dd class="ftype_description">
+				{$_M['word']['website_manually']}
 			</dd>
 		</dl>
 		<dl class="noborder">
 			<dt> </dt>
 			<dd>
-				<input type="submit" name="submit" value="{$_M['word']['landing']}" class="submit">
+				<input type="submit" name="submit" value="{$_M['word']['landing']}" class="submits">
+				<a href="{$_M[url][site_admin]}index.php?lang={$_M['lang']}&anyid={$_M['form']['anyid']}&n=appstore&c=member&a=doregister" style="height: 34px;line-height: 42px;display: inline-block;">{$_M['word']['registration']}</a>
 			</dd>
 		</dl>
 	</div>

@@ -2,6 +2,7 @@
 $tem_case         = tmpcentarr($lang_case_id);
 $tem_case['name'] = $lang_case_title?$lang_case_title:$tem_case['name'];
 $tem_case['list'] = methtml_getarray($lang_case_id,$lang_case_type,'','',$lang_case_num);
+$tem_wp4 = $lang_waypointsok==1?'tem_wp4':'';
 echo <<<EOT
 -->
 <section class="tem_index_case {$into}">
@@ -26,7 +27,7 @@ $val[imgurl]="{$thumb_src}dir=../{$val[imgurl]}&x={$lang_case_x}&y={$lang_case_y
 echo <<<EOT
 -->
 			{$qq}
-				<dl class="tem_list tem_wp4">
+				<dl class="tem_list {$tem_wp4}">
 					<dt><a href="{$val[url]}" title="{$val[title]}" {$metblank}><img src="{$val[imgurl]}" title="{$val[title]}" alt="{$val[title]}" width="{$lang_case_x}" height="{$lang_case_y}" /></a></dt>
 					<dd>
 						<h3><a href="{$val[url]}" title="{$val[title]}" {$metblank}>{$val[title]}</a></h3>
